@@ -1,0 +1,26 @@
+{
+  "configVersion": 2,
+  "packages": [
+    {
+      "name": "meta",
+      "rootUri": "file:///Users/kawal/.pub-cache/hosted/pub.dartlang.org/meta-1.2.3",
+      "packageUri": "lib/",
+      "languageVersion": "1.12"
+    },
+    {
+      "name": "pedantic",
+      "rootUri": "file:///Users/kawal/.pub-cache/hosted/pub.dartlang.org/pedantic-1.9.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
+    },
+    {
+      "name": "utility",
+      "rootUri": "../",
+      "packageUri": "lib/",
+      "languageVersion": "2.9"
+    }
+  ],
+  "generated": "2020-12-06T10:36:13.964917Z",
+  "generator": "pub",
+  "generatorVersion": "2.10.4"
+}
