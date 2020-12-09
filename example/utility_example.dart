@@ -18,4 +18,8 @@ void main() {
   //print(isNumber(2.12));
   //print('awesome: ${list}');
   print('déjà vu'.deburr);
+  print('déjà vu'.unicodeWords);
+  print('déjà vu'.asciiWords);
+  print('___Foo_Bar--__'.camelCase);
+  print('___Foo_Bar--__'.kebabCase);
 }

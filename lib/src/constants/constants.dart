@@ -23,6 +23,7 @@ var rsAstralRange = '\\ud800-\\udfff',
         rsMathOpRange + rsNonCharRange + rsPunctuationRange + rsSpaceRange;
 
 var reComboMark = RegExp(rsCombo);
+
 var rsApos = "['\u2019]",
     rsAstral = '[' + rsAstralRange + ']',
     rsBreak = '[' + rsBreakRange + ']',
@@ -68,6 +69,9 @@ var rsMiscLower = '(?:' + rsLower + '|' + rsMisc + ')',
         [rsNonAstral + rsCombo + '?', rsCombo, rsRegional, rsSurrPair, rsAstral]
             .join('|') +
         ')';
+var reAsciiWord = RegExp('[^\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f]+');
+var reHasUnicodeWord = RegExp(
+    '[a-z][A-Z]|[A-Z]{2}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]');
 
 var reUnicodeWord = RegExp([
   rsUpper +
