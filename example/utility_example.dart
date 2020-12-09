@@ -22,4 +22,6 @@ void main() {
   print('déjà vu'.asciiWords);
   print('___Foo_Bar--__'.camelCase);
   print('___Foo_Bar--__'.kebabCase);
+  print('abc'.repeat(2));
+  print('justkawal'.slice(0));
 }

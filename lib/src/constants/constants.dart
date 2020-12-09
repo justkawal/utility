@@ -8,17 +8,17 @@ var regExpIsOctal = RegExp(r'^0o[0-7]+');
 var reLatin = RegExp('^([A-Za-z\xc0-\xd6\xd8-\xf6\xf8-\xff\u0100-\u017f\s]*)',
     unicode: true);
 
-var rsAstralRange = '\\ud800-\\udfff',
-    rsComboRange = '\\u0300-\\u036f\\ufe20-\\ufe2f\\u20d0-\\u20ff',
-    rsDingbatRange = '\\u2700-\\u27bf',
-    rsLowerRange = 'a-z\\xdf-\\xf6\\xf8-\\xff',
-    rsMathOpRange = '\\xac\\xb1\\xd7\\xf7',
-    rsNonCharRange = '\\x00-\\x2f\\x3a-\\x40\\x5b-\\x60\\x7b-\\xbf',
-    rsPunctuationRange = '\\u2000-\\u206f',
+var rsAstralRange = '\ud800-\udfff',
+    rsComboRange = '\u0300-\u036f\ufe20-\ufe2f\u20d0-\u20ff',
+    rsDingbatRange = '\u2700-\u27bf',
+    rsLowerRange = 'a-z\xdf-\xf6\xf8-\xff',
+    rsMathOpRange = '\xac\xb1\xd7\xf7',
+    rsNonCharRange = '\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\xbf',
+    rsPunctuationRange = '\u2000-\u206f',
     rsSpaceRange =
-        ' \\t\\x0b\\f\\xa0\\ufeff\\n\\r\\u2028\\u2029\\u1680\\u180e\\u2000\\u2001\\u2002\\u2003\\u2004\\u2005\\u2006\\u2007\\u2008\\u2009\\u200a\\u202f\\u205f\\u3000',
-    rsUpperRange = 'A-Z\\xc0-\\xd6\\xd8-\\xde',
-    rsVarRange = '\\ufe0e\\ufe0f',
+        ' \t\x0b\f\xa0\ufeff\n\r\u2028\u2029\u1680\u180e\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u202f\u205f\u3000',
+    rsUpperRange = 'A-Z\xc0-\xd6\xd8-\xde',
+    rsVarRange = '\ufe0e\ufe0f',
     rsBreakRange =
         rsMathOpRange + rsNonCharRange + rsPunctuationRange + rsSpaceRange;
 
@@ -28,7 +28,7 @@ var rsApos = "['\u2019]",
     rsAstral = '[' + rsAstralRange + ']',
     rsBreak = '[' + rsBreakRange + ']',
     rsCombo = '[' + rsComboRange + ']',
-    rsDigits = '\\d+',
+    rsDigits = '\d+',
     rsDingbat = '[' + rsDingbatRange + ']',
     rsLower = '[' + rsLowerRange + ']',
     rsMisc = '[^' +
@@ -39,13 +39,13 @@ var rsApos = "['\u2019]",
         rsLowerRange +
         rsUpperRange +
         ']',
-    rsFitz = '\\ud83c[\\udffb-\\udfff]',
+    rsFitz = '\ud83c[\udffb-\udfff]',
     rsModifier = '(?:' + rsCombo + '|' + rsFitz + ')',
     rsNonAstral = '[^' + rsAstralRange + ']',
-    rsRegional = '(?:\\ud83c[\\udde6-\\uddff]){2}',
-    rsSurrPair = '[\\ud800-\\udbff][\\udc00-\\udfff]',
+    rsRegional = '(?:\ud83c[\udde6-\uddff]){2}',
+    rsSurrPair = '[\ud800-\udbff][\udc00-\udfff]',
     rsUpper = '[' + rsUpperRange + ']',
-    rsZWJ = '\\u200d';
+    rsZWJ = '\u200d';
 var rsMiscLower = '(?:' + rsLower + '|' + rsMisc + ')',
     rsMiscUpper = '(?:' + rsUpper + '|' + rsMisc + ')',
     rsOptContrLower = '(?:' + rsApos + '(?:d|ll|m|re|s|t|ve))?',
@@ -60,8 +60,8 @@ var rsMiscLower = '(?:' + rsLower + '|' + rsMisc + ')',
         rsOptVar +
         reOptMod +
         ')*',
-    rsOrdLower = '\\d*(?:1st|2nd|3rd|(?![123])\\dth)(?=\\b|[A-Z_])',
-    rsOrdUpper = '\\d*(?:1ST|2ND|3RD|(?![123])\\dTH)(?=\\b|[a-z_])',
+    rsOrdLower = '\d*(?:1st|2nd|3rd|(?![123])\dth)(?=\b|[A-Z_])',
+    rsOrdUpper = '\d*(?:1ST|2ND|3RD|(?![123])\dTH)(?=\b|[a-z_])',
     rsSeq = rsOptVar + reOptMod + rsOptJoin,
     rsEmoji =
         '(?:' + [rsDingbat, rsRegional, rsSurrPair].join('|') + ')' + rsSeq,
@@ -69,9 +69,16 @@ var rsMiscLower = '(?:' + rsLower + '|' + rsMisc + ')',
         [rsNonAstral + rsCombo + '?', rsCombo, rsRegional, rsSurrPair, rsAstral]
             .join('|') +
         ')';
+
 var reAsciiWord = RegExp('[^\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f]+');
+
+var reHasUnicode =
+    RegExp('[' + rsZWJ + rsAstralRange + rsComboRange + rsVarRange + ']');
+
 var reHasUnicodeWord = RegExp(
     '[a-z][A-Z]|[A-Z]{2}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]');
+    
+var reUnicode = RegExp(rsFitz + '(?=' + rsFitz + ')|' + rsSymbol + rsSeq);
 
 var reUnicodeWord = RegExp([
   rsUpper +
