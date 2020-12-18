@@ -3,7 +3,6 @@ part of utility;
 // ignore_for_file: unnecessary_this
 
 extension UtilityList<T> on List<T> {
-  ///
   ///Creates a slice of `list` from `start` up to, but not including, `end`.
   ///
   ///````dart
@@ -40,8 +39,51 @@ extension UtilityList<T> on List<T> {
     return this;
   }
 
+  // Private function to be accessed for internal usage only
+  List<T> _castSlice(int start, [int end]) {
+    var length = this.length;
+    end ??= length;
+    return (start == 0 && end >= length) ? this : this.slice(start, end);
+  }
+
+  /// returns `random value` from list. If list is empty then it returns `null`
   ///
-  /// returns `true` if it is fixed-length list otherwise false
+  /// ````dart
+  /// var list = <int>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  /// var randomValue = list.random(); // 3 // 3 will not be removed from list
+  /// 
+  /// // If remove = true is passed as argument then polled random item will be removed from list
+  /// // before list is
+  /// // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  /// var randomValue list.random(remove: true); // 5
+  /// // after calling with remove = true
+  /// // [1, 2, 3, 4, 6, 7, 8, 9, 10]
+  /// 
+  /// // If secure = true is passed as argument then Random.secure() is used
+  /// var randomValue list.random(secure: true); // 5
+  /// ````
+  T random({bool secure = false, bool remove = false, int seed}) {
+    if (this.isEmpty) {
+      return null;
+    }
+    Random random;
+    if (secure ?? false) {
+      random = Random.secure();
+    } else if (seed != null) {
+      random = Random(seed);
+    } else {
+      random = Random();
+    }
+    var randomIndex = random.nextInt(this.length);
+    var item = this[randomIndex];
+    if (remove ?? false) {
+      this.removeAt(randomIndex);
+    }
+    return item;
+  }
+
+/*
+  /// returns `true` if it is fixed-length list otherwise false.
   ///
   /// ````dart
   /// // On Non-Growable List
@@ -52,7 +94,7 @@ extension UtilityList<T> on List<T> {
   /// var list = List<dynamic>();
   /// var isGrowable = list.isGrowable; // true
   /// ````
-  bool get isGrowable {
+   bool get isGrowable {
     try {
       this.add(null);
       this.removeLast();
@@ -60,9 +102,8 @@ extension UtilityList<T> on List<T> {
     } catch (e) {
       return false;
     }
-  }
+  } */
 
-  ///
   /// removes `n` number of elements from the beginning of list
   ///
   /// ````dart
@@ -85,7 +126,6 @@ extension UtilityList<T> on List<T> {
     return this;
   }
 
-  ///
   /// removes `n` number of elements from the ending of list
   ///
   /// ````dart
@@ -110,7 +150,6 @@ extension UtilityList<T> on List<T> {
     return this;
   }
 
-  ///
   /// starts `removing elements` from the `ending of list` until condition becomes `false`
   ///
   /// ````dart
@@ -129,7 +168,6 @@ extension UtilityList<T> on List<T> {
     return this;
   }
 
-  ///
   /// starts `removing elements` from the `starting of list` until condition becomes `false`
   ///
   /// ````dart
@@ -149,7 +187,6 @@ extension UtilityList<T> on List<T> {
     return this;
   }
 
-  ///
   /// `Flattens` array a single level deep.
   ///
   /// It returns `newObject` of flattened array and does not affects the list object called-upon
@@ -172,7 +209,6 @@ extension UtilityList<T> on List<T> {
     return copyList;
   }
 
-  ///
   /// `Recursively flatten array up to depth times.`
   ///
   /// It returns `newObject` of flattened array and does not affects the list object called-upon
@@ -198,7 +234,6 @@ extension UtilityList<T> on List<T> {
     return this;
   }
 
-  ///
   /// `Recursively flattens array.`
   ///
   /// It returns `newObject` of deeply flattened array and does not affects the list object called-upon.
@@ -221,7 +256,6 @@ extension UtilityList<T> on List<T> {
     return copyList;
   }
 
-  ///
   /// Creates a new list of elements split into groups the length of `size`.
   ///
   /// If `list` can't be split evenly, the final chunk will be the remaining elements.

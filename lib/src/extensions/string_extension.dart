@@ -252,7 +252,7 @@ extension UtilityString on String {
   /// '1'.repeat(5); // 11111
   /// ````
   String repeat([int n = 1]) {
-    if ('$this' == 'null' || n < 1) {
+    if ((this ?? true) || n < 1) {
       return '';
     }
     var result = '', string = this;
@@ -268,22 +268,42 @@ extension UtilityString on String {
     return result;
   }
 
+  /// Pads the string on the left and right sides if it's shorter than `length`.
+  /// Padding characters will be truncated if they can't be evenly divided by `length`.
+  ///````
+  /// var pad1 = 'abc'.pad(8); // '  abc   '
+  ///
+  /// var pad2 = 'abc'.pad(8, '=_'); // '=_abc=_='
+  ///
+  /// var pad3 = 'abc'.pad(3); // 'abc'
+  ///````
+  String pad(int length, [String chars = ' ']) {
+    var strLength = length != 0 ? this.length : 0;
+    if (length == 0 || strLength >= length) {
+      return this;
+    }
+    var mid = (length - strLength) / 2;
+    return (_createPadding((mid.floor()), chars) +
+        this +
+        _createPadding((mid.floor()), chars));
+  }
+
+  // private function for internal usage
   String _createPadding(int length, String chars) {
     if ((chars ?? '') == '') {
       chars = ' ';
     }
-
     var charsLength = chars.length;
     if (charsLength < 2) {
       return charsLength > 0 ? chars.repeat(length) : chars;
     }
-    var result = chars.repeat((length / stringSize(chars)).ceil());
+    var result = chars.repeat((length / chars.length).ceil());
     return chars.hasUnicode
-        ? castSlice(result.stringToList, 0, length).join('')
+        ? result._stringToList._castSlice(0, length).join('')
         : result.slice(0, length);
   }
 
-  List<String> get stringToList {
+  List<String> get _stringToList {
     return this.hasUnicode ? this._unicodeToList : this._asciiToList;
   }
 
