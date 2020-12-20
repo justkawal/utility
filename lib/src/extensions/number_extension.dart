@@ -42,5 +42,5 @@ extension UtilityNumber on int {
   /// var value = 20.or(3); // value = 23
   ///````
   ///
-  int or(int val) => this & val;
+  int or(int val) => this | val;
 }

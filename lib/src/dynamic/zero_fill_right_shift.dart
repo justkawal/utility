@@ -1,8 +1,6 @@
 part of utility;
 
-///
-///`>>>` is called zero fill right shift.
-/// As operator `>>>` is not available in dart, So [zeroFillRightShift] function helps to mimic the working of `>>>`
+/// As operator `>>>` is not available in dart, So `zeroFillRightShift` function helps to mimics the working of `>>>` in dart.
 ///````dart
 /// // var t = 0 >>> 1;
 /// var t = zeroFillRightShift(0, 1);

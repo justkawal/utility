@@ -2,7 +2,6 @@ part of utility;
 
 // ignore_for_file: unnecessary_this
 extension UtilityString on String {
-  ///
   ///Creates a slice of `string` from `start` up to, but not including, `end`.
   ///
   ///````dart
@@ -39,7 +38,6 @@ extension UtilityString on String {
     return result;
   }
 
-  ///
   /// returns `true` is `s` is number otherwise `false`
   /// ````dart
   ///
@@ -54,7 +52,7 @@ extension UtilityString on String {
   /// '1010'.isBinary; // true
   /// '10A'.isBinary; // false
   /// ````
-  bool get isBinary => regExpIsBinary.hasMatch('$this');
+  bool get isBinary => regExpIsBinary.hasMatch(this);
 
   /// returns `true` if the string is `decimal`, other-wise `false`
   /// ````dart
@@ -70,7 +68,7 @@ extension UtilityString on String {
   /// '123'.isOctal; // true
   /// '10A'.isOctal; // false
   /// ````
-  bool get isOctal => regExpIsOctal.hasMatch('$this');
+  bool get isOctal => regExpIsOctal.hasMatch(this);
 
   /// returns `true` if the string is `good hex`, other-wise `false`
   /// ````dart
@@ -78,7 +76,7 @@ extension UtilityString on String {
   /// '123'.isHex; // true
   /// '10A'.isHex; // false
   /// ````
-  bool get isHex => !regExpIsBadHex.hasMatch('$this');
+  bool get isHex => !regExpIsBadHex.hasMatch(this);
 
   /// Converts string from `Latin-1` to normal `basic latin letters`
   /// ````dart
@@ -113,9 +111,7 @@ extension UtilityString on String {
   /// returns `list of unicodeWords` when `isUnicode: true` other-wise returns `list of asciiWords`
   List<String> _unicodeAsciiWords([bool isUnicode = true]) {
     var list = <String>[];
-    (isUnicode ? reUnicodeWord : reAsciiWord)
-        .allMatches('$this')
-        .forEach((match) {
+    (isUnicode ? reUnicodeWord : reAsciiWord).allMatches(this).forEach((match) {
       if (match[0].hasUnicodeWord == isUnicode) {
         list.add(match[0]);
       }
@@ -187,14 +183,13 @@ extension UtilityString on String {
 
   /// returns `list of words`
   /// ````dart
-  /// 'kàwàl vu'.hasUnicodeWord; // true
-  /// 'vu'.hasUnicodeWord;      // false
+  /// 'kàwàl vu'.words; // ['kàwàl', 'vu']
   /// ````
   List<String> words([RegExp pattern]) {
     if (pattern == null) {
       return reAsciiWord.hasMatch(this) ? this.asciiWords : this.unicodeWords;
     }
-    return pattern.allMatches('$this').map((match) => '${match[0]}').toList();
+    return pattern.allMatches(this).map((match) => '${match[0]}').toList();
   }
 
   /// --------------------- Cases Start ---------------------
@@ -303,14 +298,17 @@ extension UtilityString on String {
         : result.slice(0, length);
   }
 
+  // private function for internal usage
   List<String> get _stringToList {
     return this.hasUnicode ? this._unicodeToList : this._asciiToList;
   }
 
+  // private function for internal usage
   List<String> get _asciiToList {
     return this.split('');
   }
 
+  // private function for internal usage
   List<String> get _unicodeToList {
     return reUnicode
         .allMatches(this)
