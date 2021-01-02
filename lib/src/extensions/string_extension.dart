@@ -78,7 +78,9 @@ extension UtilityString on String {
   /// '123'.isNumber; // true
   /// '_justkawal'.isNumber; // false
   /// ```
-  bool get isNumber => double.tryParse(this) ?? false;
+  bool get isNumber {
+    return double.tryParse(this) ?? false;
+  }
 
   /// returns `true` if the `string` is `binary`, other-wise `false`
   /// ```dart
@@ -86,7 +88,9 @@ extension UtilityString on String {
   /// '1010'.isBinary; // true
   /// '_justkawal'.isBinary; // false
   /// ```
-  bool get isBinary => regExpIsBinary.hasMatch(this);
+  bool get isBinary {
+    return regExpIsBinary.hasMatch(this);
+  }
 
   /// returns `true` if the `string` is `decimal`, other-wise `false`
   /// ```dart
@@ -94,7 +98,9 @@ extension UtilityString on String {
   /// '123'.isDecimal; // true
   /// '_justkawal'.isDecimal; // false
   /// ```
-  bool get isDecimal => this?.isNumber ?? false;
+  bool get isDecimal {
+    return this?.isNumber ?? false;
+  }
 
   /// returns `true` if the `string` is `octal`, other-wise `false`
   /// ```dart
@@ -102,7 +108,9 @@ extension UtilityString on String {
   /// '123'.isOctal; // true
   /// '_justkawal'.isOctal; // false
   /// ```
-  bool get isOctal => regExpIsOctal.hasMatch(this);
+  bool get isOctal {
+    return regExpIsOctal.hasMatch(this);
+  }
 
   /// returns `true` if the `string` is `good hex`, other-wise `false`
   /// ```dart
@@ -110,7 +118,9 @@ extension UtilityString on String {
   /// '123'.isHex; // true
   /// '_justkawal'.isHex; // false
   /// ```
-  bool get isHex => !regExpIsBadHex.hasMatch(this);
+  bool get isHex {
+    return !regExpIsBadHex.hasMatch(this);
+  }
 
   /// Converts string from `Latin-1` to normal `basic latin letters`
   /// ```dart
@@ -174,11 +184,11 @@ extension UtilityString on String {
   /// ```
   String get capitalize {
     var result;
-    if (this.isNotEmpty) {
+    if (this != null && this.isNotEmpty) {
       result = this[0].toUpperCase();
-    }
-    if (this.length > 1) {
-      result += this.substring(1).toLowerCase();
+      if (this.length > 1) {
+        result += this.substring(1).toLowerCase();
+      }
     }
     return result;
   }
@@ -190,11 +200,11 @@ extension UtilityString on String {
   /// ```
   String get lowerFirst {
     var result;
-    if (this.isNotEmpty) {
+    if (this != null && this.isNotEmpty) {
       result = this[0].toLowerCase();
-    }
-    if (this.length > 1) {
-      result += this.substring(1);
+      if (this.length > 1) {
+        result += this.substring(1);
+      }
     }
     return result;
   }
@@ -205,12 +215,12 @@ extension UtilityString on String {
   /// 'jUSTKAWAL'.upperFirst; // JUSTKAWAL
   /// ```
   String get upperFirst {
-    var result;
-    if (this.isNotEmpty) {
+    var result = '';
+    if (this != null && this.isNotEmpty) {
       result = this[0].toUpperCase();
-    }
-    if (this.length > 1) {
-      result += this.substring(1);
+      if (this.length > 1) {
+        result += this.substring(1);
+      }
     }
     return result;
   }
@@ -244,32 +254,55 @@ extension UtilityString on String {
 
   /// Converts the string to `kebabCase`.
   /// ```dart
-  /// '___hello__world__'.kebabCase; // hello-world
-  /// '  hello  World  '.kebabCase; // hello-world
-  /// '-----hello--world--'.kebabCase; // hello-world
+  /// '___hello__world__'.kebabCase(); // hello-world
+  /// '  hello  World  '.kebabCase(); // hello-world
+  /// '-----hello--world--'.kebabCase(); // hello-world
   /// ```
-  String get kebabCase {
-    return this.words().map((word) => word.toLowerCase()).toList().join('-');
+  String kebabCase({String separator = '-'}) {
+    return _reuseCase(separator ?? '-');
   }
 
   /// Converts the string to `lowerCase`.
   /// ```dart
-  /// '___hello__world__'.lowerCase; // hello world
-  /// '  hello  World  '.lowerCase; // hello world
-  /// '-----hello--world--'.lowerCase; // hello world
+  /// '___hello__world__'.lowerCase(); // hello world
+  /// '  hello  World  '.lowerCase(); // hello world
+  /// '-----hello--world--'.lowerCase(); // hello world
   /// ```
-  String get lowerCase {
-    return this.words().map((word) => word.toLowerCase()).toList().join(' ');
+  String lowerCase({String separator = ' '}) {
+    return _reuseCase(separator ?? ' ');
   }
 
   /// Converts the string to `snakeCase`.
   /// ```dart
-  /// '___hello__world__'.snakeCase; // hello_world
-  /// '  hello  World  '.snakeCase; // hello_world
-  /// '-----hello--world--'.snakeCase; // hello_world
+  /// '___hello__world__'.snakeCase(); // hello_world
+  /// '  helloWorld  '.snakeCase(); // hello_world
+  /// '-----hello--world--'.snakeCase(); // hello_world
   /// ```
-  String get snakeCase {
-    return this.words().map((word) => word.toLowerCase()).toList().join('_');
+  String snakeCase({String separator = '_'}) {
+    return _reuseCase(separator ?? '_');
+  }
+
+  /// A helper function for reusing the same functionality of `snakeCase`, `lowerCase` and `kebabCase`.
+  String _reuseCase(String separator) {
+    return this
+        .words()
+        .map((word) => word.toLowerCase())
+        .toList()
+        .join(separator);
+  }
+
+  /// Converts the string to `nameCase`.
+  /// ```dart
+  /// '___kaWaljeet__sInGH__'.nameCase(); // Kawaljeet Singh
+  /// '  justKawal  '.nameCase(); // Just Kawal
+  /// '-----kawaljeet--singh--'.nameCase(); // Kawaljeet Singh
+  /// ```
+  String nameCase({String separator = ' '}) {
+    return this
+        .words()
+        .map((word) => word.capitalize)
+        .toList()
+        .join(separator ?? ' ');
   }
 
   // --------------------- Cases End ---------------------

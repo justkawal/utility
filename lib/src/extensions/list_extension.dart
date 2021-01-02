@@ -51,14 +51,14 @@ extension UtilityList<T> on List<T> {
   /// ````dart
   /// var list = <int>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   /// var randomValue = list.random(); // 3 // 3 will not be removed from list
-  /// 
+  ///
   /// // If remove = true is passed as argument then polled random item will be removed from list
   /// // before list is
   /// // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   /// var randomValue list.random(remove: true); // 5
   /// // after calling with remove = true
   /// // [1, 2, 3, 4, 6, 7, 8, 9, 10]
-  /// 
+  ///
   /// // If secure = true is passed as argument then Random.secure() is used
   /// var randomValue list.random(secure: true); // 5
   /// ````
@@ -82,8 +82,7 @@ extension UtilityList<T> on List<T> {
     return item;
   }
 
-/*
-  /// returns `true` if it is fixed-length list otherwise false.
+  /// returns `true` if it is `Growable list` otherwise false.
   ///
   /// ````dart
   /// // On Non-Growable List
@@ -91,10 +90,10 @@ extension UtilityList<T> on List<T> {
   /// var isGrowable = list.isGrowable; // false
   ///
   /// // On Growable List
-  /// var list = List<dynamic>();
-  /// var isGrowable = list.isGrowable; // true
+  /// var list2 = List<dynamic>();
+  /// var isGrowable = list2.isGrowable; // true
   /// ````
-   bool get isGrowable {
+  bool get isGrowable {
     try {
       this.add(null);
       this.removeLast();
@@ -102,7 +101,7 @@ extension UtilityList<T> on List<T> {
     } catch (e) {
       return false;
     }
-  } */
+  }
 
   /// removes `n` number of elements from the beginning of list
   ///
