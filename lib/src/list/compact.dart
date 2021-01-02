@@ -14,6 +14,9 @@ part of utility;
 /// var compactedData_new_object = compact(list); // ['a', 'b'];
 ///````
 List<T> compact<T>(List<T> list) {
+  if (list == null) {
+    return null;
+  }
   var temporaryList = List<T>.from(list);
   return temporaryList.compact();
 }

@@ -4,5 +4,8 @@ part of utility;
 ///
 /// otherwise returns `false`
 bool isFalsey(dynamic value) {
-  return value == null || value == false || '$value'.trim() == '' || value == 0;
+  return value == null ||
+      (value is bool && value == false) ||
+      (value is String && value.trim() == '') ||
+      (value is num && value == 0);
 }
