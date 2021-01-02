@@ -41,8 +41,8 @@ extension UtilityString on String {
   ///
   ///```dart
   ///
-  /// '2604 '.toNumber; // 2604
-  /// '  26.04 '.toNumber; // 26.04
+  ///'2604 '.toNumber; // 2604
+  ///'  26.04 '.toNumber; // 26.04
   ///```
   num get toNumber {
     if (this == null || /* this. */ trim().isEmpty) {
@@ -75,7 +75,7 @@ extension UtilityString on String {
   /// ```dart
   ///
   /// '123'.isNumber; // true
-  /// '_justkawal'.isNumber; // false
+  /// 'justkawal'.isNumber; // false
   /// ```
   bool get isNumber {
     return double.tryParse(this) ?? false;
@@ -85,7 +85,7 @@ extension UtilityString on String {
   /// ```dart
   ///
   /// '1010'.isBinary; // true
-  /// '_justkawal'.isBinary; // false
+  /// 'justkawal'.isBinary; // false
   /// ```
   bool get isBinary {
     return regExpIsBinary.hasMatch(this);
@@ -95,7 +95,7 @@ extension UtilityString on String {
   /// ```dart
   ///
   /// '123'.isDecimal; // true
-  /// '_justkawal'.isDecimal; // false
+  /// 'justkawal'.isDecimal; // false
   /// ```
   bool get isDecimal {
     return this?.isNumber ?? false;
@@ -105,7 +105,7 @@ extension UtilityString on String {
   /// ```dart
   ///
   /// '123'.isOctal; // true
-  /// '_justkawal'.isOctal; // false
+  /// 'justkawal'.isOctal; // false
   /// ```
   bool get isOctal {
     return regExpIsOctal.hasMatch(this);
@@ -115,7 +115,7 @@ extension UtilityString on String {
   /// ```dart
   ///
   /// '123'.isHex; // true
-  /// '_justkawal'.isHex; // false
+  /// 'justkawal'.isHex; // false
   /// ```
   bool get isHex {
     return !regExpIsBadHex.hasMatch(this);
