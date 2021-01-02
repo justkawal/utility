@@ -75,7 +75,7 @@ $  flutter packages get
 Now in your `Dart` code, you can use: 
 
 ````dart
-    import 'package:utility/utility.dart';
+import 'package:utility/utility.dart';
 ````
 
 # Usage
@@ -167,17 +167,75 @@ list.dropWhile((element) => element <= 3); // list = [4, 5];
 ```
 
 ### flatten
-`Flattens` array a single level deep.
+`Flattens` list a single level deep.
 
-It returns `newObject` of flattened array and does not affects the list object called-upon
+It returns `newObject` of flattened list and does not affects the list object called-upon
 
 ```dart
 var list = [2, [1, 3], [4, [1, [2]] ] ];
 var newList = list.flatten(); // newList = [2, 1, 3, 4, [1, [2] ] ];
 ```
 
+### flattenDepth
+`Recursively flatten list up to depth times.`
 
+It returns `newObject` of flattened list and does not affects the list object called-upon
 
+```dart
+var list = [2, [1, 3], [4, [1, [2]] ] ];
+var newList = list.flattenDepth(1); // newList = [2, 1, 3, 4, [1, [2] ] ];
+```
+
+### flatterDeep
+`Recursively flattens list.`
+
+It returns `newObject` of deeply flattened list and does not affects the list object called-upon.
+```dart
+var list = [2, [1, 3], [4, [1, [2]] ] ];
+var newList = list.flattenDeep(); // newList = [2, 1, 3, 4, 1, 2];
+```
+
+### chunk
+Creates a new list of elements split into groups the length of `size`.
+
+If `list` can't be split evenly, the final chunk will be the remaining elements.
+
+```dart
+
+// It returns new Object of Chunked data;
+var list = ['a', 'b', 'c', 'd'];
+
+var newChunkedList = list.chunk(3);// newChunkedList = [['a', 'b', 'c'], ['d']];
+```
+
+### compact
+Creates an list of elements where the values of the list are not `Falsey`.
+
+Avoid calling it on fixed-length list.
+```dart
+// It alters the list object if the list is not fixed-length list.
+var list = ['a', null, '', false, 'b'];
+list.compact(); // ['a', 'b'];
+
+// It returns new Object of compacted data;
+var list = ['a', null, '', false, 'b'];
+// here the list object is not altered
+var compactedData_new_object = compact(list); // ['a', 'b'];
+```
+
+### heapSort
+Sorts the list in `O(nLog(n))` time complexity.
+```dart
+
+var list = <int>[97, 4, 5, 26, 6];
+// With `inPlace` set to `false` it returns new sorted list.
+var newSortedList = list.heapSort(inPlace: false);
+// newSortedList = [4, 5, 6, 26, 97];
+
+var list = <int>[97, 04, 5, 26, 6];
+// With `inPlace` set to `true (default)` it sorts the list in its place.
+list.heapSort(); // list = [4, 5, 6, 26, 97];
+```
 
 ## Features coming in next version
 On-going implementation for future:
