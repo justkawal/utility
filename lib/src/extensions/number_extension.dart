@@ -24,7 +24,6 @@ extension UtilityNumber on int {
   ///
   int xor(int val) => this ^ val;
 
-  
 /* 
   ///
   /// It returns `and` operation
