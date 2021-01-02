@@ -1,6 +1,5 @@
 part of utility;
 
-// ignore_for_file: unnecessary_this
 extension UtilityString on String {
   ///Creates a slice of `string` from `start` up to, but not including, `end`.
   ///
@@ -46,10 +45,10 @@ extension UtilityString on String {
   /// '  26.04 '.toNumber; // 26.04
   ///```
   num get toNumber {
-    if (this == null || this.trim().isEmpty) {
+    if (this == null || /* this. */ trim().isEmpty) {
       return null;
     }
-    return double.tryParse(this.trim());
+    return double.tryParse(/* this. */ trim());
   }
 
   /// Counts the number of occurrences of value.
@@ -65,10 +64,10 @@ extension UtilityString on String {
       return 0;
     }
     //caseSensitive ??= true;
-    return this.length -
+    return /* this. */ length -
         (caseSensitive
-                ? this.replaceAll(value, '')
-                : this.toLowerCase().replaceAll(value.toLowerCase(), ''))
+                ? /* this. */ replaceAll(value, '')
+                : /* this. */ toLowerCase().replaceAll(value.toLowerCase(), ''))
             .length;
   }
 
@@ -184,10 +183,10 @@ extension UtilityString on String {
   /// ```
   String get capitalize {
     var result;
-    if (this != null && this.isNotEmpty) {
+    if (this != null && /* this. */ isNotEmpty) {
       result = this[0].toUpperCase();
-      if (this.length > 1) {
-        result += this.substring(1).toLowerCase();
+      if (/* this. */ length > 1) {
+        result += /* this. */ substring(1).toLowerCase();
       }
     }
     return result;
@@ -200,10 +199,10 @@ extension UtilityString on String {
   /// ```
   String get lowerFirst {
     var result;
-    if (this != null && this.isNotEmpty) {
+    if (this != null && /* this. */ isNotEmpty) {
       result = this[0].toLowerCase();
-      if (this.length > 1) {
-        result += this.substring(1);
+      if (/* this. */ length > 1) {
+        result += /* this. */ substring(1);
       }
     }
     return result;
@@ -216,10 +215,10 @@ extension UtilityString on String {
   /// ```
   String get upperFirst {
     var result = '';
-    if (this != null && this.isNotEmpty) {
+    if (this != null && /* this. */ isNotEmpty) {
       result = this[0].toUpperCase();
-      if (this.length > 1) {
-        result += this.substring(1);
+      if (/* this. */ length > 1) {
+        result += /* this. */ substring(1);
       }
     }
     return result;
@@ -231,7 +230,9 @@ extension UtilityString on String {
   /// ```
   List<String> words([RegExp pattern]) {
     if (pattern == null) {
-      return reAsciiWord.hasMatch(this) ? this.asciiWords : this.unicodeWords;
+      return reAsciiWord.hasMatch(this)
+          ? /* this. */ asciiWords
+          : /* this. */ unicodeWords;
     }
     return pattern.allMatches(this).map((match) => '${match[0]}').toList();
   }
@@ -245,7 +246,7 @@ extension UtilityString on String {
   /// '-----just--Kawal--'.camelCase; // justKawal
   /// ```
   String get camelCase {
-    var wordList = this.words();
+    var wordList = /* this. */ words();
     var leftSide = wordList.first.toLowerCase();
     var rightSide =
         wordList.skip(1).reduce((value, element) => value + element.capitalize);
@@ -284,11 +285,9 @@ extension UtilityString on String {
 
   /// A helper function for reusing the same functionality of `snakeCase`, `lowerCase` and `kebabCase`.
   String _reuseCase(String separator) {
-    return this
-        .words()
-        .map((word) => word.toLowerCase())
-        .toList()
-        .join(separator);
+    return /* this
+        . */
+        words().map((word) => word.toLowerCase()).toList().join(separator);
   }
 
   /// Converts the string to `nameCase`.
@@ -298,11 +297,9 @@ extension UtilityString on String {
   /// '-----kawaljeet--singh--'.nameCase(); // Kawaljeet Singh
   /// ```
   String nameCase({String separator = ' '}) {
-    return this
-        .words()
-        .map((word) => word.capitalize)
-        .toList()
-        .join(separator ?? ' ');
+    return /* this
+        . */
+        words().map((word) => word.capitalize).toList().join(separator ?? ' ');
   }
 
   // --------------------- Cases End ---------------------
@@ -340,7 +337,7 @@ extension UtilityString on String {
   /// var pad3 = 'abc'.pad(3); // 'abc'
   ///```
   String pad(int length, [String chars = ' ']) {
-    var strLength = length != 0 ? this.length : 0;
+    var strLength = length != 0 ? /* this. */ length : 0;
     if (length == 0 || strLength >= length) {
       return this;
     }
@@ -367,12 +364,14 @@ extension UtilityString on String {
 
   // private function for internal usage
   List<String> get _stringToList {
-    return this.hasUnicode ? this._unicodeToList : this._asciiToList;
+    return /* this. */ hasUnicode
+        ? /* this. */ _unicodeToList
+        : /* this. */ _asciiToList;
   }
 
   // private function for internal usage
   List<String> get _asciiToList {
-    return this.split('');
+    return /* this. */ split('');
   }
 
   // private function for internal usage

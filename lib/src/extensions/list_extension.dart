@@ -1,7 +1,5 @@
 part of utility;
 
-// ignore_for_file: unnecessary_this
-
 extension UtilityList<T> on List<T> {
   ///Creates a slice of `list` from `start` up to, but not including, `end`.
   ///
@@ -41,9 +39,8 @@ extension UtilityList<T> on List<T> {
 
   // Private function to be accessed for internal usage only
   List<T> _castSlice(int start, [int end]) {
-    var length = this.length;
     end ??= length;
-    return (start == 0 && end >= length) ? this : this.slice(start, end);
+    return (start == 0 && end >= length) ? this : /* this. */ slice(start, end);
   }
 
   /// returns `random value` from list. If list is empty then it returns `null`
@@ -63,7 +60,7 @@ extension UtilityList<T> on List<T> {
   /// var randomValue list.random(secure: true); // 5
   /// ````
   T random({bool secure = false, bool remove = false, int seed}) {
-    if (this.isEmpty) {
+    if (/* this. */isEmpty) {
       return null;
     }
     Random random;
@@ -74,10 +71,10 @@ extension UtilityList<T> on List<T> {
     } else {
       random = Random();
     }
-    var randomIndex = random.nextInt(this.length);
+    var randomIndex = random.nextInt(/* this. */length);
     var item = this[randomIndex];
     if (remove ?? false) {
-      this.removeAt(randomIndex);
+      /* this. */ removeAt(randomIndex);
     }
     return item;
   }
@@ -95,8 +92,8 @@ extension UtilityList<T> on List<T> {
   /// ````
   bool get isGrowable {
     try {
-      this.add(null);
-      this.removeLast();
+      /* this. */ add(null);
+      /* this. */ removeLast();
       return true;
     } catch (e) {
       return false;
@@ -116,11 +113,11 @@ extension UtilityList<T> on List<T> {
   /// list.drop(5); // list = []; // does not throw error :D
   /// ````
   List<T> drop([int n = 1]) {
-    if (n > (this.length ?? 0)) {
-      n = this.length;
+    if (n > (/* this. */ length ?? 0)) {
+      n = /* this. */ length;
     }
     for (var i = 1; i <= n; i++) {
-      this.removeAt(0);
+      /* this. */ removeAt(0);
     }
     return this;
   }
@@ -139,11 +136,11 @@ extension UtilityList<T> on List<T> {
   /// ````
   List<T> dropRight([int n = 1]) {
     if (n > 0) {
-      if (n > (this.length ?? 0)) {
-        n = this.length;
+      if (n > (/* this. */ length ?? 0)) {
+        n = /* this. */ length;
       }
       for (var i = 1; i <= n; i++) {
-        this.removeLast();
+        /* this. */ removeLast();
       }
     }
     return this;
@@ -156,12 +153,12 @@ extension UtilityList<T> on List<T> {
   /// list.dropRightWhile((element) => element >= 3); // list = [2, 1];
   /// ````
   List<T> dropRightWhile(bool Function(T element) callback) {
-    var index = this.length - 1;
+    var index = /* this. */ length - 1;
     while (index >= 0) {
       if (!callback(this[index])) {
         break;
       }
-      this.removeLast();
+      /* this. */ removeLast();
       index--;
     }
     return this;
@@ -174,13 +171,12 @@ extension UtilityList<T> on List<T> {
   /// list.dropWhile((element) => element <= 3); // list = [4, 5];
   /// ````
   List<T> dropWhile(bool Function(T element) callback) {
-    var length = this.length;
     var index = 0;
     while (index < length) {
       if (!callback(this[index])) {
         break;
       }
-      this.removeAt(0);
+      /* this. */ removeAt(0);
       index++;
     }
     return this;
@@ -243,7 +239,7 @@ extension UtilityList<T> on List<T> {
   /// ````
   List<T> flattenDeep() {
     var copyList = <Object>[];
-    this.forEach((element) {
+    /* this. */ forEach((element) {
       if (element is List) {
         for (var val in element.flattenDeep()) {
           copyList.add(val);
@@ -277,7 +273,7 @@ extension UtilityList<T> on List<T> {
     var result = List<List<T>>((length / size).ceil());
 
     while (index < length) {
-      result.add(this.slice(index, (index += size)));
+      result.add(/* this. */ slice(index, (index += size)));
     }
     return result;
   }
@@ -296,14 +292,7 @@ extension UtilityList<T> on List<T> {
   /// var compactedData_new_object = compact(list); // ['a', 'b'];
   ///````
   List<T> compact() {
-    this.removeWhere((element) => isFalsey(element));
+    /* this. */ removeWhere((element) => isFalsey(element));
     return this;
-  }
-
-  List<T> heapSort({bool inPlace = true}) {
-    if (this == null) {
-      return null;
-    }
-    
   }
 }
