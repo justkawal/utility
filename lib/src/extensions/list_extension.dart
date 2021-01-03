@@ -11,6 +11,7 @@ extension UtilityList<T> on List<T> {
   ///````
   List<T> slice(int start, [int end]) {
     var length = this?.length ?? 0;
+    var untouchedLength = length;
     if (length <= 0) {
       return <T>[];
     }
@@ -26,22 +27,38 @@ extension UtilityList<T> on List<T> {
     if (end < 0) {
       end += length;
     }
-    length = start > end ? 0 : zeroFillRightShift((end - start), 0);
+    length = start > end ? 0 : (end - start).zeroFillRightShift(0);
     start = start.zeroFillRightShift(0);
 
-    var index = -1;
-    var result = <T>[];
-    while (++index < length) {
-      result.add(this[index + start]);
-    }
+    var index = 0;
     if (isGrowable) {
-      // below command will clear the list from this
-      // TODO: to make a even faster code for this
-      clear();
-      addAll(result);
+      var reducer = 0;
+      // removing section
+      while (index < untouchedLength - reducer) {
+        var pointer = index + start - reducer;
+        if (index < pointer) {
+          removeAt(0);
+          reducer += 1;
+        } else {
+          break;
+        }
+      }
+      // ignoring section
+      index = length;
+      untouchedLength -= reducer;
+      while (index < untouchedLength) {
+        removeAt(length);
+        index++;
+      }
       return this;
+    } else {
+      var result = <T>[];
+      while (index < length) {
+        result.add(this[index + start]);
+        index++;
+      }
+      return result;
     }
-    return result;
   }
 
   // Private function to be accessed for internal usage only
@@ -67,7 +84,7 @@ extension UtilityList<T> on List<T> {
   /// var randomValue list.random(secure: true); // 5
   /// ````
   T random({bool secure = false, bool remove = false, int seed}) {
-    if (/* this. */isEmpty) {
+    if (/* this. */ isEmpty) {
       return null;
     }
     Random random;
@@ -78,7 +95,7 @@ extension UtilityList<T> on List<T> {
     } else {
       random = Random();
     }
-    var randomIndex = random.nextInt(/* this. */length);
+    var randomIndex = random.nextInt(/* this. */ length);
     var item = this[randomIndex];
     if (remove ?? false) {
       /* this. */ removeAt(randomIndex);
@@ -88,7 +105,7 @@ extension UtilityList<T> on List<T> {
 
   /// returns `true` if it is `Growable list` otherwise false.
   ///
-  /// ````dart
+  /// ```dart
   /// // On Non-Growable List
   /// var list = List<dynamic>(8);
   /// var isGrowable = list.isGrowable; // false
@@ -96,7 +113,7 @@ extension UtilityList<T> on List<T> {
   /// // On Growable List
   /// var list2 = List<dynamic>();
   /// var isGrowable = list2.isGrowable; // true
-  /// ````
+  /// ```
   bool get isGrowable {
     try {
       /* this. */ add(null);
@@ -105,6 +122,19 @@ extension UtilityList<T> on List<T> {
     } catch (e) {
       return false;
     }
+  }
+
+  /// Removes items at `0` position in this
+  /// ```dart
+  /// var list = <int>[1, 5, 2, 4];
+  /// var firstItem = list.removeFirst();
+  /// // altered list = [5, 2, 4];
+  /// ```
+  T removeFirst() {
+    if (isGrowable) {
+      return removeAt(0);
+    }
+    return null;
   }
 
   /// removes `n` number of elements from the beginning of list
