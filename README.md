@@ -248,7 +248,7 @@ var t = zeroFillRightShift(20, 3); // 6
 
 // Thus above function helps to provide operation of `>>>`
 
-20 >>> 3 = 6
+// 20 >>> 3 = 6
 var value = 20.zeroFillRightShift(3); // value = 6
 ```
 
@@ -279,10 +279,10 @@ var value = dividend.divide(divisor); // value = 2
 ### slice
 Creates a slice of `string` from `start` up to, but not including, `end`.
 ```dart
-var string = 'justkawal;
+var string = '__justkawal;
 
 // It slices the string and returns modified string
-string.slice(2); // string = '';
+string.slice(2); // string = 'justkawal';
 ```
 
 ### toNumber
