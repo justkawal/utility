@@ -329,7 +329,7 @@ extension UtilityString on String {
 
   /// Pads the string on the left and right sides if it's shorter than `length`.
   /// Padding characters will be truncated if they can't be evenly divided by `length`.
-  ///```
+  ///```dart
   /// var pad1 = 'abc'.pad(8); // '  abc   '
   ///
   /// var pad2 = 'abc'.pad(8, '=_'); // '=_abc=_='
