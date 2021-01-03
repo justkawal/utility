@@ -1,7 +1,7 @@
 import 'package:test/test.dart';
 import 'package:utility/utility.dart';
-void main(){
 
+void main() {
   group('list', () {
     test('Slice', () {
       var list = [1, 2, 3, 4];
@@ -12,7 +12,7 @@ void main(){
       expect(list.random(), equals(4));
     });
 
-      test('.remainder() returns the remainder of division', () {
+    test('.remainder() returns the remainder of division', () {
       expect(11.remainder(3), equals(2));
     });
   });

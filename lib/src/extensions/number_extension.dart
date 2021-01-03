@@ -2,7 +2,6 @@ part of utility;
 
 extension UtilityNumber on int {
   ///As dart don't have `>>>`. So to achieve functionality of `>>>` a mimic can be used.
-  ///
   /// ```dart
   /// // 20 >>> 3 = 6
   /// var value = 20.zeroFillRightShift(3); // value = 6
@@ -15,7 +14,6 @@ extension UtilityNumber on int {
   }
 
   /// It returns `xor` operation
-  ///
   /// ```dart
   /// // 20 ^ 3 = 23
   /// var value = 20.xor(3); // value = 23
@@ -28,7 +26,6 @@ extension UtilityNumber on int {
   }
 
   /// It returns `quotient` as integer on divison.
-  ///
   /// ```dart
   /// // ( In Python ) -> [20 // 10 = 2]
   /// // ( In Dart )   -> [20 / 10 = 2.0]
@@ -45,25 +42,4 @@ extension UtilityNumber on int {
     }
     return this ~/ divisor;
   }
-
-/* 
-  ///
-  /// It returns `and` operation
-  ///
-  /// ````dart
-  /// // 20 & 3 = 0
-  /// var value = 20.and(3); // value = 0
-  ///````
-  ///
-  int and(int val) => this & val;
-
-  ///
-  /// It returns `or` operation
-  ///
-  /// ````dart
-  /// // 20 | 3 = 23
-  /// var value = 20.or(3); // value = 23
-  ///````
-  ///
-  int or(int val) => this | val; */
 }

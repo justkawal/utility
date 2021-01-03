@@ -3,18 +3,23 @@ import 'package:utility/utility.dart';
 
 void main() {
   // -------------- list operations start --------------
-  var numberList = <num>[20.0, 5, 1.0, 10, null, 25];
-  var stringList = <String>['Kawal', 'Ashumendra', null, 'Github'];
-  var dynamicList = <dynamic>['Ashumendra', 5, false, null, 'justkawal'];
 
-  for (var i = -7; i < 8; i++) {
-    dynamicList.slice(i, 8);
-    print('$i: ' + dynamicList.toString());
-  }
+  var numberList = <num>[20.0, 5, 1.0, 10, 25];
 
-  // numberList.slice(2); // method operates on object and alters the object.and
+  print('before slicing: $numberList');
+  numberList.slice(2);
+  print('after slicing on 2: $numberList');
 
-  // var slicedList = slice(numberList, 2); // functions operates on copy of object
+  var newSortedObject = numberList.heapSort(inPlace: false);
+  print('sorted Object: $newSortedObject');
+
+  var stringList = <String>['Subscribe', 'to', 'MrBeast', 'and', 'Click', 'bell', 'icon'];
+  var newSlicedObject = slice(stringList, 0, 3);
+  print('new sliced Object slicing\n$newSlicedObject');
+
+  var dynamicList = <dynamic>['Subscribe', 'to', 'MrBeast', 5, false, null, 'India', 'MrBeast'];
+
+
 
   // -------------- list operations end --------------
 }

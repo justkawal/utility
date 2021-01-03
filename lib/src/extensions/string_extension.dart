@@ -2,7 +2,6 @@ part of utility;
 
 extension UtilityString on String {
   ///Creates a slice of `string` from `start` up to, but not including, `end`.
-  ///
   ///```dart
   ///var string = 'justkawal;
   ///
@@ -38,7 +37,6 @@ extension UtilityString on String {
   }
 
   /// Trims the value and then converts it to number
-  ///
   ///```dart
   ///
   ///'2604 '.toNumber; // 2604
@@ -52,7 +50,6 @@ extension UtilityString on String {
   }
 
   /// Counts the number of occurrences of value.
-  ///
   /// ```dart
   ///
   /// 'justkawal'.count('a'); // 2
