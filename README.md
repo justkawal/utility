@@ -91,6 +91,14 @@ var list = [1, 2, 3, 4];
 list.slice(2); // list = [3, 4]
 ```
 
+### removeFirst();
+Removes items at `0` position in the list.
+```dart
+var list = <int>[1, 5, 2, 4];
+var firstItem = list.removeFirst();
+// altered list = [5, 2, 4];
+```
+
 ### random
 returns `random value` from list. If list is empty then it returns `null`
 ```dart
