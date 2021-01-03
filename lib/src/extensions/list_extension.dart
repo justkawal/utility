@@ -1,7 +1,7 @@
 part of utility;
 
 extension UtilityList<T> on List<T> {
-  ///Creates a slice of `list` from `start` up to, but not including, `end`.
+  ///Creates a slice of `list` from `start` up to `end`[exclusive].
   ///
   ///````dart
   ///var list = [1, 2, 3, 4];

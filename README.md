@@ -125,7 +125,6 @@ var value2 = list2.isGrowable; // true
 
 ### drop
 removes `n` number of elements from the beginning of list
-
 ```dart
 var list = <int>[1, 2, 3, 4, 5];
 list.drop(); // list = [2, 3, 4, 5];
@@ -139,7 +138,6 @@ list.drop(5); // list = []; // does not throw error :D
 
 ### dropRight
 removes `n` number of elements from the ending of list.
-
 ```dart
 var list = <int>[1, 2, 3, 4, 5];
 list.dropRight(); // list = [1, 2, 3, 4];
@@ -160,7 +158,6 @@ list.dropRightWhile((element) => element >= 3); // list = [2, 1];
 
 ### dropWhile
 starts `removing elements` from the `starting of list` until condition becomes `false`
-
 ```dart
 var list = <int>[2, 1, 3, 4, 5];
 list.dropWhile((element) => element <= 3); // list = [4, 5];
@@ -170,7 +167,6 @@ list.dropWhile((element) => element <= 3); // list = [4, 5];
 `Flattens` list a single level deep.
 
 It returns `newObject` of flattened list and does not affects the list object called-upon
-
 ```dart
 var list = [2, [1, 3], [4, [1, [2]] ] ];
 var newList = list.flatten(); // newList = [2, 1, 3, 4, [1, [2] ] ];
@@ -180,7 +176,6 @@ var newList = list.flatten(); // newList = [2, 1, 3, 4, [1, [2] ] ];
 `Recursively flatten list up to depth times.`
 
 It returns `newObject` of flattened list and does not affects the list object called-upon
-
 ```dart
 var list = [2, [1, 3], [4, [1, [2]] ] ];
 var newList = list.flattenDepth(1); // newList = [2, 1, 3, 4, [1, [2] ] ];
@@ -199,7 +194,6 @@ var newList = list.flattenDeep(); // newList = [2, 1, 3, 4, 1, 2];
 Creates a new list of elements split into groups the length of `size`.
 
 If `list` can't be split evenly, the final chunk will be the remaining elements.
-
 ```dart
 
 // It returns new Object of Chunked data;
@@ -235,6 +229,242 @@ var newSortedList = list.heapSort(inPlace: false);
 var list = <int>[97, 04, 5, 26, 6];
 // With `inPlace` set to `true (default)` it sorts the list in its place.
 list.heapSort(); // list = [4, 5, 6, 26, 97];
+```
+
+## Number Operations
+### >>> (mimic)
+As dart don't have `>>>`. So to achieve functionality of `>>>` a mimic can be used.
+
+```dart
+// 20 >>> 3 = 6
+var value = 20.zeroFillRightShift(3); // value = 6
+```
+
+### zeroFillRightShift(int number, int amount)
+As operator `>>>` is not available in dart, So `zeroFillRightShift` function helps to mimics the working of `>>>`.
+```dart
+// var t = 20 >>> 3;
+var t = zeroFillRightShift(20, 3); // 6
+
+// Thus above function helps to provide operation of `>>>`
+
+// 20 >>> 3 = 6
+var value = 20.zeroFillRightShift(3); // value = 6
+```
+
+### xor
+It returns `xor` operation.
+```dart
+// 20 ^ 3 = 23
+var value = 20.xor(3); // value = 23
+```
+
+### divide
+It returns `quotient` as integer on divison.
+```dart
+// ( In Python ) -> [20 // 10 = 2]
+// ( In Dart )   -> [20 / 10 = 2.0] (oops) :p
+
+// But we need 2 as result.
+var value = 20.divide(10);       // value = 2
+var value = 20.divide(10.0);     // value = 2
+var value = (20.0).divide(10);   // value = 2
+var value = (20.0).divide(10.0); // value = 2
+var dividend = 20;
+var divisor = 10;
+var value = dividend.divide(divisor); // value = 2
+```
+
+## String Operations
+### slice
+Creates a slice of `string` from `start` up to, but not including, `end`.
+```dart
+var string = '__justkawal;
+
+// It slices the string and returns modified string
+string.slice(2); // string = 'justkawal';
+```
+
+### toNumber
+Returns converted number
+```dart
+'2604 '.toNumber; // 2604
+'  26.04 '.toNumber; // 26.04
+```
+
+### toNumber()
+Converts `value` to number
+```dart
+var value = toNumber('2604 '); // 2604
+var value1 = toNumber(26.04); // 26.04 // lolz anyway its a number
+```
+
+### count
+`Counts` and `returns` the number of occurrences of value.
+```dart
+'justkawal'.count('a');       // 2
+'justkawal'.count('just');    // 1
+'justkawal'.count('flutter'); // 0
+```
+
+### isNumber
+Returns `true`, if the `string` is `number` other-wise `false`
+```dart
+'123'.isNumber; // true
+'justkawal'.isNumber; // false
+```
+
+### isNumber(dynamic val)
+Returns `true` if `this` is `number` otherwise `false`.
+```dart
+var value = isNumber('123 '); // true
+var value1 = isNumber('12A'); // false
+```
+
+### isBinary
+Returns `true` if the `string` is `binary`, other-wise `false`
+```dart
+'1010'.isBinary; // true
+'justkawal'.isBinary; // false
+```
+
+### isDecimal
+Returns `true` if the `string` is `decimal`, other-wise `false`
+```dart
+'123'.isDecimal; // true
+'justkawal'.isDecimal; // false
+```
+
+### isOctal
+Returns `true` if the `string` is `octal`, other-wise `false`
+```dart
+'123'.isOctal; // true
+'justkawal'.isOctal; // false
+```
+
+### isHex
+Returns `true` if the `string` is `good hex`, other-wise `false`
+```dart
+'123'.isHex; // true
+'justkawal'.isHex; // false
+```
+
+### deburr
+Converts string from `Latin-1` to normal `basic latin letters`.
+```dart
+'hey kàwàl'.deburr; // hey kawal
+```
+
+### unicodeWords
+Returns list of `unicode words` from the string.
+```dart
+'hey kàwàl'.unicodeWords; // [kàwàl]
+```
+
+### asciiWords
+Returns list of `ascii words` from the string.
+```dart
+'hey kàwàl'.asciiWords; // [hey]
+```
+
+### hasUnicodeWord
+Returns `true` if string contains any occurence of `unicode word` other-wise `false`.
+```dart
+'hey kàwàl'.hasUnicodeWord; // true
+'hey'.hasUnicodeWord;      // false
+```
+
+### hasUnicode
+Returns `true` if string contains `unicode` other-wise `false`.
+```dart
+'kàwàl'.hasUnicode; // true
+```
+
+### capitalize
+Converts the first character of string to `upper case` and the remaining to `lower case`.
+```dart
+'justkawal'.capitalize; // Justkawal
+'JUSTKAWAL'.capitalize; // Justkawal
+```
+
+### lowerFirst
+Converts the first character of string to `lower case`.
+```dart
+'Justkawal'.lowerFirst; // justkawal
+'JUSTKAWAL'.lowerFirst; // jUSTKAWAL
+```
+
+### upperFirst
+Converts the `first character` of string to `upper case`.
+```dart
+'justkawal'.upperFirst; // Justkawal
+'jUSTKAWAL'.upperFirst; // JUSTKAWAL
+```
+
+### words
+Returns `list of words`
+```dart
+'kàwàl vu'.words; // ['kàwàl', 'vu']
+```
+
+### camelCase
+Converts the string to `camelCase` and returns it.
+```dart
+'___just__kawal__'.camelCase; // justKawal
+'  just  Kawal  '.camelCase; // justKawal
+'-----just--Kawal--'.camelCase; // justKawal
+```
+
+### kebabCase
+Converts the string to `kebabCase` and returns it.
+```dart
+'___hello__world__'.kebabCase(); // hello-world
+'  hello  World  '.kebabCase(); // hello-world
+'-----hello--world--'.kebabCase(); // hello-world
+```
+
+### lowerCase
+Converts the string to `lowerCase` and returns it.
+```dart
+'___hello__world__'.lowerCase(); // hello world
+'  hello  World  '.lowerCase(); // hello world
+'-----hello--world--'.lowerCase(); // hello world
+```
+
+### snakeCase
+Converts the string to `snakeCase` and returns it.
+```dart
+'___hello__world__'.snakeCase(); // hello_world
+'  helloWorld  '.snakeCase(); // hello_world
+'-----hello--world--'.snakeCase(); // hello_world
+```
+
+### nameCase
+Converts the string to `nameCase` and returns it.
+```dart
+'___kaWaljeet__sInGH__'.nameCase(); // Kawaljeet Singh
+'  justKawal  '.nameCase(); // Just Kawal
+'-----kawaljeet--singh--'.nameCase(); // Kawaljeet Singh
+```
+
+### repeat
+Returns `repeated string`, `n` number of times
+```dart
+'justkawal'.repeat(1); // justkawal
+'123'.repeat(2); // 123123
+'1'.repeat(5); // 11111
+```
+
+### pad
+Pads the string on the left and right sides if it's shorter than `length`.
+
+Padding characters will be truncated if they can't be evenly divided by `length`.
+```dart
+var pad1 = 'abc'.pad(8); // '  abc   '
+
+var pad2 = 'abc'.pad(8, '=_'); // '=_abc=_='
+
+var pad3 = 'abc'.pad(3); // 'abc'
 ```
 
 ## Features coming in next version
