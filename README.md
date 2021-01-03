@@ -240,6 +240,18 @@ As dart don't have `>>>`. So to achieve functionality of `>>>` a mimic can be us
 var value = 20.zeroFillRightShift(3); // value = 6
 ```
 
+### zeroFillRightShift(int number, int amount)
+As operator `>>>` is not available in dart, So `zeroFillRightShift` function helps to mimics the working of `>>>`.
+```dart
+// var t = 20 >>> 3;
+var t = zeroFillRightShift(20, 3); // 6
+
+// Thus above function helps to provide operation of `>>>`
+
+20 >>> 3 = 6
+var value = 20.zeroFillRightShift(3); // value = 6
+```
+
 ### xor
 It returns `xor` operation.
 ```dart
@@ -280,6 +292,13 @@ Returns converted number
 '  26.04 '.toNumber; // 26.04
 ```
 
+### toNumber()
+Converts `value` to number
+```dart
+var value = toNumber('2604 '); // 2604
+var value1 = toNumber(26.04); // 26.04 // lolz anyway its a number
+```
+
 ### count
 `Counts` and `returns` the number of occurrences of value.
 ```dart
@@ -293,6 +312,13 @@ Returns `true`, if the `string` is `number` other-wise `false`
 ```dart
 '123'.isNumber; // true
 'justkawal'.isNumber; // false
+```
+
+### isNumber(dynamic val)
+Returns `true` if `this` is `number` otherwise `false`.
+```dart
+var value = isNumber('123 '); // true
+var value1 = isNumber('12A'); // false
 ```
 
 ### isBinary
