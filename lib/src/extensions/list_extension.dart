@@ -34,7 +34,14 @@ extension UtilityList<T> on List<T> {
     while (++index < length) {
       result.add(this[index + start]);
     }
-    return this;
+    if (isGrowable) {
+      // below command will clear the list from this
+      // TODO: to make a even faster code for this
+      clear();
+      addAll(result);
+      return this;
+    }
+    return result;
   }
 
   // Private function to be accessed for internal usage only

@@ -1,7 +1,6 @@
 part of utility;
 
 /// Creates a slice of `list` from `start` up to, but not including, `end`.
-///
 ///````dart
 /// var list = [1, 2, 3, 4];
 ///
@@ -15,7 +14,6 @@ List<T> slice<T>(List<T> list, int start, [int end]) {
   if (list == null) {
     return null;
   }
-  var temporaryList = List<T>.from(list);
-  temporaryList.slice(start, end);
-  return temporaryList;
+  var copyList = List<T>.from(list);
+  return copyList.slice(start, end);
 }
