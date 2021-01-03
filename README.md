@@ -369,16 +369,76 @@ Converts the first character of string to `lower case`.
 ```
 
 ### upperFirst
-Converts the first character of string to `upper case`.
+Converts the `first character` of string to `upper case`.
 ```dart
 'justkawal'.upperFirst; // Justkawal
 'jUSTKAWAL'.upperFirst; // JUSTKAWAL
 ```
 
 ### words
-returns `list of words`
+Returns `list of words`
 ```dart
 'kàwàl vu'.words; // ['kàwàl', 'vu']
+```
+
+### camelCase
+Converts the string to `camelCase` and returns it.
+```dart
+'___just__kawal__'.camelCase; // justKawal
+'  just  Kawal  '.camelCase; // justKawal
+'-----just--Kawal--'.camelCase; // justKawal
+```
+
+### kebabCase
+Converts the string to `kebabCase` and returns it.
+```dart
+'___hello__world__'.kebabCase(); // hello-world
+'  hello  World  '.kebabCase(); // hello-world
+'-----hello--world--'.kebabCase(); // hello-world
+```
+
+### lowerCase
+Converts the string to `lowerCase` and returns it.
+```dart
+'___hello__world__'.lowerCase(); // hello world
+'  hello  World  '.lowerCase(); // hello world
+'-----hello--world--'.lowerCase(); // hello world
+```
+
+### snakeCase
+Converts the string to `snakeCase` and returns it.
+```dart
+'___hello__world__'.snakeCase(); // hello_world
+'  helloWorld  '.snakeCase(); // hello_world
+'-----hello--world--'.snakeCase(); // hello_world
+```
+
+### nameCase
+Converts the string to `nameCase` and returns it.
+```dart
+'___kaWaljeet__sInGH__'.nameCase(); // Kawaljeet Singh
+'  justKawal  '.nameCase(); // Just Kawal
+'-----kawaljeet--singh--'.nameCase(); // Kawaljeet Singh
+```
+
+### repeat
+Returns `repeated string`, `n` number of times
+```dart
+'justkawal'.repeat(1); // justkawal
+'123'.repeat(2); // 123123
+'1'.repeat(5); // 11111
+```
+
+### pad
+Pads the string on the left and right sides if it's shorter than `length`.
+
+Padding characters will be truncated if they can't be evenly divided by `length`.
+```dart
+var pad1 = 'abc'.pad(8); // '  abc   '
+
+var pad2 = 'abc'.pad(8, '=_'); // '=_abc=_='
+
+var pad3 = 'abc'.pad(3); // 'abc'
 ```
 
 ## Features coming in next version
