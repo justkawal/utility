@@ -13,13 +13,10 @@ void main() {
   var newSortedObject = numberList.heapSort(inPlace: false);
   print('sorted Object: $newSortedObject');
 
-  var stringList = <String>['Subscribe', 'to', 'MrBeast', 'and', 'Click', 'bell', 'icon'];
+  var stringList = <String>['Subscribe', 'to', 'MrBeast', '&'];
   var newSlicedObject = slice(stringList, 0, 3);
   print('new sliced Object slicing\n$newSlicedObject');
 
-  var dynamicList = <dynamic>['Subscribe', 'to', 'MrBeast', 5, false, null, 'India', 'MrBeast'];
-
-
-
+  //var dynamicList = <dynamic>['Subscribe', 'to', 'MrBeast', 5, false, null, 'India', 'MrBeast'];
   // -------------- list operations end --------------
 }
