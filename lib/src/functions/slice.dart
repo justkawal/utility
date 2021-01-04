@@ -14,6 +14,5 @@ List<T> slice<T>(List<T> list, int start, [int end]) {
   if (list == null) {
     return null;
   }
-  var copyList = List<T>.from(list);
-  return copyList.slice(start, end);
+  return List<T>.from(list).slice(start, end);
 }
