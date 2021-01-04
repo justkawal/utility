@@ -31,7 +31,7 @@ void main() {
 
     test('Slice', () {
       expect(
-          slicedList, equals([false, null, 'justkawal', 'Instance of Object']));
+          slicedList, equals([false, null, 'justkawal']));
       expect(numberList.slice(2), equals([1.0, 10, null, 25]));
       expect(numberList.slice(-2), equals([null, 25]));
       expect(numberList.slice(null), equals([null, 25]));
