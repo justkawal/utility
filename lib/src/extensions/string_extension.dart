@@ -75,7 +75,7 @@ extension UtilityString on String {
   /// 'justkawal'.isNumber; // false
   /// ```
   bool get isNumber {
-    return double.tryParse(this) ?? false;
+    return double.tryParse(this) != null;
   }
 
   /// returns `true` if the `string` is `binary`, other-wise `false`

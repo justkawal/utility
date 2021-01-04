@@ -12,5 +12,5 @@ bool isNumber(dynamic s) {
   if (s is num) {
     return true;
   }
-  return double.tryParse('$s'.trim()) ?? false;
+  return double.tryParse('$s'.trim()) != null;
 }
