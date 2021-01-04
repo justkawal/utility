@@ -178,11 +178,12 @@ void main() {
       expect('justllkawal'.count('l'), equals(3));
       expect('occurance'.count('c'), equals(3));
     });
-    
+
     test('isNumber', () {
       expect('Counttokarega'.isNumber, isFalse);
       // var value = isNumber('1234');
       // expect(value, isTrue);
       expect('occ1234urance'.isNumber, isFalse);
+    });
   });
 }
