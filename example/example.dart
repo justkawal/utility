@@ -6,7 +6,6 @@ void main() {
 
   var value = 10.xor(-2);
   print(value);
-  
 
   // var flattenlist = [
 
