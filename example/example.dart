@@ -1,6 +1,5 @@
 // ignore: avoid_relative_lib_imports
 import 'package:utility/utility.dart';
-import 'package:test/test.dart';
 
 void main() {
   // -------------- list operations start --------------
@@ -93,5 +92,6 @@ void main() {
   // tempflattenlist.flattenDeep();
   // print(tempflattenlist);
 
+  //var dynamicList = <dynamic>['Subscribe', 'to', 'MrBeast', 5, false, null, 'India', 'MrBeast'];
   // -------------- list operations end --------------
 }

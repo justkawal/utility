@@ -17,6 +17,5 @@ List<T> compact<T>(List<T> list) {
   if (list == null) {
     return null;
   }
-  var temporaryList = List<T>.from(list);
-  return temporaryList.compact();
+  return List<T>.from(list).compact();
 }

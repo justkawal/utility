@@ -18,6 +18,5 @@ List<List<T>> chunk<T>(List<T> list, [int size = 1]) {
   if (list == null) {
     return null;
   }
-  var temporaryList = List<T>.from(list);
-  return temporaryList.chunk(size);
+  return List<T>.from(list).chunk(size);
 }

@@ -2,9 +2,8 @@ part of utility;
 
 extension UtilityString on String {
   ///Creates a slice of `string` from `start` up to, but not including, `end`.
-  ///
   ///```dart
-  ///var string = 'justkawal;
+  ///var string = 'justkawal';
   ///
   ///// It slices the string and returns modified string
   ///string.slice(2); // string = '';
@@ -38,7 +37,6 @@ extension UtilityString on String {
   }
 
   /// Trims the value and then converts it to number
-  ///
   ///```dart
   ///
   ///'2604 '.toNumber; // 2604
@@ -52,7 +50,6 @@ extension UtilityString on String {
   }
 
   /// Counts the number of occurrences of value.
-  ///
   /// ```dart
   ///
   /// 'justkawal'.count('a'); // 2
@@ -329,7 +326,7 @@ extension UtilityString on String {
 
   /// Pads the string on the left and right sides if it's shorter than `length`.
   /// Padding characters will be truncated if they can't be evenly divided by `length`.
-  ///```
+  ///```dart
   /// var pad1 = 'abc'.pad(8); // '  abc   '
   ///
   /// var pad2 = 'abc'.pad(8, '=_'); // '=_abc=_='
@@ -381,4 +378,54 @@ extension UtilityString on String {
         .map((match) => match[0].toString())
         .toList();
   }
+/* 
+  _parseHex(String nakedHex) {
+    var isShort = nakedHex.length == 3 || nakedHex.length == 4;
+
+    if (isShort) {
+      var alpha = '${nakedHex.slice(3, 4)}${nakedHex.slice(3, 4)}';
+      return {
+        'r': '${nakedHex.slice(0, 1)}${nakedHex.slice(0, 1)}',
+        'g': '${nakedHex.slice(1, 2)}${nakedHex.slice(1, 2)}',
+        'b': '${nakedHex.slice(2, 3)}${nakedHex.slice(2, 3)}',
+        'a': alpha.isEmpty ? 'ff' : alpha
+      };
+    } else {
+      var alpha = '${nakedHex.slice(6, 8)}';
+      return {
+        'r': nakedHex.slice(0, 2),
+        'g': nakedHex.slice(2, 4),
+        'b': nakedHex.slice(4, 6),
+        'a': alpha.isEmpty ? 'ff' : alpha
+      };
+    } */
+  /* 
+
+  const twoDigitHexR = isShort ? `${nakedHex.slice(0, 1)}${nakedHex.slice(0, 1)}` : nakedHex.slice(0, 2);
+  const twoDigitHexG = isShort ? `${nakedHex.slice(1, 2)}${nakedHex.slice(1, 2)}` : nakedHex.slice(2, 4);
+  const twoDigitHexB = isShort ? `${nakedHex.slice(2, 3)}${nakedHex.slice(2, 3)}` : nakedHex.slice(4, 6);
+  const twoDigitHexA = ((isShort ? `${nakedHex.slice(3, 4)}${nakedHex.slice(3, 4)}` : nakedHex.slice(6, 8)) || 'ff'); */
+
+  // const numericA = +((parseInt(a, 16) / 255).toFixed(2));
+/* 
+  return {
+    r: twoDigitHexR,
+    g: twoDigitHexG,
+    b: twoDigitHexB,
+    a: twoDigitHexA,
+  };
+  } */
+/* 
+  void hexToRGBA(int alpha) {
+    var hashlessHex = _removeHash(this);
+    var hexObject = _parseHex(hashlessHex);
+    var decimalObject = hexesToDecimals(hexObject);
+  }
+
+  String _removeHash(String hex) {
+    if (hex != null && hex.isNotEmpty && hex[0] == '#') {
+      hex.slice(1);
+    }
+    return hex;
+  } */
 }

@@ -11,6 +11,7 @@ extension UtilityList<T> on List<T> {
   ///````
   List<T> slice(int start, [int end]) {
     var length = this?.length ?? 0;
+    var untouchedLength = length;
     if (length <= 0) {
       return <T>[];
     }
@@ -26,32 +27,47 @@ extension UtilityList<T> on List<T> {
     if (end < 0) {
       end += length;
     }
-    length = start > end ? 0 : zeroFillRightShift((end - start), 0);
+    length = start > end ? 0 : (end - start).zeroFillRightShift(0);
     start = start.zeroFillRightShift(0);
 
-    var index = -1;
-    var result = <T>[];
-    while (++index < length) {
-      result.add(this[index + start]);
-    }
+    var index = 0;
     if (isGrowable) {
-      // below command will clear the list from this
-      // TODO: to make a even faster code for this
-      clear();
-      addAll(result);
+      var reducer = 0;
+      // removing section
+      while (index < untouchedLength - reducer) {
+        var pointer = index + start - reducer;
+        if (index < pointer) {
+          removeAt(0);
+          reducer += 1;
+        } else {
+          break;
+        }
+      }
+      // ignoring section
+      index = length;
+      untouchedLength -= reducer;
+      while (index < untouchedLength) {
+        removeAt(length);
+        index++;
+      }
       return this;
+    } else {
+      var result = <T>[];
+      while (index < length) {
+        result.add(this[index + start]);
+        index++;
+      }
+      return result;
     }
-    return result;
   }
 
   // Private function to be accessed for internal usage only
   List<T> _castSlice(int start, [int end]) {
     end ??= length;
-    return (start == 0 && end >= length) ? this : /* this. */ slice(start, end);
+    return (start == 0 && end >= length) ? this : slice(start, end);
   }
 
-  /// returns `random value` from list. If list is empty then it returns `null`
-  ///
+  /// Returns `random value` from list. If list is empty then it returns `null`
   /// ````dart
   /// var list = <int>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   /// var randomValue = list.random(); // 3 // 3 will not be removed from list
@@ -59,15 +75,15 @@ extension UtilityList<T> on List<T> {
   /// // If remove = true is passed as argument then polled random item will be removed from list
   /// // before list is
   /// // [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  /// var randomValue list.random(remove: true); // 5
+  /// var randomValue = list.random(remove: true); // 5
   /// // after calling with remove = true
   /// // [1, 2, 3, 4, 6, 7, 8, 9, 10]
   ///
   /// // If secure = true is passed as argument then Random.secure() is used
-  /// var randomValue list.random(secure: true); // 5
+  /// var randomValue = list.random(secure: true); // 5
   /// ````
   T random({bool secure = false, bool remove = false, int seed}) {
-    if (/* this. */isEmpty) {
+    if (isEmpty) {
       return null;
     }
     Random random;
@@ -78,17 +94,17 @@ extension UtilityList<T> on List<T> {
     } else {
       random = Random();
     }
-    var randomIndex = random.nextInt(/* this. */length);
+    var randomIndex = random.nextInt(length);
     var item = this[randomIndex];
     if (remove ?? false) {
-      /* this. */ removeAt(randomIndex);
+      removeAt(randomIndex);
     }
     return item;
   }
 
   /// returns `true` if it is `Growable list` otherwise false.
   ///
-  /// ````dart
+  /// ```dart
   /// // On Non-Growable List
   /// var list = List<dynamic>(8);
   /// var isGrowable = list.isGrowable; // false
@@ -96,15 +112,28 @@ extension UtilityList<T> on List<T> {
   /// // On Growable List
   /// var list2 = List<dynamic>();
   /// var isGrowable = list2.isGrowable; // true
-  /// ````
+  /// ```
   bool get isGrowable {
     try {
-      /* this. */ add(null);
-      /* this. */ removeLast();
+      add(null);
+      removeLast();
       return true;
     } catch (e) {
       return false;
     }
+  }
+
+  /// Removes items at `0` position in this
+  /// ```dart
+  /// var list = <int>[1, 5, 2, 4];
+  /// var firstItem = list.removeFirst();
+  /// // altered list = [5, 2, 4];
+  /// ```
+  T removeFirst() {
+    if (isGrowable) {
+      return removeAt(0);
+    }
+    return null;
   }
 
   /// removes `n` number of elements from the beginning of list
@@ -120,11 +149,11 @@ extension UtilityList<T> on List<T> {
   /// list.drop(5); // list = []; // does not throw error :D
   /// ````
   List<T> drop([int n = 1]) {
-    if (n > (/* this. */ length ?? 0)) {
-      n = /* this. */ length;
+    if (n > (length ?? 0)) {
+      n = length;
     }
     for (var i = 1; i <= n; i++) {
-      /* this. */ removeAt(0);
+      removeAt(0);
     }
     return this;
   }
@@ -143,11 +172,11 @@ extension UtilityList<T> on List<T> {
   /// ````
   List<T> dropRight([int n = 1]) {
     if (n > 0) {
-      if (n > (/* this. */ length ?? 0)) {
-        n = /* this. */ length;
+      if (n > (length ?? 0)) {
+        n = length;
       }
       for (var i = 1; i <= n; i++) {
-        /* this. */ removeLast();
+        removeLast();
       }
     }
     return this;
@@ -155,17 +184,17 @@ extension UtilityList<T> on List<T> {
 
   /// starts `removing elements` from the `ending of list` until condition becomes `false`
   ///
-  /// ````dart
+  /// ```dart
   /// var list = <int>[2, 1, 3, 4, 5];
   /// list.dropRightWhile((element) => element >= 3); // list = [2, 1];
-  /// ````
+  /// ```
   List<T> dropRightWhile(bool Function(T element) callback) {
-    var index = /* this. */ length - 1;
+    var index = length - 1;
     while (index >= 0) {
       if (!callback(this[index])) {
         break;
       }
-      /* this. */ removeLast();
+      removeLast();
       index--;
     }
     return this;
@@ -173,17 +202,17 @@ extension UtilityList<T> on List<T> {
 
   /// starts `removing elements` from the `starting of list` until condition becomes `false`
   ///
-  /// ````dart
+  /// ```dart
   /// var list = <int>[2, 1, 3, 4, 5];
   /// list.dropWhile((element) => element <= 3); // list = [4, 5];
-  /// ````
+  /// ```
   List<T> dropWhile(bool Function(T element) callback) {
     var index = 0;
     while (index < length) {
       if (!callback(this[index])) {
         break;
       }
-      /* this. */ removeAt(0);
+      removeAt(0);
       index++;
     }
     return this;
@@ -193,10 +222,10 @@ extension UtilityList<T> on List<T> {
   ///
   /// It returns `newObject` of flattened array and does not affects the list object called-upon
   ///
-  /// ````dart
+  /// ```dart
   /// var list = [2, [1, 3], [4, [1, [2]] ] ];
   /// var newList = list.flatten(); // newList = [2, 1, 3, 4, [1, [2] ] ];
-  /// ````
+  /// ```
   List<T> flatten() {
     var copyList = <Object>[];
     for (var val in this) {
@@ -246,7 +275,7 @@ extension UtilityList<T> on List<T> {
   /// ````
   List<T> flattenDeep() {
     var copyList = <Object>[];
-    /* this. */ forEach((element) {
+    forEach((element) {
       if (element is List) {
         for (var val in element.flattenDeep()) {
           copyList.add(val);
@@ -280,7 +309,7 @@ extension UtilityList<T> on List<T> {
     var result = List<List<T>>((length / size).ceil());
 
     while (index < length) {
-      result.add(/* this. */ slice(index, (index += size)));
+      result.add(slice(index, (index += size)));
     }
     return result;
   }
@@ -299,7 +328,7 @@ extension UtilityList<T> on List<T> {
   /// var compactedData_new_object = compact(list); // ['a', 'b'];
   ///````
   List<T> compact() {
-    /* this. */ removeWhere((element) => isFalsey(element));
+    removeWhere((element) => isFalsey(element));
     return this;
   }
 }

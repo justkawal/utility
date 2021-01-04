@@ -1,7 +1,7 @@
 name: utility
 description: Utility helps Java-Script and Type-Script developers to migrate to dart and use it more effeciently.
-version: 1.0.0
-homepage: https://www.kawal.dev
+version: 1.0.1
+homepage: https://kawal.dev
 
 environment:
   sdk: '>=2.7.0 <3.0.0'
