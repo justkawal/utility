@@ -1,3 +1,4 @@
 pubspec.lock
 .packages
-.dart_tool/
+/.dart_tool/
+/.vscode/
