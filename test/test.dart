@@ -1,22 +1,14 @@
-import 'dart:math';
-
 import 'package:test/test.dart';
 import 'package:utility/utility.dart';
 
 void main() {
+  /// ===================== List Operations Start =====================
   group('list', () {
     var numberList = <num>[20.0, 5, 1.0, 10, null, 25];
     var heapList = <num>[20.0, 5, 1.0, 10, 25];
     var heaplist1 = [6, 9, 2, 1, 77, 8, 234, 9987, 12390, 98, 45];
 
-    var dynamicList = <dynamic>[
-      'Ashumendra',
-      5,
-      false,
-      null,
-      'justkawal',
-      Object()
-    ];
+    var dynamicList = <dynamic>['Ashumendra', 5, false, null, 'justkawal'];
     var slicedList = slice(dynamicList, 2);
     var flattenlist = [
       2,
@@ -33,17 +25,21 @@ void main() {
     var tempchunklist = compactlist;
 
     var list = List<dynamic>(8);
-    var list1 = List<dynamic>();
+    var list1 = <dynamic>[];
+
+    /// --------------- Slice Start ---------------
 
     test('Slice', () {
-      // expect(slicedList, equals([false, null, 'justkawal', 'Instance of Object']));
-
+      expect(
+          slicedList, equals([false, null, 'justkawal', 'Instance of Object']));
       expect(numberList.slice(2), equals([1.0, 10, null, 25]));
       expect(numberList.slice(-2), equals([null, 25]));
       expect(numberList.slice(null), equals([null, 25]));
       expect(numberList.slice(2), equals([]));
-      // expect(dynamicList.slice(-4, -1), equals([false, null, 'justkawal',Object()]));
+      expect(dynamicList.slice(-4, -1), equals([false, null, 'justkawal']));
     });
+
+    /// --------------- Slice End ---------------
 
     test('Growable', () {
       expect(list.isGrowable, equals(false));
@@ -66,19 +62,18 @@ void main() {
       expect(randomlist.dropWhile((element) => element >= 6), equals([5]));
     });
 
-    var flattendeeplist = [
-      2,
-      [1, 3],
-      [
-        4,
-        [
-          1,
-          [2]
-        ]
-      ]
-    ];
-
     test('Flatten', () {
+      var flattendeeplist = [
+        2,
+        [1, 3],
+        [
+          4,
+          [
+            1,
+            [2]
+          ]
+        ]
+      ];
       expect(
           flattenlist.flatten(),
           equals([
@@ -115,14 +110,15 @@ void main() {
 
     test('HeapSort', () {
       var newnumb = heapList.heapSort();
-
       expect(newnumb, equals([1.0, 5, 10, 20.0, 25]));
       expect(heaplist1.heapSort(),
           equals([1, 2, 6, 8, 9, 45, 77, 98, 234, 9987, 12390]));
     });
   });
 
-  // <=====================Number Operations===============>
+  /// ===================== List Operations End =====================
+
+  /// ===================== Number Operations Start =====================
 
   group('Number Operations', () {
     test('mimic', () {
@@ -153,7 +149,9 @@ void main() {
     });
   });
 
-  // <=====================String Operations===============>
+  /// ===================== Number Operations End =====================
+
+  /// ===================== String Operations Start =====================
 
   group('String Operations', () {
     test('slice', () {
@@ -186,4 +184,6 @@ void main() {
       expect('occ1234urance'.isNumber, isFalse);
     });
   });
+
+  /// ===================== String Operations Start =====================
 }
