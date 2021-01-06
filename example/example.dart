@@ -4,8 +4,9 @@ import 'package:utility/utility.dart';
 void main() {
   // -------------- list operations start --------------
 
-  var value = 10.xor(-2);
+  var value = 'null'.isHex;
   print(value);
+  
 
   // var flattenlist = [
 
