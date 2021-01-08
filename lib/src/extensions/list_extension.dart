@@ -1,18 +1,22 @@
 part of utility;
 
+// ignore_for_file: missing_return
 extension UtilityList<T> on List<T> {
   ///Creates a slice of `list` from `start` up to `end`[exclusive].
-  ///
-  ///````dart
+  ///```dart
   ///var list = [1, 2, 3, 4];
   ///
   ///// It slices the list elements and hence modifies the list
   ///list.slice(2); // list = [3, 4]
-  ///````
+  ///```
   List<T> slice(int start, [int end]) {
+    return _privateSlice(start, end);
+  }
+
+  List<T> _privateSlice(int start, [int end, bool inPlace = true]) {
     var length = this?.length ?? 0;
     var untouchedLength = length;
-    if (length <= 0) {
+    if (length < 1) {
       return <T>[];
     }
     start ??= 0;
@@ -31,27 +35,32 @@ extension UtilityList<T> on List<T> {
     start = start.zeroFillRightShift(0);
 
     var index = 0;
-    if (isGrowable) {
-      var reducer = 0;
-      // removing section
-      while (index < untouchedLength - reducer) {
-        var pointer = index + start - reducer;
-        if (index < pointer) {
-          removeAt(0);
-          reducer += 1;
-        } else {
-          break;
+    try {
+      if (inPlace) {
+        var reducer = 0;
+        // removing left side section
+        while (index < untouchedLength - reducer) {
+          var pointer = index + start - reducer;
+          if (index < pointer) {
+            removeAt(0);
+            reducer += 1;
+          } else {
+            break;
+          }
         }
+        // ignoring right side section
+        index = length;
+        untouchedLength -= reducer;
+        while (index < untouchedLength) {
+          removeAt(length);
+          index++;
+        }
+        return this;
       }
-      // ignoring section
-      index = length;
-      untouchedLength -= reducer;
-      while (index < untouchedLength) {
-        removeAt(length);
-        index++;
-      }
-      return this;
-    } else {
+    } catch (e) {
+      inPlace = false;
+    }
+    if (!inPlace) {
       var result = <T>[];
       while (index < length) {
         result.add(this[index + start]);
@@ -103,7 +112,6 @@ extension UtilityList<T> on List<T> {
   }
 
   /// returns `true` if it is `Growable list` otherwise false.
-  ///
   /// ```dart
   /// // On Non-Growable List
   /// var list = List<dynamic>(8);
@@ -130,24 +138,32 @@ extension UtilityList<T> on List<T> {
   /// // altered list = [5, 2, 4];
   /// ```
   T removeFirst() {
-    if (isGrowable) {
-      return removeAt(0);
-    }
-    return null;
+    return removeAt(0);
   }
 
-  /// removes `n` number of elements from the beginning of list
+  ///removes `n` number of elements from the `beginning of list`
+  ///```dart
+  ///// If used as method, it directly alter the list's object
+  ///var list = <int>[1, 2, 3, 4, 5];
+  ///list.drop(); // list = [2, 3, 4, 5];
   ///
-  /// ````dart
-  /// var list = <int>[1, 2, 3, 4, 5];
-  /// list.drop(); // list = [2, 3, 4, 5];
+  ///var list = <int>[1, 2, 3, 4, 5];
+  ///list.drop(3); // list = [4, 5];
   ///
-  /// var list = <int>[1, 2, 3, 4, 5];
-  /// list.drop(3); // list = [4, 5];
+  ///var list = <int>[1, 2, 3];
+  ///list.drop(5); // list = []; // does not throw error :D
   ///
-  /// var list = <int>[1, 2, 3];
-  /// list.drop(5); // list = []; // does not throw error :D
-  /// ````
+  ///// If used as function,
+  ///// it creates a new copy of the output and list's object is untouched
+  ///var list = <int>[1, 2, 3, 4, 5];
+  ///var newObject = list.dropRight(); // newObject = [1, 2, 3, 4];
+  ///
+  ///var list = <int>[1, 2, 3, 4, 5];
+  ///var newObject = list.dropRight(3); // newObject = [1, 2];
+  ///
+  ///var list = <int>[1, 2, 3];
+  ///var newObject = list.dropRight(5); // newObject = []; // does not throw error :D
+  ///```
   List<T> drop([int n = 1]) {
     if (n > (length ?? 0)) {
       n = length;
@@ -158,18 +174,29 @@ extension UtilityList<T> on List<T> {
     return this;
   }
 
-  /// removes `n` number of elements from the ending of list
+  ///removes `n` number of elements from the ending of list
+  ///```dart
+  /////If used as method, it directly alter the list's object
+  ///var list = <int>[1, 2, 3, 4, 5];
+  ///list.dropRight(); // list = [1, 2, 3, 4];
   ///
-  /// ````dart
-  /// var list = <int>[1, 2, 3, 4, 5];
-  /// list.dropRight(); // list = [1, 2, 3, 4];
+  ///var list = <int>[1, 2, 3, 4, 5];
+  ///list.dropRight(3); // list = [1, 2];
   ///
-  /// var list = <int>[1, 2, 3, 4, 5];
-  /// list.dropRight(3); // list = [1, 2];
+  ///var list = <int>[1, 2, 3];
+  ///list.dropRight(5); // list = []; // does not throw error :D
   ///
-  /// var list = <int>[1, 2, 3];
-  /// list.dropRight(5); // list = []; // does not throw error :D
-  /// ````
+  /////If used as function,
+  /////it creates a new copy of the output and list's object is untouched
+  ///var list = <int>[1, 2, 3, 4, 5];
+  ///var newObject = list.dropRight(); // newObject = [1, 2, 3, 4];
+  ///
+  ///var list = <int>[1, 2, 3, 4, 5];
+  ///var newObject = list.dropRight(3); // newObject = [1, 2];
+  ///
+  ///var list = <int>[1, 2, 3];
+  ///var newObject = list.dropRight(5); // newObject = []; // does not throw error :D
+  ///```
   List<T> dropRight([int n = 1]) {
     if (n > 0) {
       if (n > (length ?? 0)) {
@@ -182,16 +209,15 @@ extension UtilityList<T> on List<T> {
     return this;
   }
 
-  /// starts `removing elements` from the `ending of list` until condition becomes `false`
-  ///
-  /// ```dart
-  /// var list = <int>[2, 1, 3, 4, 5];
-  /// list.dropRightWhile((element) => element >= 3); // list = [2, 1];
-  /// ```
-  List<T> dropRightWhile(bool Function(T element) callback) {
+  ///starts `removing elements` from the `ending of list` until condition becomes `false`
+  ///```dart
+  ///var list = <int>[2, 1, 3, 4, 5];
+  ///list.dropRightWhile((element) => element >= 3); // list = [2, 1];
+  ///```
+  List<T> dropRightWhile(bool Function(T element) test) {
     var index = length - 1;
     while (index >= 0) {
-      if (!callback(this[index])) {
+      if (!test(this[index])) {
         break;
       }
       removeLast();
@@ -201,15 +227,14 @@ extension UtilityList<T> on List<T> {
   }
 
   /// starts `removing elements` from the `starting of list` until condition becomes `false`
-  ///
   /// ```dart
   /// var list = <int>[2, 1, 3, 4, 5];
-  /// list.dropWhile((element) => element <= 3); // list = [4, 5];
+  /// list.dropWhile((T element) => element <= 3); // list = [4, 5];
   /// ```
-  List<T> dropWhile(bool Function(T element) callback) {
+  List<T> dropWhile(bool Function(T element) test) {
     var index = 0;
     while (index < length) {
-      if (!callback(this[index])) {
+      if (!test(this[index])) {
         break;
       }
       removeAt(0);
@@ -221,7 +246,6 @@ extension UtilityList<T> on List<T> {
   /// `Flattens` array a single level deep.
   ///
   /// It returns `newObject` of flattened array and does not affects the list object called-upon
-  ///
   /// ```dart
   /// var list = [2, [1, 3], [4, [1, [2]] ] ];
   /// var newList = list.flatten(); // newList = [2, 1, 3, 4, [1, [2] ] ];
@@ -290,43 +314,41 @@ extension UtilityList<T> on List<T> {
   /// Creates a new list of elements split into groups the length of `size`.
   ///
   /// If `list` can't be split evenly, the final chunk will be the remaining elements.
-  ///
   /// ````dart
-  ///
-  /// // It returns new Object of Chunked data;
+  /// // It returns new List Object of Chunked data;
   /// var list = ['a', 'b', 'c', 'd'];
   ///
-  /// var newChunkedList = list.chunk(3);// newChunkedList = [['a', 'b', 'c'], ['d']];
+  /// var newChunkedList = list.chunk(3); // newChunkedList = [['a', 'b', 'c'], ['d']];
   /// ````
   List<List<T>> chunk([int size = 1]) {
     size ??= 1;
     size = max(size, 0);
     var length = this?.length ?? 0;
-    if (length <= 0 || size < 1) {
+    if (length < 1 || size < 1) {
       return <List<T>>[];
     }
     var index = 0;
-    var result = List<List<T>>((length / size).ceil());
+    var result = <List<T>>[];
 
     while (index < length) {
-      result.add(slice(index, (index += size)));
+      result.add(_privateSlice(index, (index += size), false));
     }
     return result;
   }
 
-  /// Creates an list of elements where the values of the list are not `Falsey`.
-  /// Avoid calling it on fixed-length list.
+  ///Creates an list of elements where the values of the list are not `Falsey`.
   ///
-  /// ````dart
-  /// // It alters the list object if the list is not fixed-length list.
-  /// var list = ['a', null, '', false, 'b'];
-  /// var compactedData = list.compact(); // ['a', 'b'];
+  ///Avoid calling it on fixed-length list.
+  ///```dart
+  ///// It alters the list object if the list is not fixed-length list.
+  ///var list = ['a', null, '', false, 'b'];
+  ///var compactedData = list.compact(); // ['a', 'b'];
   ///
-  /// // It returns new Object of compacted data;
-  /// var list = ['a', null, '', false, 'b'];
-  /// // here the list object is not altered
-  /// var compactedData_new_object = compact(list); // ['a', 'b'];
-  ///````
+  ///// It returns new Object of compacted data;
+  ///var list = ['a', null, '', false, 'b'];
+  ///// here the list object is not altered
+  ///var compactedData_new_object = compact(list); // ['a', 'b'];
+  ///```
   List<T> compact() {
     removeWhere((element) => isFalsey(element));
     return this;

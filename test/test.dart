@@ -19,10 +19,9 @@ void main() {
       ],
       5
     ];
-    var tempflattenlist = flattenlist;
     var randomlist = <int>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     var compactlist = ['a', 'v', 'l', null, true, 'r', 'o', false];
-    var tempchunklist = compactlist;
+    var chunkList = List<Object>.from(compactlist);
 
     var list = List<dynamic>(8);
     var list1 = <dynamic>[];
@@ -35,7 +34,7 @@ void main() {
       expect(numberList.slice(-2), equals([null, 25]));
       expect(numberList.slice(null), equals([null, 25]));
       expect(numberList.slice(2), equals([]));
-      expect(dynamicList.slice(-4, -1), equals([false, null, 'justkawal']));
+      expect(dynamicList.slice(-4, -1), equals([5, false, null]));
     });
 
     /// --------------- Slice End ---------------
@@ -103,9 +102,16 @@ void main() {
       expect(newcompact, equals(['a', 'v', 'l', true, 'r', 'o']));
     });
 
-    // test('Chunk', () {
-    //   expect(chunklist.chunk(), equals([]));
-    // });
+    test('Chunk', () {
+      expect(
+          chunkList.chunk(2),
+          equals([
+            ['a', 'v'],
+            ['l', null],
+            [true, 'r'],
+            ['o', false]
+          ]));
+    });
 
     test('HeapSort', () {
       var newnumb = heapList.heapSort();

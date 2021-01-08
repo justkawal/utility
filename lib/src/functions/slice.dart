@@ -11,8 +11,5 @@ part of utility;
 /// var old_object_slicedList = list.slice(2); // [3, 4]
 ///````
 List<T> slice<T>(List<T> list, int start, [int end]) {
-  if (list == null) {
-    return null;
-  }
-  return List<T>.from(list).slice(start, end);
+  return list._privateSlice(start, end, false);
 }
