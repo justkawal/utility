@@ -4,7 +4,7 @@ import 'package:utility/utility.dart';
 void main() {
   // -------------- list operations start --------------
 
-  var value = 'null'.isHex;
+  var value = 'acb'.pad(8,'=_');
   print(value);
   
 
