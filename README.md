@@ -293,6 +293,17 @@ var string = '__justkawal;
 string.slice(2); // string = 'justkawal';
 ```
 
+### enumVal
+Returns the `value` of the `enum`
+```dart
+enum justkawal {
+  just,
+  kawal,
+}
+'${justkawal.just}'.enumVal; // just
+'${justkawal.kawal}'.enumVal; // kawal
+```
+
 ### toNumber
 Returns converted number
 ```dart
