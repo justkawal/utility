@@ -24,7 +24,6 @@ part of utility;
 ///list.drop(5); // list = []; // does not throw error :D
 ///```
 List<T> drop<T>(List<T> list, [int n = 1]) {
-  // TODO: @Kawal - check functionality working on main website of mdn
   if (n < 1) {
     return List<T>.from(list);
   }

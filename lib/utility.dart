@@ -19,5 +19,3 @@ part 'src/extensions/number_extension.dart';
 part 'src/extensions/list_extension.dart';
 part 'src/extensions/list_num_extension.dart';
 part 'src/extensions/string_extension.dart';
-
-/// list
