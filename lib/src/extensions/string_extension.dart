@@ -5,7 +5,7 @@ extension UtilityString on String {
   ///```dart
   ///var string = 'justkawal';
   ///
-  ///// It slices the string and returns modified string
+  /////It slices the string and returns modified string
   ///string.slice(2); // string = '';
   ///```
   String slice(int start, [int end]) {
@@ -36,21 +36,21 @@ extension UtilityString on String {
     return result;
   }
 
-  /// Returns the `value` of the `enum`
+  ///Returns the `value` of the `enum`
   ///```dart
-  /// enum justkawal {
-  ///   just,
-  ///   kawal,
-  /// }
-  /// '${justkawal.just}'.enumVal; // just
-  /// '${justkawal.kawal}'.enumVal; // kawal
+  ///enum justkawal {
+  ///  just,
+  ///  kawal,
+  ///}
+  ///'${justkawal.just}'.enumVal; // just
+  ///'${justkawal.kawal}'.enumVal; // kawal
   ///```
   String get enumVal {
     var list = this?.split('.');
     return (list?.isEmpty ?? true) ? null : list.last;
   }
 
-  /// Trims the value and then converts it to number
+  ///Trims the value and then converts it to number
   ///```dart
   ///
   ///'2604 '.toNumber; // 2604
@@ -63,13 +63,13 @@ extension UtilityString on String {
     return double.tryParse(trim());
   }
 
-  /// Counts the number of occurrences of value.
-  /// ```dart
+  ///Counts the number of occurrences of value.
+  ///```dart
   ///
-  /// 'justkawal'.count('a'); // 2
-  /// 'justkawal'.count('just'); // 1
-  /// 'justkawal'.count('flutter'); // 0
-  /// ```
+  ///'justkawal'.count('a'); // 2
+  ///'justkawal'.count('just'); // 1
+  ///'justkawal'.count('flutter'); // 0
+  ///```
   int count(String value, [bool caseSensitive = true]) {
     if (this == null || value == null || value.isEmpty) {
       return 0;
@@ -82,60 +82,60 @@ extension UtilityString on String {
             .length;
   }
 
-  /// returns `true`, if the `string` is `number` other-wise `false`
-  /// ```dart
+  ///returns `true`, if the `string` is `number` other-wise `false`
+  ///```dart
   ///
-  /// '123'.isNumber; // true
-  /// 'justkawal'.isNumber; // false
-  /// ```
+  ///'123'.isNumber; // true
+  ///'justkawal'.isNumber; // false
+  ///```
   bool get isNumber {
     return double.tryParse(this) != null;
   }
 
-  /// returns `true` if the `string` is `binary`, other-wise `false`
-  /// ```dart
+  ///returns `true` if the `string` is `binary`, other-wise `false`
+  ///```dart
   ///
-  /// '1010'.isBinary; // true
-  /// 'justkawal'.isBinary; // false
-  /// ```
+  ///'1010'.isBinary; // true
+  ///'justkawal'.isBinary; // false
+  ///```
   bool get isBinary {
     return regExpIsBinary.hasMatch(this);
   }
 
-  /// returns `true` if the `string` is `decimal`, other-wise `false`
-  /// ```dart
+  ///returns `true` if the `string` is `decimal`, other-wise `false`
+  ///```dart
   ///
-  /// '123'.isDecimal; // true
-  /// 'justkawal'.isDecimal; // false
-  /// ```
+  ///'123'.isDecimal; // true
+  ///'justkawal'.isDecimal; // false
+  ///```
   bool get isDecimal {
     return this?.isNumber ?? false;
   }
 
-  /// returns `true` if the `string` is `octal`, other-wise `false`
-  /// ```dart
+  ///returns `true` if the `string` is `octal`, other-wise `false`
+  ///```dart
   ///
-  /// '123'.isOctal; // true
-  /// 'justkawal'.isOctal; // false
-  /// ```
+  ///'123'.isOctal; // true
+  ///'justkawal'.isOctal; // false
+  ///```
   bool get isOctal {
     return regExpIsOctal.hasMatch(this);
   }
 
-  /// returns `true` if the `string` is `good hex`, other-wise `false`
-  /// ```dart
+  ///returns `true` if the `string` is `good hex`, other-wise `false`
+  ///```dart
   ///
-  /// '123'.isHex; // true
-  /// 'justkawal'.isHex; // false
-  /// ```
+  ///'123'.isHex; // true
+  ///'justkawal'.isHex; // false
+  ///```
   bool get isHex {
     return !regExpIsBadHex.hasMatch(this);
   }
 
-  /// Converts string from `Latin-1` to normal `basic latin letters`
-  /// ```dart
-  /// 'hey kàwàl'.deburr; // hey kawal
-  /// ```
+  ///Converts string from `Latin-1` to normal `basic latin letters`
+  ///```dart
+  ///'hey kàwàl'.deburr; // hey kawal
+  ///```
   String get deburr {
     return this?.replaceAllMapped(reLatin, (match) {
       var value = '', word = '${match[0] ?? ""}';
@@ -146,23 +146,23 @@ extension UtilityString on String {
     })?.replaceAll(reComboMark, '');
   }
 
-  /// Returns list of `unicode words` from the string
-  /// ```dart
-  /// 'hey kàwàl'.unicodeWords; // [kàwàl]
-  /// ```
+  ///Returns list of `unicode words` from the string
+  ///```dart
+  ///'hey kàwàl'.unicodeWords; // [kàwàl]
+  ///```
   List<String> get unicodeWords {
     return _unicodeAsciiWords();
   }
 
-  /// Returns list of `ascii words` from the string
-  /// ```dart
-  /// 'hey kàwàl'.asciiWords; // [hey]
-  /// ```
+  ///Returns list of `ascii words` from the string
+  ///```dart
+  ///'hey kàwàl'.asciiWords; // [hey]
+  ///```
   List<String> get asciiWords {
     return _unicodeAsciiWords(false);
   }
 
-  /// returns `list of unicodeWords` when `isUnicode: true` other-wise returns `list of asciiWords`
+  ///returns `list of unicodeWords` when `isUnicode: true` other-wise returns `list of asciiWords`
   List<String> _unicodeAsciiWords([bool isUnicode = true]) {
     var list = <String>[];
     (isUnicode ? reUnicodeWord : reAsciiWord).allMatches(this).forEach((match) {
@@ -173,25 +173,25 @@ extension UtilityString on String {
     return list;
   }
 
-  /// Returns `true` if string contains any occurence of `unicode word` other-wise `false`
-  /// ```dart
-  /// 'hey kàwàl'.hasUnicodeWord; // true
-  /// 'hey'.hasUnicodeWord;      // false
-  /// ```
+  ///Returns `true` if string contains any occurence of `unicode word` other-wise `false`
+  ///```dart
+  ///'hey kàwàl'.hasUnicodeWord; // true
+  ///'hey'.hasUnicodeWord;      // false
+  ///```
   bool get hasUnicodeWord {
     return reHasUnicodeWord.hasMatch(this);
   }
 
-  /// Returns `true` if string contains `unicode` other-wise `false`
+  ///Returns `true` if string contains `unicode` other-wise `false`
   bool get hasUnicode {
     return reHasUnicode.hasMatch(this);
   }
 
-  /// Converts the first character of string to `upper case` and the remaining to `lower case`.
-  /// ```dart
-  /// 'justkawal'.capitalize; // Justkawal
-  /// 'JUSTKAWAL'.capitalize; // Justkawal
-  /// ```
+  ///Converts the first character of string to `upper case` and the remaining to `lower case`.
+  ///```dart
+  ///'justkawal'.capitalize; // Justkawal
+  ///'JUSTKAWAL'.capitalize; // Justkawal
+  ///```
   String get capitalize {
     var result;
     if (this != null && isNotEmpty) {
@@ -203,11 +203,11 @@ extension UtilityString on String {
     return result;
   }
 
-  /// Converts the first character of string to lower case.
-  /// ```dart
-  /// 'Justkawal'.lowerFirst; // justkawal
-  /// 'JUSTKAWAL'.lowerFirst; // jUSTKAWAL
-  /// ```
+  ///Converts the first character of string to lower case.
+  ///```dart
+  ///'Justkawal'.lowerFirst; // justkawal
+  ///'JUSTKAWAL'.lowerFirst; // jUSTKAWAL
+  ///```
   String get lowerFirst {
     var result;
     if (this != null && isNotEmpty) {
@@ -219,11 +219,11 @@ extension UtilityString on String {
     return result;
   }
 
-  /// Converts the first character of string to `upper case`.
-  /// ```dart
-  /// 'justkawal'.upperFirst; // Justkawal
-  /// 'jUSTKAWAL'.upperFirst; // JUSTKAWAL
-  /// ```
+  ///Converts the first character of string to `upper case`.
+  ///```dart
+  ///'justkawal'.upperFirst; // Justkawal
+  ///'jUSTKAWAL'.upperFirst; // JUSTKAWAL
+  ///```
   String get upperFirst {
     var result = '';
     if (this != null && isNotEmpty) {
@@ -235,10 +235,10 @@ extension UtilityString on String {
     return result;
   }
 
-  /// returns `list of words`
-  /// ```dart
-  /// 'kàwàl vu'.words; // ['kàwàl', 'vu']
-  /// ```
+  ///returns `list of words`
+  ///```dart
+  ///'kàwàl vu'.words; // ['kàwàl', 'vu']
+  ///```
   List<String> words([RegExp pattern]) {
     if (pattern == null) {
       return reAsciiWord.hasMatch(this) ? asciiWords : unicodeWords;
@@ -246,14 +246,14 @@ extension UtilityString on String {
     return pattern.allMatches(this).map((match) => '${match[0]}').toList();
   }
 
-  /// --------------------- Cases Start ---------------------
+  ///--------------------- Cases Start ---------------------
 
-  /// Converts the string to `camelCase`.
-  /// ```dart
-  /// '___just__kawal__'.camelCase; // justKawal
-  /// '  just  Kawal  '.camelCase; // justKawal
-  /// '-----just--Kawal--'.camelCase; // justKawal
-  /// ```
+  ///Converts the string to `camelCase`.
+  ///```dart
+  ///'___just__kawal__'.camelCase; // justKawal
+  ///'  just  Kawal  '.camelCase; // justKawal
+  ///'-----just--Kawal--'.camelCase; // justKawal
+  ///```
   String get camelCase {
     var wordList = words();
     var leftSide = wordList.first.toLowerCase();
@@ -262,49 +262,49 @@ extension UtilityString on String {
     return leftSide + rightSide;
   }
 
-  /// Converts the string to `kebabCase`.
-  /// ```dart
-  /// '___hello__world__'.kebabCase(); // hello-world
-  /// '  hello  World  '.kebabCase(); // hello-world
-  /// '-----hello--world--'.kebabCase(); // hello-world
-  /// ```
+  ///Converts the string to `kebabCase`.
+  ///```dart
+  ///'___hello__world__'.kebabCase(); // hello-world
+  ///'  hello  World  '.kebabCase(); // hello-world
+  ///'-----hello--world--'.kebabCase(); // hello-world
+  ///```
   String kebabCase({String separator = '-'}) {
     return _reuseCase(separator ?? '-');
   }
 
-  /// Converts the string to `lowerCase`.
-  /// ```dart
-  /// '___hello__world__'.lowerCase(); // hello world
-  /// '  hello  World  '.lowerCase(); // hello world
-  /// '-----hello--world--'.lowerCase(); // hello world
-  /// ```
+  ///Converts the string to `lowerCase`.
+  ///```dart
+  ///'___hello__world__'.lowerCase(); // hello world
+  ///'  hello  World  '.lowerCase(); // hello world
+  ///'-----hello--world--'.lowerCase(); // hello world
+  ///```
   String lowerCase({String separator = ' '}) {
     return _reuseCase(separator ?? ' ');
   }
 
-  /// Converts the string to `snakeCase`.
-  /// ```dart
-  /// '___hello__world__'.snakeCase(); // hello_world
-  /// '  helloWorld  '.snakeCase(); // hello_world
-  /// '-----hello--world--'.snakeCase(); // hello_world
-  /// ```
+  ///Converts the string to `snakeCase`.
+  ///```dart
+  ///'___hello__world__'.snakeCase(); // hello_world
+  ///'  helloWorld  '.snakeCase(); // hello_world
+  ///'-----hello--world--'.snakeCase(); // hello_world
+  ///```
   String snakeCase({String separator = '_'}) {
     return _reuseCase(separator ?? '_');
   }
 
-  /// A helper function for reusing the same functionality of `snakeCase`, `lowerCase` and `kebabCase`.
+  ///A helper function for reusing the same functionality of `snakeCase`, `lowerCase` and `kebabCase`.
   String _reuseCase(String separator) {
     return /* this
         . */
         words().map((word) => word.toLowerCase()).toList().join(separator);
   }
 
-  /// Converts the string to `nameCase`.
-  /// ```dart
-  /// '___kaWaljeet__sInGH__'.nameCase(); // Kawaljeet Singh
-  /// '  justKawal  '.nameCase(); // Just Kawal
-  /// '-----kawaljeet--singh--'.nameCase(); // Kawaljeet Singh
-  /// ```
+  ///Converts the string to `nameCase`.
+  ///```dart
+  ///'___kaWaljeet__sInGH__'.nameCase(); // Kawaljeet Singh
+  ///'  justKawal  '.nameCase(); // Just Kawal
+  ///'-----kawaljeet--singh--'.nameCase(); // Kawaljeet Singh
+  ///```
   String nameCase({String separator = ' '}) {
     return /* this
         . */
@@ -313,12 +313,12 @@ extension UtilityString on String {
 
   // --------------------- Cases End ---------------------
 
-  /// returns `repeated string`, `n` number of times
-  /// ```dart
-  /// 'justkawal'.repeat(1); // justkawal
-  /// '123'.repeat(2); // 123123
-  /// '1'.repeat(5); // 11111
-  /// ```
+  ///returns `repeated string`, `n` number of times
+  ///```dart
+  ///'justkawal'.repeat(1); // justkawal
+  ///'123'.repeat(2); // 123123
+  ///'1'.repeat(5); // 11111
+  ///```
   String repeat([int n = 1]) {
     if (this == null || n < 1) {
       return '';

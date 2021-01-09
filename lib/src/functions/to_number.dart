@@ -1,6 +1,6 @@
 part of utility;
 
-/// Converts `value` to number
+///Converts `value` to number
 ///```dart
 ///var value = toNumber('2604 '); // 2604
 ///var value1 = toNumber('  26.04 '); // 26.04
