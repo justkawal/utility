@@ -322,7 +322,7 @@ extension UtilityString on String {
   /// '1'.repeat(5); // 11111
   /// ```
   String repeat([int n = 1]) {
-    if ((this ?? true) || n < 1) {
+    if (this == null || n < 1) {
       return '';
     }
     var result = '', string = this;
