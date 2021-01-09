@@ -36,6 +36,20 @@ extension UtilityString on String {
     return result;
   }
 
+  /// Returns the `value` of the `enum`
+  ///```dart
+  /// enum justkawal {
+  ///   just,
+  ///   kawal,
+  /// }
+  /// '${justkawal.just}'.enumVal; // just
+  /// '${justkawal.kawal}'.enumVal; // kawal
+  ///```
+  String get enumVal {
+    var list = this?.split('.');
+    return (list?.isEmpty ?? true) ? null : list.last;
+  }
+
   /// Trims the value and then converts it to number
   ///```dart
   ///

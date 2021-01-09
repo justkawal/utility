@@ -1,6 +1,11 @@
 import 'package:test/test.dart';
 import 'package:utility/utility.dart';
 
+/// enum for testing: string operation
+enum justkawal {
+  just,
+  kawal,
+}
 void main() {
   /// ===================== List Operations Start =====================
   group('List Operations: ', () {
@@ -236,6 +241,9 @@ void main() {
   /// ===================== String Operations Start =====================
 
   group('String Operations:', () {
+    ///
+    /// --------------- slice Start ---------------
+    ///
     test('slice', () {
       var value = 'hello Everyone Happy New year 2021';
       expect(value.slice(2), equals('llo Everyone Happy New year 2021'));
@@ -244,6 +252,13 @@ void main() {
       expect(value.slice(0), equals('hello Everyone Happy New year 2021'));
     });
 
+    ///
+    /// --------------- slice End ---------------
+    ///
+
+    ///
+    /// --------------- toNumber Start ---------------
+    ///
     test('toNumber', () {
       expect('20912'.toNumber, equals(20912));
       expect(' 109.09876'.toNumber, equals(109.09876));
@@ -251,12 +266,26 @@ void main() {
       expect('  '.toNumber, equals(null));
     });
 
-    test('Count', () {
+    ///
+    /// --------------- toNumber End ---------------
+    ///
+
+    ///
+    /// --------------- count Start ---------------
+    ///
+    test('count', () {
       expect('justkawal'.count('a'), equals(2));
       expect('github@justkawal'.count('t'), equals(2));
       expect('occurance'.count('c'), equals(3));
     });
 
+    ///
+    /// --------------- count End ---------------
+    ///
+
+    ///
+    /// --------------- isNumber Start ---------------
+    ///
     test('isNumber', () {
       expect('justkawal'.isNumber, isFalse);
       expect('123'.isNumber, isTrue);
@@ -265,6 +294,28 @@ void main() {
       expect('-123.0'.isNumber, isTrue);
       expect('occ1234urance'.isNumber, isFalse);
     });
+
+    ///
+    /// --------------- isNumber End ---------------
+    ///
+
+    ///
+    /// --------------- enumVal Start ---------------
+    ///
+    test('enumVal', () {
+      ///
+      /// enum justkawal {
+      ///   just,
+      ///   kawal,
+      /// }
+      ///
+      expect('${justkawal.just}'.enumVal, equals('just'));
+      expect('${justkawal.kawal}'.enumVal, equals('kawal'));
+    });
+
+    ///
+    /// --------------- enumVal End ---------------
+    ///
   });
 
   /// ===================== String Operations Start =====================
