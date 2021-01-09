@@ -294,8 +294,7 @@ extension UtilityString on String {
 
   ///A helper function for reusing the same functionality of `snakeCase`, `lowerCase` and `kebabCase`.
   String _reuseCase(String separator) {
-    return /* this
-        . */
+    return 
         words().map((word) => word.toLowerCase()).toList().join(separator);
   }
 
@@ -306,8 +305,7 @@ extension UtilityString on String {
   ///'-----kawaljeet--singh--'.nameCase(); // Kawaljeet Singh
   ///```
   String nameCase({String separator = ' '}) {
-    return /* this
-        . */
+    return 
         words().map((word) => word.capitalize).toList().join(separator ?? ' ');
   }
 
