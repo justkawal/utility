@@ -524,16 +524,15 @@ void main() {
     ///
     /// --------------- repeat Start ---------------
     ///
-//showing String is not a subtype of bool
-    //   test('repeat', () {
-    //     expect('1'.repeat(2), equals('11'));
-    //     expect('RAMAN-----Hello'.nameCase(), equals('Raman Hello'));
-    //     expect('------shyam-----------Cool'.nameCase(), equals('Shyam Cool'));
-    //     expect('occ-------urance'.nameCase(), equals('Occ Urance'));
-    //     expect('-----add=====Null'.nameCase(), equals('Add Null'));
-    //     expect('-----add=====1234'.nameCase(), equals('Add 1234'));
-    //     expect('@@@@@@add#####digit'.nameCase(), equals('Add Digit'));
-    //   });
+    test('repeat', () {
+      expect('1'.repeat(2), equals('11'));
+      //expect('RAMAN-----Hello'.nameCase(), equals('Raman Hello'));
+      //expect('------shyam-----------Cool'.nameCase(), equals('Shyam Cool'));
+      //expect('occ-------urance'.nameCase(), equals('Occ Urance'));
+      //expect('-----add=====Null'.nameCase(), equals('Add Null'));
+      //expect('-----add=====1234'.nameCase(), equals('Add 1234'));
+      //expect('@@@@@@add#####digit'.nameCase(), equals('Add Digit'));
+    });
 
     ///
     /// --------------- repeat End ---------------
@@ -557,6 +556,6 @@ void main() {
     /// --------------- pad End ---------------
     ///
   });
- 
+
   /// ===================== String Operations End =====================
 }
