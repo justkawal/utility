@@ -526,12 +526,10 @@ void main() {
     ///
     test('repeat', () {
       expect('1'.repeat(2), equals('11'));
-      //expect('RAMAN-----Hello'.nameCase(), equals('Raman Hello'));
-      //expect('------shyam-----------Cool'.nameCase(), equals('Shyam Cool'));
-      //expect('occ-------urance'.nameCase(), equals('Occ Urance'));
-      //expect('-----add=====Null'.nameCase(), equals('Add Null'));
-      //expect('-----add=====1234'.nameCase(), equals('Add 1234'));
-      //expect('@@@@@@add#####digit'.nameCase(), equals('Add Digit'));
+      expect('123'.repeat(3), equals('123123123'));
+      expect('ashu '.repeat(3), equals('ashu ashu ashu '));
+
+      expect('@'.repeat(5), equals('@@@@@'));
     });
 
     ///
@@ -544,7 +542,7 @@ void main() {
 //showing Error
     // test('pad', () {
     //   expect('--'.pad(4), equals('--'));
-    //   expect('abc'.pad(8,'=_'), equals('=_abc=_='));
+      // expect('abc'.pad(8,'=_'), equals('=_abc=_='));
     //   expect('------shyam-----------Cool'.nameCase(), equals('Shyam Cool'));
     //   expect('occ-------urance'.nameCase(), equals('Occ Urance'));
     //   expect('-----add=====Null'.nameCase(), equals('Add Null'));
@@ -556,5 +554,6 @@ void main() {
     /// --------------- pad End ---------------
     ///
   });
+
   /// ===================== String Operations End =====================
 }
