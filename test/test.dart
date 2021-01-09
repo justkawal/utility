@@ -17,7 +17,6 @@ void main() {
       var numberList = <num>[20.0, 5, 1.0, 10, null, 25];
       var dynamicList = <dynamic>['Ashumendra', 5, false, null, 'justkawal'];
       var slicedList = slice(dynamicList, 2);
-
       expect(slicedList, equals([false, null, 'justkawal']));
       expect(numberList.slice(2), equals([1.0, 10, null, 25]));
       expect(numberList.slice(-2), equals([null, 25]));
@@ -60,9 +59,9 @@ void main() {
     ///
 
     ///
-    /// --------------- Drop Start ---------------
+    /// --------------- drop Start ---------------
     ///
-    test('Drop', () {
+    test('drop', () {
       expect(randomlist.drop(), equals([2, 3, 4, 5, 6, 7, 8, 9, 10]));
       expect(randomlist.drop(2), equals([4, 5, 6, 7, 8, 9, 10]));
       expect(randomlist.dropRight(), equals([4, 5, 6, 7, 8, 9]));
@@ -74,13 +73,13 @@ void main() {
     });
 
     ///
-    /// --------------- Drop End ---------------
+    /// --------------- drop End ---------------
     ///
 
     ///
-    /// --------------- Flatten Start ---------------
+    /// --------------- flatten Start ---------------
     ///
-    test('Flatten', () {
+    test('flatten', () {
       var flattendeeplist = [
         2,
         [1, 3],
@@ -127,30 +126,30 @@ void main() {
     });
 
     ///
-    /// --------------- Flatten End ---------------
+    /// --------------- flatten End ---------------
     ///
 
     var compactlist = ['a', 'v', 'l', null, true, 'r', 'o', false];
     var chunkList = List<Object>.from(compactlist);
 
     ///
-    /// --------------- Compact Start ---------------
+    /// --------------- compact Start ---------------
     ///
-    test('Compact', () {
+    test('compact', () {
       expect(compactlist.compact(), equals(['a', 'v', 'l', true, 'r', 'o']));
       var newcompact = compact(compactlist);
       expect(newcompact, equals(['a', 'v', 'l', true, 'r', 'o']));
     });
 
     ///
-    /// --------------- Compact End ---------------
+    /// --------------- compact End ---------------
     ///
 
     ///
-    /// --------------- Chunk Start ---------------
+    /// --------------- chunk Start ---------------
     ///
 
-    test('Chunk', () {
+    test('chunk', () {
       expect(
           chunkList.chunk(2),
           equals([
@@ -162,7 +161,7 @@ void main() {
     });
 
     ///
-    /// --------------- Chunk End ---------------
+    /// --------------- chunk End ---------------
     ///
 
     ///
@@ -189,9 +188,9 @@ void main() {
 
   group('Number Operations:', () {
     ///
-    /// --------------- >>> Start ---------------
+    /// --------------- >>> (zero Fill Right Shift) Start ---------------
     ///
-    test('>>>', () {
+    test('>>> (zero Fill Right Shift)', () {
       var number = 20.zeroFillRightShift(3);
       expect(number, equals(2));
       var number1 = zeroFillRightShift(40, 3);
@@ -199,13 +198,13 @@ void main() {
     });
 
     ///
-    /// --------------- >>> End ---------------
+    /// --------------- >>> ( zero Fill Right Shift ) End ---------------
     ///
 
     ///
     /// --------------- xor Start ---------------
     ///
-    test('Xor', () {
+    test('xor', () {
       var number = 20.xor(3);
       expect(number, equals(23));
       var number1 = 10.xor(-2);
@@ -221,9 +220,9 @@ void main() {
     ///
 
     ///
-    /// --------------- Divide Start ---------------
+    /// --------------- divide Start ---------------
     ///
-    test('Divide', () {
+    test('divide', () {
       var dividend = 90;
       var divisor = 15;
       expect(20.divide(10), equals(2));
@@ -232,7 +231,7 @@ void main() {
     });
 
     ///
-    /// --------------- Divide End ---------------
+    /// --------------- divide End ---------------
     ///
   });
 
@@ -308,7 +307,7 @@ void main() {
       ///   just,
       ///   kawal,
       /// }
-      ///
+      /// justkawal enum is declared on line number 4
       expect('${justkawal.just}'.enumVal, equals('just'));
       expect('${justkawal.kawal}'.enumVal, equals('kawal'));
     });
@@ -318,5 +317,5 @@ void main() {
     ///
   });
 
-  /// ===================== String Operations Start =====================
+  /// ===================== String Operations End =====================
 }
