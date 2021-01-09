@@ -170,6 +170,7 @@ void main() {
     var heapList = <num>[20.0, 5, 1.0, 10, 25];
     var heaplist1 = [6, 9, 2, 1, 77, 8, 234, 9987, 12390, 98, 45];
 
+    /// --------------- Heapsort Start ---------------
     test('HeapSort', () {
       var newnumb = heapList.heapSort();
       expect(newnumb, equals([1.0, 5, 10, 20.0, 25]));
@@ -205,14 +206,10 @@ void main() {
     /// --------------- xor Start ---------------
     ///
     test('xor', () {
-      var number = 20.xor(3);
-      expect(number, equals(23));
-      var number1 = 10.xor(-2);
-      expect(number1, equals(-12));
-      var number2 = 10.xor(-20);
-      expect(number2, equals(-26));
-      var number3 = 10.xor(0);
-      expect(number3, equals(10));
+      expect(20.xor(3), equals(23));
+      expect(10.xor(-2), equals(-12));
+      expect(10.xor(-20), equals(-26));
+      expect(10.xor(0), equals(10));
     });
 
     ///
@@ -278,6 +275,7 @@ void main() {
       expect('occurance'.count('c'), equals(3));
     });
 
+    /// --------------- Count End ---------------
     ///
     /// --------------- count End ---------------
     ///
@@ -315,7 +313,250 @@ void main() {
     ///
     /// --------------- enumVal End ---------------
     ///
-  });
 
+    /// --------------- isBinary Start ---------------
+
+    test('isBinary', () {
+      expect('Counttokarega'.isBinary, isFalse);
+      expect('1234'.isBinary, isFalse);
+      expect('occ1234urance'.isBinary, isFalse);
+      // var value = '0101010';
+      // expect(value.isBinary, isTrue);
+    });
+
+    /// --------------- isBinary End ---------------
+
+    /// --------------- isDecimal Start ---------------
+
+    test('isDecimal', () {
+      expect('Counttokarega'.isDecimal, isFalse);
+      expect('1234'.isDecimal, isTrue);
+      expect('occ1234urance'.isDecimal, isFalse);
+    });
+
+    ///
+    /// --------------- isDecimal End ---------------
+    ///
+
+    ///
+    /// --------------- isOctal Start ---------------
+    ///
+
+    test('isOctal', () {
+      expect('Counttokarega'.isOctal, isFalse);
+      expect('1234'.isOctal, isFalse);
+      // expect('123'.isOctal, isTrue);
+      expect('occ1234urance'.isOctal, isFalse);
+    });
+
+    ///
+    /// --------------- isOctal End ---------------
+    ///
+
+    ///
+    /// --------------- isHex Start ---------------
+    ///
+
+    test('isHex', () {
+      expect('Counttokarega'.isHex, isTrue);
+      expect('1234'.isHex, isTrue);
+      expect('123'.isHex, isTrue);
+      expect('occ1234urance'.isHex, isTrue);
+      expect('null'.isHex, isTrue);
+    });
+
+    ///
+    /// --------------- isHex End ---------------
+    ///
+
+    ///
+    /// --------------- deburr Start ---------------
+    ///
+
+    test('deburr', () {
+      expect('hey kawal'.isHex, isTrue);
+      expect('1234'.isHex, isTrue);
+      expect('123'.isHex, isTrue);
+      expect('occ1234urance'.isHex, isTrue);
+      expect('null'.isHex, isTrue);
+    });
+
+    ///
+    /// --------------- deburr End ---------------
+    ///
+
+    ///
+    /// --------------- capitalize Start ---------------
+    ///
+
+    test('Capitalize', () {
+      expect('Counttokarega'.capitalize, equals('Counttokarega'));
+      expect('RAMAN'.capitalize, equals('Raman'));
+      expect('SHYaM'.capitalize, equals('Shyam'));
+      expect('occ1234urance'.capitalize, equals('Occ1234urance'));
+      expect('123null'.capitalize, equals('123null'));
+    });
+
+    ///
+    /// --------------- capitalize End ---------------
+    ///
+
+    ///
+    /// --------------- lowerfirst Start ---------------
+    ///
+
+    test('LowerFirst', () {
+      expect('Counttokarega'.lowerFirst, equals('counttokarega'));
+      expect('RAMAN'.lowerFirst, equals('rAMAN'));
+      expect('SHYaM'.lowerFirst, equals('sHYaM'));
+      expect('occ1234urance'.lowerFirst, equals('occ1234urance'));
+      expect('123null'.lowerFirst, equals('123null'));
+    });
+
+    ///
+    /// --------------- lowerfirst End ---------------
+    ///
+
+    ///
+    /// --------------- upperfirst Start ---------------
+    ///
+
+    test('UpperFirst', () {
+      expect('Counttokarega'.upperFirst, equals('Counttokarega'));
+      expect('RAMAN'.upperFirst, equals('RAMAN'));
+      expect('SHYaM'.upperFirst, equals('SHYaM'));
+      expect('occ1234urance'.upperFirst, equals('Occ1234urance'));
+      expect('123null'.upperFirst, equals('123null'));
+    });
+
+    ///
+    /// --------------- upperfirst End ---------------
+    ///
+
+    ///
+    /// --------------- camelCase Start ---------------
+    ///
+
+    test('camelCase', () {
+      expect('---count===Number'.camelCase, equals('countNumber'));
+      expect('RAMAN-----Hello'.camelCase, equals('ramanHello'));
+      expect('shyam    Cool'.camelCase, equals('shyamCool'));
+      expect('occ-------urance'.camelCase, equals('occurance'));
+      expect('-----add=====Null'.camelCase, equals('addNull'));
+    });
+
+    ///
+    /// --------------- camelCase End ---------------
+    ///
+
+    ///
+    /// --------------- kebabCase Start ---------------
+    ///
+
+    test('kebabCase', () {
+      expect('---count===Number'.kebabCase(), equals('count-number'));
+      expect('RAMAN-----Hello'.kebabCase(), equals('raman-hello'));
+      expect('shyam    Cool'.kebabCase(), equals('shyam-cool'));
+      expect('occ-------urance'.kebabCase(), equals('occ-urance'));
+      expect('-----add=====Null'.kebabCase(), equals('add-null'));
+      expect('-----add=====1234'.kebabCase(), equals('add-1234'));
+      expect('@@@@@@add#####'.kebabCase(), equals('add'));
+    });
+
+    ///
+    /// --------------- kebabCase End ---------------
+    ///
+
+    ///
+    /// --------------- lowerCase Start ---------------
+    ///
+
+    test('lowerCase', () {
+      expect('---count===Number'.lowerCase(), equals('count number'));
+      expect('RAMAN-----Hello'.lowerCase(), equals('raman hello'));
+      expect('------shyam-----------Cool'.lowerCase(), equals('shyam cool'));
+      expect('occ-------urance'.lowerCase(), equals('occ urance'));
+      expect('-----add=====Null'.lowerCase(), equals('add null'));
+      expect('-----add=====1234'.lowerCase(), equals('add 1234'));
+      expect('@@@@@@add#####'.lowerCase(), equals('add'));
+    });
+
+    ///
+    /// --------------- lowerCase End ---------------
+    ///
+
+    ///
+    /// --------------- snakeCase Start ---------------
+    ///
+
+    test('snakeCase', () {
+      expect('---count===Number'.snakeCase(), equals('count_number'));
+      expect('RAMAN-----Hello'.snakeCase(), equals('raman_hello'));
+      expect('------shyam-----------Cool'.snakeCase(), equals('shyam_cool'));
+      expect('occ-------urance'.snakeCase(), equals('occ_urance'));
+      expect('-----add=====Null'.snakeCase(), equals('add_null'));
+      expect('-----add=====1234'.snakeCase(), equals('add_1234'));
+      expect('@@@@@@add#####'.snakeCase(), equals('add'));
+    });
+
+    ///
+    /// --------------- snakeCase End ---------------
+    ///
+
+    ///
+    /// --------------- nameCase Start ---------------
+    ///
+
+    test('nameCase', () {
+      expect('---count===Number'.nameCase(), equals('Count Number'));
+      expect('RAMAN-----Hello'.nameCase(), equals('Raman Hello'));
+      expect('------shyam-----------Cool'.nameCase(), equals('Shyam Cool'));
+      expect('occ-------urance'.nameCase(), equals('Occ Urance'));
+      expect('-----add=====Null'.nameCase(), equals('Add Null'));
+      expect('-----add=====1234'.nameCase(), equals('Add 1234'));
+      expect('@@@@@@add#####digit'.nameCase(), equals('Add Digit'));
+    });
+
+    ///
+    /// --------------- nameCase End ---------------
+    ///
+
+    ///
+    /// --------------- repeat Start ---------------
+    ///
+//showing String is not a subtype of bool
+    //   test('repeat', () {
+    //     expect('1'.repeat(2), equals('11'));
+    //     expect('RAMAN-----Hello'.nameCase(), equals('Raman Hello'));
+    //     expect('------shyam-----------Cool'.nameCase(), equals('Shyam Cool'));
+    //     expect('occ-------urance'.nameCase(), equals('Occ Urance'));
+    //     expect('-----add=====Null'.nameCase(), equals('Add Null'));
+    //     expect('-----add=====1234'.nameCase(), equals('Add 1234'));
+    //     expect('@@@@@@add#####digit'.nameCase(), equals('Add Digit'));
+    //   });
+
+    ///
+    /// --------------- repeat End ---------------
+    ///
+
+    ///
+    /// --------------- pad Start ---------------
+    ///
+//showing Error
+    // test('pad', () {
+    //   expect('--'.pad(4), equals('--'));
+    //   expect('abc'.pad(8,'=_'), equals('=_abc=_='));
+    //   expect('------shyam-----------Cool'.nameCase(), equals('Shyam Cool'));
+    //   expect('occ-------urance'.nameCase(), equals('Occ Urance'));
+    //   expect('-----add=====Null'.nameCase(), equals('Add Null'));
+    //   expect('-----add=====1234'.nameCase(), equals('Add 1234'));
+    //   expect('@@@@@@add#####digit'.nameCase(), equals('Add Digit'));
+    // });
+
+    ///
+    /// --------------- pad End ---------------
+    ///
+  });
+ 
   /// ===================== String Operations End =====================
 }
