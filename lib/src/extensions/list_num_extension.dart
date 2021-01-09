@@ -1,18 +1,18 @@
 part of utility;
 
 extension UtilityListNum on List<num> {
-  /// Sorts the algorithm in `O(nLog(n))` time complexity.
-  /// ```dart
+  ///Sorts the algorithm in `O(nLog(n))` time complexity.
+  ///```dart
   ///
-  /// var list = <int>[97, 4, 5, 26, 6];
-  /// // With `inPlace` set to `false` it returns new sorted list.
-  /// var newSortedList = list.heapSort(inPlace: false);
-  /// // newSortedList = [4, 5, 6, 26, 97];
+  ///var list = <int>[97, 4, 5, 26, 6];
+  ///// With `inPlace` set to `false` it returns new sorted list.
+  ///var newSortedList = list.heapSort(inPlace: false);
+  ///// newSortedList = [4, 5, 6, 26, 97];
   ///
-  /// var list = <int>[97, 04, 5, 26, 6];
-  /// // With `inPlace` set to `true (default)` it sorts the list in its place.
-  /// list.heapSort(); // list = [4, 5, 6, 26, 97];
-  /// ```
+  ///var list = <int>[97, 04, 5, 26, 6];
+  ///// With `inPlace` set to `true (default)` it sorts the list in its place.
+  ///list.heapSort(); // list = [4, 5, 6, 26, 97];
+  ///```
   List<num> heapSort({bool inPlace = true}) {
     if (this == null) {
       return null;

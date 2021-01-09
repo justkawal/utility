@@ -1,7 +1,7 @@
 part of utility;
 
-/// Creates an new list of elements split into groups the length of `size`.
-/// If `list` can't be split evenly, the final chunk will be the remaining elements.
+///Creates an new list of elements split into groups the length of `size`.
+///If `list` can't be split evenly, the final chunk will be the remaining elements.
 ///
 ///````dart
 ///// It returns new Object of Chunked data;

@@ -103,7 +103,7 @@ var reUnicodeWord = RegExp([
   rsEmoji
 ].join('|'));
 
-/// Used to map Latin Unicode letters to basic Latin letters.
+///Used to map Latin Unicode letters to basic Latin letters.
 var deburredLetters = {
   // Latin-1 Supplement block.
   '\xc0': 'A', '\xc1': 'A', '\xc2': 'A', '\xc3': 'A', '\xc4': 'A', '\xc5': 'A',

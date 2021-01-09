@@ -1,7 +1,7 @@
 import 'package:test/test.dart';
 import 'package:utility/utility.dart';
 
-/// enum for testing: string operation
+///enum for testing: string operation
 enum justkawal {
   just,
   kawal,
