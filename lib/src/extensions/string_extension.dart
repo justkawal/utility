@@ -57,10 +57,10 @@ extension UtilityString on String {
   ///'  26.04 '.toNumber; // 26.04
   ///```
   num get toNumber {
-    if (this == null || /* this. */ trim().isEmpty) {
+    if (this == null || trim().isEmpty) {
       return null;
     }
-    return double.tryParse(/* this. */ trim());
+    return double.tryParse(trim());
   }
 
   /// Counts the number of occurrences of value.
@@ -75,10 +75,10 @@ extension UtilityString on String {
       return 0;
     }
     //caseSensitive ??= true;
-    return /* this. */ length -
+    return length -
         (caseSensitive
-                ? /* this. */ replaceAll(value, '')
-                : /* this. */ toLowerCase().replaceAll(value.toLowerCase(), ''))
+                ? replaceAll(value, '')
+                : toLowerCase().replaceAll(value.toLowerCase(), ''))
             .length;
   }
 
@@ -194,10 +194,10 @@ extension UtilityString on String {
   /// ```
   String get capitalize {
     var result;
-    if (this != null && /* this. */ isNotEmpty) {
+    if (this != null && isNotEmpty) {
       result = this[0].toUpperCase();
-      if (/* this. */ length > 1) {
-        result += /* this. */ substring(1).toLowerCase();
+      if (length > 1) {
+        result += substring(1).toLowerCase();
       }
     }
     return result;
@@ -210,10 +210,10 @@ extension UtilityString on String {
   /// ```
   String get lowerFirst {
     var result;
-    if (this != null && /* this. */ isNotEmpty) {
+    if (this != null && isNotEmpty) {
       result = this[0].toLowerCase();
-      if (/* this. */ length > 1) {
-        result += /* this. */ substring(1);
+      if (length > 1) {
+        result += substring(1);
       }
     }
     return result;
@@ -226,10 +226,10 @@ extension UtilityString on String {
   /// ```
   String get upperFirst {
     var result = '';
-    if (this != null && /* this. */ isNotEmpty) {
+    if (this != null && isNotEmpty) {
       result = this[0].toUpperCase();
-      if (/* this. */ length > 1) {
-        result += /* this. */ substring(1);
+      if (length > 1) {
+        result += substring(1);
       }
     }
     return result;
@@ -241,9 +241,7 @@ extension UtilityString on String {
   /// ```
   List<String> words([RegExp pattern]) {
     if (pattern == null) {
-      return reAsciiWord.hasMatch(this)
-          ? /* this. */ asciiWords
-          : /* this. */ unicodeWords;
+      return reAsciiWord.hasMatch(this) ? asciiWords : unicodeWords;
     }
     return pattern.allMatches(this).map((match) => '${match[0]}').toList();
   }
@@ -257,7 +255,7 @@ extension UtilityString on String {
   /// '-----just--Kawal--'.camelCase; // justKawal
   /// ```
   String get camelCase {
-    var wordList = /* this. */ words();
+    var wordList = words();
     var leftSide = wordList.first.toLowerCase();
     var rightSide =
         wordList.skip(1).reduce((value, element) => value + element.capitalize);
@@ -338,24 +336,25 @@ extension UtilityString on String {
     return result;
   }
 
-  /// Pads the string on the left and right sides if it's shorter than `length`.
-  /// Padding characters will be truncated if they can't be evenly divided by `length`.
+  ///Pads the string on the left and right sides if it's shorter than `length`.
+  ///
+  ///Padding characters will be truncated if they can't be evenly divided by `length`.
   ///```dart
-  /// var pad1 = 'abc'.pad(8); // '  abc   '
+  ///var pad1 = 'abc'.pad(8); // '  abc   '
   ///
-  /// var pad2 = 'abc'.pad(8, '=_'); // '=_abc=_='
+  ///var pad2 = 'abc'.pad(8, '=_'); // '=_abc=_='
   ///
-  /// var pad3 = 'abc'.pad(3); // 'abc'
+  ///var pad3 = 'abc'.pad(3); // 'abc'
   ///```
   String pad(int length, [String chars = ' ']) {
-    var strLength = length != 0 ? /* this. */ length : 0;
+    var strLength = length != 0 ? this.length : 0;
     if (length == 0 || strLength >= length) {
       return this;
     }
     var mid = (length - strLength) / 2;
-    return (_createPadding((mid.floor()), chars) +
+    return (_createPadding(mid.floor(), chars) +
         this +
-        _createPadding((mid.floor()), chars));
+        _createPadding(mid.ceil(), chars));
   }
 
   // private function for internal usage
@@ -375,14 +374,12 @@ extension UtilityString on String {
 
   // private function for internal usage
   List<String> get _stringToList {
-    return /* this. */ hasUnicode
-        ? /* this. */ _unicodeToList
-        : /* this. */ _asciiToList;
+    return hasUnicode ? _unicodeToList : _asciiToList;
   }
 
   // private function for internal usage
   List<String> get _asciiToList {
-    return /* this. */ split('');
+    return split('');
   }
 
   // private function for internal usage
