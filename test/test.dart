@@ -374,15 +374,76 @@ void main() {
     ///
 
     test('deburr', () {
-      expect('hey kawal'.isHex, isTrue);
-      expect('1234'.isHex, isTrue);
-      expect('123'.isHex, isTrue);
-      expect('occ1234urance'.isHex, isTrue);
-      expect('null'.isHex, isTrue);
+      // expect('hey kàwàl'.deburr, equals('hey kawal'));
     });
 
     ///
     /// --------------- deburr End ---------------
+    ///
+
+    ///
+    /// --------------- hasUnicode Start ---------------
+    ///
+
+    // test('hasUnicode', () {
+    //   expect('kàwàl'.hasUnicode, isTrue);
+    // });
+
+    ///
+    /// --------------- hasUnicode End ---------------
+    ///
+
+    ///
+    /// --------------- hasUnicodeWord Start ---------------
+    ///
+
+    test('hasUnicodeWord', () {
+      expect('kàwàl'.hasUnicodeWord, isTrue);
+      expect('hey'.hasUnicodeWord, isFalse);
+    });
+
+    ///
+    /// --------------- hasUnicodeWord End ---------------
+    ///
+
+    ///
+    /// --------------- Word Start ---------------
+    ///
+
+    test('Word', () {
+      expect('kàwàl hello'.words(), equals(['hello']));
+      expect('hey count this 12345'.words(),
+          equals(['hey', 'count', 'this', '12345']));
+    });
+
+    ///
+    /// --------------- Word End ---------------
+    ///
+
+    ///
+    /// --------------- unicodeWords Start ---------------
+    ///
+
+    test('unicodeWords', () {
+      expect('hey kàwàl'.unicodeWords, equals(['kàwàl']));
+      expect('kàwàl hey kàwàl'.unicodeWords, equals(['kàwàl', 'kàwàl']));
+    });
+
+    ///
+    /// --------------- unicodeWords End ---------------
+    ///
+    ///
+    /// --------------- asciiword Start ---------------
+    ///
+
+    test('asciiWords', () {
+      expect('kàwàl'.asciiWords, equals([]));
+      expect('hey kàwàl bro'.asciiWords, equals(['hey', 'bro']));
+      expect('hey kàwàl'.asciiWords, equals(['hey']));
+    });
+
+    ///
+    /// --------------- asciiWords End ---------------
     ///
 
     ///
@@ -528,7 +589,6 @@ void main() {
       expect('1'.repeat(2), equals('11'));
       expect('123'.repeat(3), equals('123123123'));
       expect('ashu '.repeat(3), equals('ashu ashu ashu '));
-
       expect('@'.repeat(5), equals('@@@@@'));
     });
 
@@ -539,22 +599,18 @@ void main() {
     ///
     /// --------------- pad Start ---------------
     ///
-//showing Error
-    // test('pad', () {
-    //   expect('--'.pad(4), equals('--'));
-      // expect('abc'.pad(8,'=_'), equals('=_abc=_='));
-    //   expect('------shyam-----------Cool'.nameCase(), equals('Shyam Cool'));
-    //   expect('occ-------urance'.nameCase(), equals('Occ Urance'));
-    //   expect('-----add=====Null'.nameCase(), equals('Add Null'));
-    //   expect('-----add=====1234'.nameCase(), equals('Add 1234'));
-    //   expect('@@@@@@add#####digit'.nameCase(), equals('Add Digit'));
-    // });
+    test('pad', () {
+      expect('--'.pad(4), equals(' -- '));
+      expect('abc'.pad(8, '=_'), equals('=_abc=_='));
+      expect('Cool'.pad(5, '@'), equals('Cool@'));
+      expect('@@ ##'.pad(8), equals(' @@ ##  '));
+      expect('ashumendra'.pad(8), equals('ashumendra'));
+    });
 
     ///
     /// --------------- pad End ---------------
     ///
   });
-  
 
   /// ===================== String Operations End =====================
 }
