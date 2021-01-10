@@ -246,7 +246,7 @@ extension UtilityString on String {
     return pattern.allMatches(this).map((match) => '${match[0]}').toList();
   }
 
-  ///--------------------- Cases Start ---------------------
+  // --------------------- Cases Start ---------------------
 
   ///Converts the string to `camelCase`.
   ///```dart
