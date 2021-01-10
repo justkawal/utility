@@ -99,7 +99,7 @@ extension UtilityString on String {
   ///'justkawal'.isBinary; // false
   ///```
   bool get isBinary {
-    return regExpIsBinary.hasMatch(this);
+    return reIsBinary.hasMatch(this);
   }
 
   ///returns `true` if the `string` is `decimal`, other-wise `false`
@@ -119,7 +119,7 @@ extension UtilityString on String {
   ///'justkawal'.isOctal; // false
   ///```
   bool get isOctal {
-    return regExpIsOctal.hasMatch(this);
+    return reIsOctal.hasMatch(this);
   }
 
   ///returns `true` if the `string` is `good hex`, other-wise `false`
@@ -129,7 +129,7 @@ extension UtilityString on String {
   ///'justkawal'.isHex; // false
   ///```
   bool get isHex {
-    return !regExpIsBadHex.hasMatch(this);
+    return !reIsBadHex.hasMatch(this);
   }
 
   ///Converts string from `Latin-1` to normal `basic latin letters`
@@ -166,8 +166,9 @@ extension UtilityString on String {
   List<String> _unicodeAsciiWords([bool isUnicode = true]) {
     var list = <String>[];
     (isUnicode ? reUnicodeWord : reAsciiWord).allMatches(this).forEach((match) {
-      if (match[0].hasUnicodeWord == isUnicode) {
-        list.add(match[0]);
+      var m = match[0];
+      if (m.hasUnicodeWord == isUnicode) {
+        list.add(m);
       }
     });
     return list;
@@ -180,11 +181,6 @@ extension UtilityString on String {
   ///```
   bool get hasUnicodeWord {
     return reHasUnicodeWord.hasMatch(this);
-  }
-
-  ///Returns `true` if string contains `unicode` other-wise `false`
-  bool get hasUnicode {
-    return reHasUnicode.hasMatch(this);
   }
 
   ///Converts the first character of string to `upper case` and the remaining to `lower case`.
@@ -241,7 +237,11 @@ extension UtilityString on String {
   ///```
   List<String> words([RegExp pattern]) {
     if (pattern == null) {
-      return reAsciiWord.hasMatch(this) ? asciiWords : unicodeWords;
+      var list = <String>[];
+      reUnicodeWord.allMatches(this).forEach((match) {
+        list.add(match[0]);
+      });
+      return list;
     }
     return pattern.allMatches(this).map((match) => '${match[0]}').toList();
   }
@@ -294,8 +294,7 @@ extension UtilityString on String {
 
   ///A helper function for reusing the same functionality of `snakeCase`, `lowerCase` and `kebabCase`.
   String _reuseCase(String separator) {
-    return 
-        words().map((word) => word.toLowerCase()).toList().join(separator);
+    return words().map((word) => word.toLowerCase()).toList().join(separator);
   }
 
   ///Converts the string to `nameCase`.
@@ -305,8 +304,10 @@ extension UtilityString on String {
   ///'-----kawaljeet--singh--'.nameCase(); // Kawaljeet Singh
   ///```
   String nameCase({String separator = ' '}) {
-    return 
-        words().map((word) => word.capitalize).toList().join(separator ?? ' ');
+    return words()
+        .map((word) => word.capitalize)
+        .toList()
+        .join(separator ?? ' ');
   }
 
   // --------------------- Cases End ---------------------
@@ -365,14 +366,14 @@ extension UtilityString on String {
       return charsLength > 0 ? chars.repeat(length) : chars;
     }
     var result = chars.repeat((length / chars.length).ceil());
-    return chars.hasUnicode
+    return chars.hasUnicodeWord
         ? result._stringToList._castSlice(0, length).join('')
         : result.slice(0, length);
   }
 
   // private function for internal usage
   List<String> get _stringToList {
-    return hasUnicode ? _unicodeToList : _asciiToList;
+    return hasUnicodeWord ? _unicodeToList : _asciiToList;
   }
 
   // private function for internal usage

@@ -2,7 +2,10 @@
 import 'package:utility/utility.dart';
 
 void main() {
-  print('abc'.pad(8)); // '  abc   '
-  print('abc'.pad(8, '=_')); // '=_abc=_='
-  print('abc'.pad(3)); // 'abc'
+  var latin = 'hey kàwàl';
+  print(latin.deburr);
+  print(latin.unicodeWords);
+  print(latin.asciiWords);
+  print(latin.hasUnicodeWord);
+  print(latin.words());
 }
