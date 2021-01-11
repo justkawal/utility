@@ -81,7 +81,7 @@ extension UtilityList<T> on List<T> {
   }
 
   ///Returns `random value` from list. If list is empty then it returns `null`
-  ///````dart
+  ///```dart
   ///var list = <int>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   ///var randomValue = list.random(); // 3 // 3 will not be removed from list
   ///
@@ -95,7 +95,7 @@ extension UtilityList<T> on List<T> {
   ///
   ///// If secure = true is passed as argument then Random.secure() is used
   ///var randomValue = list.random(secure: true); // 5
-  ///````
+  ///```
   T random({bool secure = false, bool remove = false, int seed}) {
     if (isEmpty) {
       return null;
@@ -148,26 +148,24 @@ extension UtilityList<T> on List<T> {
 
   ///removes `n` number of elements from the `beginning of list`
   ///```dart
-  /////If used as method, it directly alter the list's object
+  ///// If used as method, it directly alter the list's object
+  ///
   ///var list = <int>[1, 2, 3, 4, 5];
   ///list.drop(); // list = [2, 3, 4, 5];
   ///
-  ///var list = <int>[1, 2, 3, 4, 5];
-  ///list.drop(3); // list = [4, 5];
+  ///list.drop(3); // list = [5];
   ///
-  ///var list = <int>[1, 2, 3];
   ///list.drop(5); // list = []; // does not throw error :D
   ///
-  /////If used as function,
-  /////it creates a new copy of the output and list's object is untouched
-  ///var list = <int>[1, 2, 3, 4, 5];
-  ///var newObject = list.dropRight(); // newObject = [1, 2, 3, 4];
+  ///// If used as function,
+  ///// it creates a new copy of the output and list's object is untouched
   ///
   ///var list = <int>[1, 2, 3, 4, 5];
-  ///var newObject = list.dropRight(3); // newObject = [1, 2];
+  ///var newObject = drop(list); // newObject = [2, 3, 4, 5;
   ///
-  ///var list = <int>[1, 2, 3];
-  ///var newObject = list.dropRight(5); // newObject = []; // does not throw error :D
+  ///var newObject = drop(list, 3); // newObject = [4, 5];
+  ///
+  ///var newObject = drop(list, 5); // newObject = []; // does not throw error :D
   ///```
   List<T> drop([int n = 1]) {
     if (n > (length ?? 0)) {
@@ -185,22 +183,19 @@ extension UtilityList<T> on List<T> {
   ///var list = <int>[1, 2, 3, 4, 5];
   ///list.dropRight(); // list = [1, 2, 3, 4];
   ///
-  ///var list = <int>[1, 2, 3, 4, 5];
-  ///list.dropRight(3); // list = [1, 2];
+  ///list.dropRight(3); // list = [1];
   ///
-  ///var list = <int>[1, 2, 3];
   ///list.dropRight(5); // list = []; // does not throw error :D
   ///
   /////If used as function,
   /////it creates a new copy of the output and list's object is untouched
-  ///var list = <int>[1, 2, 3, 4, 5];
-  ///var newObject = list.dropRight(); // newObject = [1, 2, 3, 4];
   ///
   ///var list = <int>[1, 2, 3, 4, 5];
-  ///var newObject = list.dropRight(3); // newObject = [1, 2];
+  ///var newObject = dropRight(list); // newObject = [1, 2, 3, 4];
   ///
-  ///var list = <int>[1, 2, 3];
-  ///var newObject = list.dropRight(5); // newObject = []; // does not throw error :D
+  ///var newObject = dropRight(list, 3); // newObject = [1, 2];
+  ///
+  ///var newObject = dropRight(list, 5); // newObject = []; // does not throw error :D
   ///```
   List<T> dropRight([int n = 1]) {
     if (n > 0) {
@@ -273,10 +268,10 @@ extension UtilityList<T> on List<T> {
   ///
   ///It returns `newObject` of flattened array and does not affects the list object called-upon
   ///
-  ///````dart
+  ///```dart
   ///var list = [2, [1, 3], [4, [1, [2]] ] ];
   ///var newList = list.flattenDepth(1); // newList = [2, 1, 3, 4, [1, [2] ] ];
-  ///````
+  ///```
   List<T> flattenDepth([int depth = 1]) {
     if (this is List) {
       var copyList = <Object>[];
@@ -298,10 +293,10 @@ extension UtilityList<T> on List<T> {
   ///
   ///It returns `newObject` of deeply flattened array and does not affects the list object called-upon.
   ///
-  ///````dart
+  ///```dart
   ///var list = [2, [1, 3], [4, [1, [2]] ] ];
   ///var newList = list.flattenDeep(); // newList = [2, 1, 3, 4, 1, 2];
-  ///````
+  ///```
   List<T> flattenDeep() {
     var copyList = <Object>[];
     forEach((element) {
@@ -319,12 +314,12 @@ extension UtilityList<T> on List<T> {
   ///Creates a new list of elements split into groups the length of `size`.
   ///
   ///If `list` can't be split evenly, the final chunk will be the remaining elements.
-  ///````dart
+  ///```dart
   ///// It returns new List Object of Chunked data;
   ///var list = ['a', 'b', 'c', 'd'];
   ///
   ///var newChunkedList = list.chunk(3); // newChunkedList = [['a', 'b', 'c'], ['d']];
-  ///````
+  ///```
   List<List<T>> chunk([int size = 1]) {
     size ??= 1;
     size = max(size, 0);
@@ -334,7 +329,6 @@ extension UtilityList<T> on List<T> {
     }
     var index = 0;
     var result = <List<T>>[];
-
     while (index < length) {
       result.add(_privateSlice(index, (index += size), false));
     }
@@ -356,6 +350,49 @@ extension UtilityList<T> on List<T> {
   ///```
   List<T> compact() {
     removeWhere((element) => isFalsey(element));
+    return this;
+  }
+
+  ///starts `adding elements` to `this` from `from` until condition becomes `false`
+  ///```dart
+  ///var list = <int>[2, 1, 3, 4, 5];
+  ///var newList = <int>[];
+  ///newList.addAllWhile((T element) => element <= 3); // list = [4, 5];
+  ///```
+  List<T> addAllWhile(List<T> from, bool Function(T element) test) {
+    var index = 0;
+    while (index < length) {
+      if (!test(from[index])) {
+        break;
+      }
+      add(from[index]);
+      index++;
+    }
+    return this;
+  }
+
+  ///adds `elements` which satisfies `test` from `List<T> from` to `this`.
+  ///```dart
+  ///
+  ///var oldList = <int>[2, 1, 3, 4, 5];
+  ///var evenNumberList = <int>[];
+  ///
+  ///// Now call function addIf.
+  ///evenNumberList.addIf(oldList, (T element) => (element % 2 == 0)); // list = [2, 4];
+  ///
+  ///var oddNumberList = <int>[];
+  ///
+  ///// Now call function addIf.
+  ///oddNumberList.addIf(oldList, (T element) => (element % 2 != 0)); // list = [1, 3, 5];
+  ///```
+  List<T> addIf(List<T> from, bool Function(T element) test) {
+    var index = 0;
+    while (index < length) {
+      if (test(from[index])) {
+        add(from[index]);
+      }
+      index++;
+    }
     return this;
   }
 }

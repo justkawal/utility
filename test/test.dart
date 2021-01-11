@@ -390,23 +390,11 @@ void main() {
     ///
 
     test('deburr', () {
-      // expect('hey kàwàl'.deburr, equals('hey kawal'));
+      expect('hey kàwàl'.deburr, equals('hey kawal'));
     });
 
     ///
     /// --------------- deburr End ---------------
-    ///
-
-    ///
-    /// --------------- hasUnicode Start ---------------
-    ///
-
-    // test('hasUnicode', () {
-    //   expect('kàwàl'.hasUnicode, isTrue);
-    // });
-
-    ///
-    /// --------------- hasUnicode End ---------------
     ///
 
     ///
@@ -423,17 +411,17 @@ void main() {
     ///
 
     ///
-    /// --------------- Word Start ---------------
+    /// --------------- words Start ---------------
     ///
 
-    test('Word', () {
-      expect('kàwàl hello'.words(), equals(['hello']));
+    test('words', () {
+      expect('kàwàl hello'.words(), equals(['kàwàl', 'hello']));
       expect('hey count this 12345'.words(),
           equals(['hey', 'count', 'this', '12345']));
     });
 
     ///
-    /// --------------- Word End ---------------
+    /// --------------- words End ---------------
     ///
 
     ///
@@ -449,12 +437,12 @@ void main() {
     /// --------------- unicodeWords End ---------------
     ///
     ///
-    /// --------------- asciiword Start ---------------
+    /// --------------- asciiWords Start ---------------
     ///
 
     test('asciiWords', () {
       expect('kàwàl'.asciiWords, equals([]));
-      expect('hey kàwàl bro'.asciiWords, equals(['hey', 'bro']));
+      expect('just kàwàl'.asciiWords, equals(['just']));
       expect('hey kàwàl'.asciiWords, equals(['hey']));
     });
 
@@ -466,7 +454,7 @@ void main() {
     /// --------------- capitalize Start ---------------
     ///
 
-    test('Capitalize', () {
+    test('capitalize', () {
       expect('Counttokarega'.capitalize, equals('Counttokarega'));
       expect('RAMAN'.capitalize, equals('Raman'));
       expect('SHYaM'.capitalize, equals('Shyam'));
@@ -482,7 +470,7 @@ void main() {
     /// --------------- lowerfirst Start ---------------
     ///
 
-    test('LowerFirst', () {
+    test('lowerFirst', () {
       expect('Counttokarega'.lowerFirst, equals('counttokarega'));
       expect('RAMAN'.lowerFirst, equals('rAMAN'));
       expect('SHYaM'.lowerFirst, equals('sHYaM'));
@@ -498,7 +486,7 @@ void main() {
     /// --------------- upperfirst Start ---------------
     ///
 
-    test('UpperFirst', () {
+    test('upperFirst', () {
       expect('Counttokarega'.upperFirst, equals('Counttokarega'));
       expect('RAMAN'.upperFirst, equals('RAMAN'));
       expect('SHYaM'.upperFirst, equals('SHYaM'));
