@@ -51,7 +51,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  utility:
+  utility: any
 ```
 
 ### 2. Install it
@@ -83,11 +83,16 @@ import 'package:utility/utility.dart';
 ## List Operations
 ### slice
 Creates a slice of `list` from `start` up to `end`[exclusive].
-  
 ```dart
 var list = [1, 2, 3, 4];
-  
-// It slices the list elements and hence modifies the list
+
+//It slices the list elements and hence modifies this list
+list.slice(2); // list = [3, 4]
+
+// Do not want to alter the list object ??
+var list = [1, 2, 3, 4];
+
+//It creates copy of list slices the list elements and creates new list
 list.slice(2); // list = [3, 4]
 ```
 
@@ -119,21 +124,21 @@ var randomValue list.random(secure: true); // 5
 ```
 
 ### isGrowable
-returns `true` if it is `Growable list` otherwise `false`.
+returns `true` if it is `Growable list` otherwise false.
 ```dart
-
 // On Non-Growable List
 var list = List<dynamic>(8);
-var value = list.isGrowable; // false
+var isGrowable = list.isGrowable; // false
 
 // On Growable List
 var list2 = List<dynamic>();
-var value2 = list2.isGrowable; // true
+var isGrowable = list2.isGrowable; // true
 ```
 
 ### drop
-removes `n` number of elements from the beginning of list
+removes `n` number of elements from the `beginning of list`
 ```dart
+//If used as method, it directly alter the list's object
 var list = <int>[1, 2, 3, 4, 5];
 list.drop(); // list = [2, 3, 4, 5];
 
@@ -142,11 +147,23 @@ list.drop(3); // list = [4, 5];
 
 var list = <int>[1, 2, 3];
 list.drop(5); // list = []; // does not throw error :D
+
+//If used as function,
+//it creates a new copy of the output and list's object is untouched
+var list = <int>[1, 2, 3, 4, 5];
+var newObject = list.dropRight(); // newObject = [1, 2, 3, 4];
+
+var list = <int>[1, 2, 3, 4, 5];
+var newObject = list.dropRight(3); // newObject = [1, 2];
+
+var list = <int>[1, 2, 3];
+var newObject = list.dropRight(5); // newObject = []; // does not throw error :D
 ```
 
 ### dropRight
-removes `n` number of elements from the ending of list.
+removes `n` number of elements from the ending of list
 ```dart
+//If used as method, it directly alter the list's object
 var list = <int>[1, 2, 3, 4, 5];
 list.dropRight(); // list = [1, 2, 3, 4];
 
@@ -155,6 +172,17 @@ list.dropRight(3); // list = [1, 2];
 
 var list = <int>[1, 2, 3];
 list.dropRight(5); // list = []; // does not throw error :D
+
+//If used as function,
+//it creates a new copy of the output and list's object is untouched
+var list = <int>[1, 2, 3, 4, 5];
+var newObject = list.dropRight(); // newObject = [1, 2, 3, 4];
+
+var list = <int>[1, 2, 3, 4, 5];
+var newObject = list.dropRight(3); // newObject = [1, 2];
+
+var list = <int>[1, 2, 3];
+var newObject = list.dropRight(5); // newObject = []; // does not throw error :D
 ```
 
 ### dropRightWhile
@@ -215,13 +243,13 @@ Creates an list of elements where the values of the list are not `Falsey`.
 
 Avoid calling it on fixed-length list.
 ```dart
-// It alters the list object if the list is not fixed-length list.
+//It alters the list object if the list is not fixed-length list.
 var list = ['a', null, '', false, 'b'];
-list.compact(); // ['a', 'b'];
+var compactedData = list.compact(); // ['a', 'b'];
 
-// It returns new Object of compacted data;
+//It returns new Object of compacted data;
 var list = ['a', null, '', false, 'b'];
-// here the list object is not altered
+//here the list object is not altered
 var compactedData_new_object = compact(list); // ['a', 'b'];
 ```
 
@@ -290,7 +318,7 @@ Creates a slice of `string` from `start` up to, but not including, `end`.
 var string = '__justkawal;
 
 // It slices the string and returns modified string
-string.slice(2); // string = 'justkawal';
+var slicedString string.slice(2); // slicedString = 'justkawal';
 ```
 
 ### enumVal
@@ -311,13 +339,6 @@ Returns converted number
 '  26.04 '.toNumber; // 26.04
 ```
 
-### toNumber()
-Converts `value` to number
-```dart
-var value = toNumber('2604 '); // 2604
-var value1 = toNumber(26.04); // 26.04 // lolz anyway its a number
-```
-
 ### count
 `Counts` and `returns` the number of occurrences of value.
 ```dart
@@ -331,13 +352,6 @@ Returns `true`, if the `string` is `number` other-wise `false`
 ```dart
 '123'.isNumber; // true
 'justkawal'.isNumber; // false
-```
-
-### isNumber(dynamic val)
-Returns `true` if `this` is `number` otherwise `false`.
-```dart
-var value = isNumber('123 '); // true
-var value1 = isNumber('12A'); // false
 ```
 
 ### isBinary
@@ -393,12 +407,6 @@ Returns `true` if string contains any occurence of `unicode word` other-wise `fa
 'hey'.hasUnicodeWord;      // false
 ```
 
-### hasUnicode
-Returns `true` if string contains `unicode` other-wise `false`.
-```dart
-'kàwàl'.hasUnicode; // true
-```
-
 ### capitalize
 Converts the first character of string to `upper case` and the remaining to `lower case`.
 ```dart
@@ -425,6 +433,8 @@ Returns `list of words`
 ```dart
 'kàwàl vu'.words; // ['kàwàl', 'vu']
 ```
+
+### Case Conversions
 
 ### camelCase
 Converts the string to `camelCase` and returns it.
@@ -490,6 +500,5 @@ var pad3 = 'abc'.pad(3); // 'abc'
 On-going implementation for future:
 - Some more Functions
 
-### Donate
-
-  - [Paypal](https://www.paypal.me/kawal7415)
+## Donate (Be the First one)
+- patreon: https://patreon.com/justkawal
