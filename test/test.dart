@@ -30,6 +30,22 @@ void main() {
     ///
 
     ///
+    /// --------------- random Start ---------------
+    ///
+    var removelist = <int>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+    test('random', () {
+      removelist.removeFirst();
+      expect(removelist, equals([2, 3, 4, 5, 6, 7, 8, 9, 10]));
+      removelist.removeFirst();
+      expect(removelist, equals([3, 4, 5, 6, 7, 8, 9, 10]));
+    });
+
+    ///
+    /// --------------- random End ---------------
+    ///
+
+    ///
     /// --------------- isGrowable Start ---------------
     ///
 
@@ -374,7 +390,7 @@ void main() {
     ///
 
     test('deburr', () {
-      // expect('hey kàwàl'.deburr, equals('hey kawal'));
+      expect('hey kàwàl'.deburr, equals('hey kawal'));
     });
 
     ///
