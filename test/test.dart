@@ -374,7 +374,7 @@ void main() {
     ///
 
     test('deburr', () {
-      // expect('hey kàwàl'.deburr, equals('hey kawal'));
+      expect('hey kàwàl'.deburr, equals('hey kawal'));
     });
 
     ///

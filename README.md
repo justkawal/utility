@@ -74,9 +74,9 @@ $  flutter packages get
 
 Now in your `Dart` code, you can use: 
 
-````dart
+```dart
 import 'package:utility/utility.dart';
-````
+```
 
 # Usage
 

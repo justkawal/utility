@@ -3,10 +3,10 @@ part of utility;
 extension UtilityString on String {
   ///Creates a slice of `string` from `start` up to, but not including, `end`.
   ///```dart
-  ///var string = 'justkawal';
+  ///var string = '__justkawal';
   ///
   /////It slices the string and returns modified string
-  ///string.slice(2); // string = '';
+  ///var slicedString = string.slice(2); // slicedString = 'justkawal';
   ///```
   String slice(int start, [int end]) {
     var length = this?.length ?? 0;
@@ -74,7 +74,6 @@ extension UtilityString on String {
     if (this == null || value == null || value.isEmpty) {
       return 0;
     }
-    //caseSensitive ??= true;
     return length -
         (caseSensitive
                 ? replaceAll(value, '')
