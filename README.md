@@ -30,8 +30,14 @@
   </a>
   <br>
   <br>
- 
- [Utility](https://www.pub.dev/packages/utility) provides functionality to improve dart code and make things faster and more easy.
+   
+# Donate [![ ](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Fshieldsio-patreon.vercel.app%2Fapi%3Fusername%3Djustkawal%26type%3Dpatrons&style=for-the-badge)](https://patreon.com/justkawal)
+<a href="https://patreon.com/justkawal">  
+    <img src="https://tenor.com/view/pass-the-hat-dollar-bills-money-cash-collect-gif-13703355.gif"  width="70%" height="45%"  
+      alt="Donate" />  
+  </a>
+  
+### [Utility](https://www.pub.dev/packages/utility) provides functionality to improve dart code and make things faster and more easy.
 
 
 
@@ -42,7 +48,6 @@
     * [String Operations](#list-operations)
     * [Number Operations](#list-operations)
   - [Upcoming Features](#features-coming-in-next-version)
-  - [Donate (Be the First one)](#donate-be-the-first-one)
 
 # Lets Get Started
 
@@ -499,6 +504,3 @@ var pad3 = 'abc'.pad(3); // 'abc'
 ## Features coming in next version
 On-going implementation for future:
 - Some more Functions
-
-## Donate (Be the First one)
-- patreon: https://patreon.com/justkawal
