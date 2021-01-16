@@ -8,8 +8,8 @@
     <img src="https://img.shields.io/pub/v/utility.svg"  
       alt="Pub Package" />  
   </a>
-  <a href="https://github.com/justkawal/excel">  
-    <img src="https://github.com/justkawal/excel/workflows/Test/badge.svg"  
+  <a href="https://github.com/justkawal/utility">  
+    <img src="https://github.com/justkawal/utility/workflows/Test/badge.svg"  
       alt="Test" />  
   </a> 
    <a href="https://opensource.org/licenses/MIT">  
