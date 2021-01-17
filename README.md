@@ -9,7 +9,7 @@
       alt="Pub Package" />  
   </a>
   <a href="https://github.com/justkawal/utility">  
-    <img src="https://github.com/justkawal/utility/workflows/Test/badge.svg"  
+    <img src="https://github.com/justkawal/utility/workflows/Dart/badge.svg"  
       alt="Test" />  
   </a> 
    <a href="https://opensource.org/licenses/MIT">  
