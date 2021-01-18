@@ -11,9 +11,6 @@ part of utility;
 ///var value = 20.zeroFillRightShift(3); // value = 6
 ///```
 int zeroFillRightShift(int number, int amount) {
-  if (number == null || amount == null) {
-    return null;
-  }
   return (number & 0xffffffff) >> amount;
 }
 
@@ -24,7 +21,7 @@ int zeroFillRightShift(int number, int amount) {
 ///var value1 = toNumber('  ABC.04 '); // null
 ///var value1 = toNumber('ABC.04 ', showException: true); // null
 ///```
-num toNumber(dynamic value, {bool showException = false}) {
+num? toNumber(dynamic value, {bool showException = false}) {
   if (value == null) {
     return null;
   }
@@ -46,9 +43,6 @@ num toNumber(dynamic value, {bool showException = false}) {
 ///var value = xor(20, 3); // value = 23
 ///```
 int xor(int val1, int val2) {
-  if (val1 == null || val2 == null) {
-    return null;
-  }
   return val1 ^ val2;
 }
 
@@ -67,8 +61,5 @@ int xor(int val1, int val2) {
 ///var value = divide(dividend, divisor); // value = 2
 ///```
 int divide(num dividend, num divisor) {
-  if (dividend == null || divisor == null) {
-    return null;
-  }
   return dividend ~/ divisor;
 }

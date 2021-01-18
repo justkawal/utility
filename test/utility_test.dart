@@ -9,19 +9,17 @@ enum justkawal {
 void main() {
   /// ===================== List Operations Start =====================
   group('List Operations: ', () {
-    
     ///
     /// --------------- Slice Start ---------------
     ///
 
     test('Slice', () {
-      var numberList = <num>[20.0, 5, 1.0, 10, null, 25];
+      var numberList = <num?>[20.0, 5, 1.0, 10, null, 25];
       var dynamicList = <dynamic>['Ashumendra', 5, false, null, 'justkawal'];
       var slicedList = slice(dynamicList, 2);
       expect(slicedList, equals([false, null, 'justkawal']));
       expect(numberList.slice(2), equals([1.0, 10, null, 25]));
       expect(numberList.slice(-2), equals([null, 25]));
-      expect(numberList.slice(null), equals([null, 25]));
       expect(numberList.slice(2), equals([]));
       expect(dynamicList.slice(-4, -1), equals([5, false, null]));
     });
@@ -50,7 +48,7 @@ void main() {
     /// --------------- isGrowable Start ---------------
     ///
 
-    var list = List<dynamic>(8);
+    var list = List<dynamic>.filled(8, null, growable: false);
     var list1 = <dynamic>[];
     test('isGrowable', () {
       expect(list.isGrowable, equals(false));
@@ -83,10 +81,10 @@ void main() {
       expect(randomlist.drop(2), equals([4, 5, 6, 7, 8, 9, 10]));
       expect(randomlist.dropRight(), equals([4, 5, 6, 7, 8, 9]));
       expect(randomlist.dropRight(2), equals([4, 5, 6, 7]));
-      expect(
-          randomlist.dropRightWhile((element) => element >= 6), equals([4, 5]));
-      expect(randomlist.dropWhile((element) => element >= 4), equals([5]));
-      expect(randomlist.dropWhile((element) => element >= 6), equals([5]));
+      expect(randomlist.dropRightWhile(((element) => element! >= 6)),
+          equals([4, 5]));
+      expect(randomlist.dropWhile(((element) => element! >= 4)), equals([5]));
+      expect(randomlist.dropWhile(((element) => element! >= 6)), equals([5]));
     });
 
     ///
@@ -147,7 +145,7 @@ void main() {
     ///
 
     var compactlist = ['a', 'v', 'l', null, true, 'r', 'o', false];
-    var chunkList = List<Object>.from(compactlist);
+    var chunkList = List<Object?>.from(compactlist);
 
     ///
     /// --------------- compact Start ---------------

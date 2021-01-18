@@ -7,9 +7,6 @@ extension UtilityNumber on int {
   ///var value = 20.zeroFillRightShift(3); // value = 6
   ///```
   int zeroFillRightShift(int amount) {
-    if (this == null || amount == null) {
-      return null;
-    }
     return (this & 0xffffffff) >> amount;
   }
 
@@ -19,9 +16,6 @@ extension UtilityNumber on int {
   ///var value = 20.xor(3); // value = 23
   ///```
   int xor(int val) {
-    if (this == null) {
-      return null;
-    }
     return this ^ val;
   }
 
@@ -40,9 +34,6 @@ extension UtilityNumber on int {
   ///var value = dividend.divide(divisor); // value = 2
   ///```
   int divide(num divisor) {
-    if (this == null) {
-      return null;
-    }
     return this ~/ divisor;
   }
 }

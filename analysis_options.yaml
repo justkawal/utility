@@ -11,4 +11,4 @@ linter:
 
 analyzer:
 #   exclude:
-#     - path/to/excluded/files///
+#     - path/to/excluded/files//

@@ -14,9 +14,6 @@ extension UtilityListNum on List<num> {
   ///list.heapSort(); // list = [4, 5, 6, 26, 97];
   ///```
   List<num> heapSort({bool inPlace = true}) {
-    if (this == null) {
-      return null;
-    }
     return _heapSort(inPlace ? this : List<num>.from(this));
   }
 
@@ -40,19 +37,19 @@ extension UtilityListNum on List<num> {
     var largest = i, left = i * 2 + 1, right = i * 2 + 2;
 
     // check if root is less than left child
-    if (left < length && list[i] < list[left]) {
+    if (left < length && list[i as int] < list[left as int]) {
       largest = left;
     }
 
     // check if root is less than right child
-    if (right < length && list[largest] < list[right]) {
+    if (right < length && list[largest as int] < list[right as int]) {
       largest = right;
     }
 
     if (largest != i) {
       // ---- start ---- do the switching of the child with the root.
-      var temp = list[i];
-      list[i] = list[largest];
+      var temp = list[i as int];
+      list[i] = list[largest as int];
       list[largest] = temp;
       // ----- end -----
       heapify(list, length, largest);

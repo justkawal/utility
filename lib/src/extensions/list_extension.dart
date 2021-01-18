@@ -1,6 +1,6 @@
 part of utility;
 
-extension UtilityList<T> on List<T> {
+extension UtilityList<T> on List<T?> {
   ///Creates a slice of `list` from `start` up to `end`[exclusive].
   ///```dart
   ///var list = [1, 2, 3, 4];
@@ -14,17 +14,16 @@ extension UtilityList<T> on List<T> {
   /////It creates copy of list slices the list elements and creates new list
   ///list.slice(2); // list = [3, 4]
   ///```
-  List<T> slice(int start, [int end]) {
+  List<T?> slice(int start, [int? end]) {
     return _privateSlice(start, end);
   }
 
-  List<T> _privateSlice(int start, [int end, bool inPlace = true]) {
-    var length = this?.length ?? 0;
+  List<T?> _privateSlice(int start, [int? end, bool inPlace = true]) {
+    var length = this.length;
     var untouchedLength = length;
     if (length < 1) {
       return <T>[];
     }
-    start ??= 0;
     end ??= length;
 
     if (start < 0) {
@@ -66,7 +65,7 @@ extension UtilityList<T> on List<T> {
       // ignoring catch block
     }
     // eventually we have to make new copy of altered list
-    var result = <T>[];
+    var result = <T?>[];
     while (index < length) {
       result.add(this[index + start]);
       index++;
@@ -75,7 +74,7 @@ extension UtilityList<T> on List<T> {
   }
 
   // Private function to be accessed for internal usage only
-  List<T> _castSlice(int start, [int end]) {
+  List<T?> _castSlice(int start, [int? end]) {
     end ??= length;
     return (start == 0 && end >= length) ? this : slice(start, end);
   }
@@ -96,12 +95,12 @@ extension UtilityList<T> on List<T> {
   ///// If secure = true is passed as argument then Random.secure() is used
   ///var randomValue = list.random(secure: true); // 5
   ///```
-  T random({bool secure = false, bool remove = false, int seed}) {
+  T? random({bool secure = false, bool remove = false, int? seed}) {
     if (isEmpty) {
       return null;
     }
     Random random;
-    if (secure ?? false) {
+    if (secure) {
       random = Random.secure();
     } else if (seed != null) {
       random = Random(seed);
@@ -110,7 +109,7 @@ extension UtilityList<T> on List<T> {
     }
     var randomIndex = random.nextInt(length);
     var item = this[randomIndex];
-    if (remove ?? false) {
+    if (remove) {
       removeAt(randomIndex);
     }
     return item;
@@ -142,7 +141,7 @@ extension UtilityList<T> on List<T> {
   ///var firstItem = list.removeFirst();
   ///// altered list = [5, 2, 4];
   ///```
-  T removeFirst() {
+  T? removeFirst() {
     return removeAt(0);
   }
 
@@ -167,8 +166,8 @@ extension UtilityList<T> on List<T> {
   ///
   ///var newObject = drop(list, 5); // newObject = []; // does not throw error :D
   ///```
-  List<T> drop([int n = 1]) {
-    if (n > (length ?? 0)) {
+  List<T?> drop([int n = 1]) {
+    if (n > length) {
       n = length;
     }
     for (var i = 1; i <= n; i++) {
@@ -197,9 +196,9 @@ extension UtilityList<T> on List<T> {
   ///
   ///var newObject = dropRight(list, 5); // newObject = []; // does not throw error :D
   ///```
-  List<T> dropRight([int n = 1]) {
+  List<T?> dropRight([int n = 1]) {
     if (n > 0) {
-      if (n > (length ?? 0)) {
+      if (n > length) {
         n = length;
       }
       for (var i = 1; i <= n; i++) {
@@ -214,7 +213,7 @@ extension UtilityList<T> on List<T> {
   ///var list = <int>[2, 1, 3, 4, 5];
   ///list.dropRightWhile((element) => element >= 3); // list = [2, 1];
   ///```
-  List<T> dropRightWhile(bool Function(T element) test) {
+  List<T?> dropRightWhile(bool Function(T? element) test) {
     var index = length - 1;
     while (index >= 0) {
       if (!test(this[index])) {
@@ -231,7 +230,7 @@ extension UtilityList<T> on List<T> {
   ///var list = <int>[2, 1, 3, 4, 5];
   ///list.dropWhile((T element) => element <= 3); // list = [4, 5];
   ///```
-  List<T> dropWhile(bool Function(T element) test) {
+  List<T?> dropWhile(bool Function(T? element) test) {
     var index = 0;
     while (index < length) {
       if (!test(this[index])) {
@@ -250,8 +249,8 @@ extension UtilityList<T> on List<T> {
   ///var list = [2, [1, 3], [4, [1, [2]] ] ];
   ///var newList = list.flatten(); // newList = [2, 1, 3, 4, [1, [2] ] ];
   ///```
-  List<T> flatten() {
-    var copyList = <Object>[];
+  List<T?> flatten() {
+    var copyList = <Object?>[];
     for (var val in this) {
       if (val is List) {
         for (var innerVal in val) {
@@ -261,7 +260,7 @@ extension UtilityList<T> on List<T> {
         copyList.add(val);
       }
     }
-    return copyList;
+    return copyList as List<T?>;
   }
 
   ///`Recursively flatten array up to depth times.`
@@ -272,19 +271,19 @@ extension UtilityList<T> on List<T> {
   ///var list = [2, [1, 3], [4, [1, [2]] ] ];
   ///var newList = list.flattenDepth(1); // newList = [2, 1, 3, 4, [1, [2] ] ];
   ///```
-  List<T> flattenDepth([int depth = 1]) {
+  List<T?> flattenDepth([int depth = 1]) {
     if (this is List) {
-      var copyList = <Object>[];
+      var copyList = <Object?>[];
       for (var val in this) {
-        if (depth > 0 && val is List) {
-          val.flattenDepth(depth - 1).forEach((element) {
+        if (depth > 0 && val != null && val is List) {
+          val.flattenDepth(depth - 1).forEach((dynamic element) {
             copyList.add(element);
           });
         } else {
           copyList.add(val);
         }
       }
-      return copyList;
+      return copyList as List<T?>;
     }
     return this;
   }
@@ -297,10 +296,10 @@ extension UtilityList<T> on List<T> {
   ///var list = [2, [1, 3], [4, [1, [2]] ] ];
   ///var newList = list.flattenDeep(); // newList = [2, 1, 3, 4, 1, 2];
   ///```
-  List<T> flattenDeep() {
-    var copyList = <Object>[];
+  List<T?> flattenDeep() {
+    var copyList = <Object?>[];
     forEach((element) {
-      if (element is List) {
+      if (element != null && element is List) {
         for (var val in element.flattenDeep()) {
           copyList.add(val);
         }
@@ -308,7 +307,7 @@ extension UtilityList<T> on List<T> {
         copyList.add(element);
       }
     });
-    return copyList;
+    return copyList as List<T?>;
   }
 
   ///Creates a new list of elements split into groups the length of `size`.
@@ -320,15 +319,14 @@ extension UtilityList<T> on List<T> {
   ///
   ///var newChunkedList = list.chunk(3); // newChunkedList = [['a', 'b', 'c'], ['d']];
   ///```
-  List<List<T>> chunk([int size = 1]) {
-    size ??= 1;
+  List<List<T?>?> chunk([int size = 1]) {
     size = max(size, 0);
-    var length = this?.length ?? 0;
+    var length = this.length;
     if (length < 1 || size < 1) {
       return <List<T>>[];
     }
     var index = 0;
-    var result = <List<T>>[];
+    var result = <List<T?>?>[];
     while (index < length) {
       result.add(_privateSlice(index, (index += size), false));
     }
@@ -348,7 +346,7 @@ extension UtilityList<T> on List<T> {
   /////here the list object is not altered
   ///var compactedData_new_object = compact(list); // ['a', 'b'];
   ///```
-  List<T> compact() {
+  List<T?>? compact() {
     removeWhere((element) => isFalsey(element));
     return this;
   }
@@ -359,7 +357,7 @@ extension UtilityList<T> on List<T> {
   ///var newList = <int>[];
   ///newList.addAllWhile((T element) => element <= 3); // list = [4, 5];
   ///```
-  List<T> addAllWhile(List<T> from, bool Function(T element) test) {
+  List<T?>? addAllWhile(List<T> from, bool Function(T element) test) {
     var index = 0;
     while (index < length) {
       if (!test(from[index])) {
@@ -385,7 +383,7 @@ extension UtilityList<T> on List<T> {
   ///// Now call function addIf.
   ///oddNumberList.addIf(oldList, (T element) => (element % 2 != 0)); // list = [1, 3, 5];
   ///```
-  List<T> addIf(List<T> from, bool Function(T element) test) {
+  List<T?>? addIf(List<T> from, bool Function(T element) test) {
     var index = 0;
     while (index < length) {
       if (test(from[index])) {

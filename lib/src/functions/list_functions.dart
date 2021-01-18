@@ -15,7 +15,7 @@ part of utility;
 ///```
 ///
 List<List<T>> chunk<T>(List<T> list, [int size = 1]) {
-  return list?.chunk(size);
+  return list.chunk(size) as List<List<T>>;
 }
 
 ///removes `n` number of elements from the `beginning of list`
@@ -42,7 +42,7 @@ List<T> drop<T>(List<T> list, [int n = 1]) {
   if (n < 1) {
     return List<T>.from(list);
   }
-  var length = list?.length ?? 0;
+  var length = list.length;
   var newObject = <T>[];
   for (var i = n; i < length; i++) {
     newObject.add(list[i]);
@@ -66,7 +66,7 @@ List<T> drop<T>(List<T> list, [int n = 1]) {
 ///```
 List<T> compact<T>(List<T> list) {
   var result = <T>[];
-  list?.forEach((value) {
+  list.forEach((value) {
     if (!isFalsey(value)) {
       result.add(value);
     }
@@ -95,7 +95,7 @@ List<T> compact<T>(List<T> list) {
 ///var newObject = dropRight(list, 5); // newObject = []; // does not throw error :D
 ///```
 List<T> dropRight<T>(List<T> list, [int n = 1]) {
-  if (n > 0 && (list?.isNotEmpty ?? false)) {
+  if (n > 0 && list.isNotEmpty) {
     var result = <T>[];
     for (var i = 0; i < list.length - n; i++) {
       result.add(list[i]);
@@ -115,8 +115,8 @@ List<T> dropRight<T>(List<T> list, [int n = 1]) {
 ///// Direclty slices the list and does not makes a new object.
 ///var old_object_slicedList = list.slice(2); // [3, 4]
 ///```
-List<T> slice<T>(List<T> list, int start, [int end]) {
-  return list._privateSlice(start, end, false);
+List<T>? slice<T>(List<T> list, int start, [int? end]) {
+  return list._privateSlice(start, end, false) as List<T>?;
 }
 
 ///starts `removing elements` from the `ending of list` until condition becomes `false`
@@ -126,7 +126,7 @@ List<T> slice<T>(List<T> list, int start, [int end]) {
 ///```
 List<T> dropRightWhile<T>(List<T> list, bool Function(T element) test) {
   var result = <T>[];
-  if (list?.isNotEmpty ?? false) {
+  if (list.isNotEmpty) {
     var index = 0;
     while (index < list.length) {
       if (!test(list[index])) {
@@ -146,7 +146,7 @@ List<T> dropRightWhile<T>(List<T> list, bool Function(T element) test) {
 ///```
 List<T> dropWhile<T>(List<T> list, bool Function(T element) test) {
   var result = <T>[];
-  if (list?.isNotEmpty ?? false) {
+  if (list.isNotEmpty) {
     var index = list.length - 1;
     while (index >= 0) {
       if (test(list[index])) {
@@ -167,7 +167,7 @@ List<T> dropWhile<T>(List<T> list, bool Function(T element) test) {
 ///var newList = flatten(list); // newList = [2, 1, 3, 4, [1, [2] ] ];
 ///```
 List<T> flatten<T>(List<T> list) {
-  return list.flatten();
+  return list.flatten() as List<T>;
 }
 
 ///`Recursively flatten array up to depth times.`
@@ -177,8 +177,8 @@ List<T> flatten<T>(List<T> list) {
 ///var list = [2, [1, 3], [4, [1, [2]] ] ];
 ///var newList = flattenDepth(list, 1); // newList = [2, 1, 3, 4, [1, [2] ] ];
 ///```
-List<T> flattenDepth<T>(List<T> list, [int depth = 1]) {
-  return list.flattenDepth(depth);
+List<T>? flattenDepth<T>(List<T> list, [int depth = 1]) {
+  return list.flattenDepth(depth) as List<T>?;
 }
 
 ///`Recursively flattens array.`
@@ -190,5 +190,5 @@ List<T> flattenDepth<T>(List<T> list, [int depth = 1]) {
 ///var newList = flattenDeep(list); // newList = [2, 1, 3, 4, 1, 2];
 ///```
 List<T> flattenDeep<T>(List<T> list) {
-  return list.flattenDeep();
+  return list.flattenDeep() as List<T>;
 }

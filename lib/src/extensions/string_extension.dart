@@ -8,12 +8,11 @@ extension UtilityString on String {
   /////It slices the string and returns modified string
   ///var slicedString = string.slice(2); // slicedString = 'justkawal';
   ///```
-  String slice(int start, [int end]) {
-    var length = this?.length ?? 0;
+  String slice(int start, [int? end]) {
+    var length = this.length;
     if (length <= 0) {
       return '';
     }
-    start ??= 0;
     end ??= length;
 
     if (start < 0) {
@@ -45,9 +44,9 @@ extension UtilityString on String {
   ///'${justkawal.just}'.enumVal; // just
   ///'${justkawal.kawal}'.enumVal; // kawal
   ///```
-  String get enumVal {
-    var list = this?.split('.');
-    return (list?.isEmpty ?? true) ? null : list.last;
+  String? get enumVal {
+    var list = split('.');
+    return list.isEmpty ? null : list.last;
   }
 
   ///Trims the value and then converts it to number
@@ -56,8 +55,8 @@ extension UtilityString on String {
   ///'2604 '.toNumber; // 2604
   ///'  26.04 '.toNumber; // 26.04
   ///```
-  num get toNumber {
-    if (this == null || trim().isEmpty) {
+  num? get toNumber {
+    if (trim().isEmpty) {
       return null;
     }
     return double.tryParse(trim());
@@ -71,7 +70,7 @@ extension UtilityString on String {
   ///'justkawal'.count('flutter'); // 0
   ///```
   int count(String value, [bool caseSensitive = true]) {
-    if (this == null || value == null || value.isEmpty) {
+    if (value.isEmpty) {
       return 0;
     }
     return length -
@@ -108,7 +107,7 @@ extension UtilityString on String {
   ///'justkawal'.isDecimal; // false
   ///```
   bool get isDecimal {
-    return this?.isNumber ?? false;
+    return isNumber;
   }
 
   ///returns `true` if the `string` is `octal`, other-wise `false`
@@ -136,13 +135,13 @@ extension UtilityString on String {
   ///'hey kàwàl'.deburr; // hey kawal
   ///```
   String get deburr {
-    return this?.replaceAllMapped(reLatin, (match) {
+    return replaceAllMapped(reLatin, (match) {
       var value = '', word = '${match[0] ?? ""}';
-      for (var index = 0; index < word.length ?? 0; index++) {
+      for (var index = 0; index < word.length; index++) {
         value += '${deburredLetters[word[index]] ?? word[index]}';
       }
       return value;
-    })?.replaceAll(reComboMark, '');
+    }).replaceAll(reComboMark, '');
   }
 
   ///Returns list of `unicode words` from the string
@@ -165,7 +164,7 @@ extension UtilityString on String {
   List<String> _unicodeAsciiWords([bool isUnicode = true]) {
     var list = <String>[];
     (isUnicode ? reUnicodeWord : reAsciiWord).allMatches(this).forEach((match) {
-      var m = match[0];
+      var m = match[0]!;
       if (m.hasUnicodeWord == isUnicode) {
         list.add(m);
       }
@@ -187,9 +186,9 @@ extension UtilityString on String {
   ///'justkawal'.capitalize; // Justkawal
   ///'JUSTKAWAL'.capitalize; // Justkawal
   ///```
-  String get capitalize {
+  String? get capitalize {
     var result;
-    if (this != null && isNotEmpty) {
+    if (isNotEmpty) {
       result = this[0].toUpperCase();
       if (length > 1) {
         result += substring(1).toLowerCase();
@@ -203,9 +202,9 @@ extension UtilityString on String {
   ///'Justkawal'.lowerFirst; // justkawal
   ///'JUSTKAWAL'.lowerFirst; // jUSTKAWAL
   ///```
-  String get lowerFirst {
+  String? get lowerFirst {
     var result;
-    if (this != null && isNotEmpty) {
+    if (isNotEmpty) {
       result = this[0].toLowerCase();
       if (length > 1) {
         result += substring(1);
@@ -221,7 +220,7 @@ extension UtilityString on String {
   ///```
   String get upperFirst {
     var result = '';
-    if (this != null && isNotEmpty) {
+    if (isNotEmpty) {
       result = this[0].toUpperCase();
       if (length > 1) {
         result += substring(1);
@@ -234,9 +233,9 @@ extension UtilityString on String {
   ///```dart
   ///'kàwàl vu'.words; // ['kàwàl', 'vu']
   ///```
-  List<String> words([RegExp pattern]) {
+  List<String?> words([RegExp? pattern]) {
     if (pattern == null) {
-      var list = <String>[];
+      var list = <String?>[];
       reUnicodeWord.allMatches(this).forEach((match) {
         list.add(match[0]);
       });
@@ -255,9 +254,10 @@ extension UtilityString on String {
   ///```
   String get camelCase {
     var wordList = words();
-    var leftSide = wordList.first.toLowerCase();
-    var rightSide =
-        wordList.skip(1).reduce((value, element) => value + element.capitalize);
+    var leftSide = wordList.first!.toLowerCase();
+    var rightSide = wordList
+        .skip(1)
+        .reduce((value, element) => value! + element!.capitalize!)!;
     return leftSide + rightSide;
   }
 
@@ -268,7 +268,7 @@ extension UtilityString on String {
   ///'-----hello--world--'.kebabCase(); // hello-world
   ///```
   String kebabCase({String separator = '-'}) {
-    return _reuseCase(separator ?? '-');
+    return _reuseCase(separator);
   }
 
   ///Converts the string to `lowerCase`.
@@ -278,7 +278,7 @@ extension UtilityString on String {
   ///'-----hello--world--'.lowerCase(); // hello world
   ///```
   String lowerCase({String separator = ' '}) {
-    return _reuseCase(separator ?? ' ');
+    return _reuseCase(separator);
   }
 
   ///Converts the string to `snakeCase`.
@@ -288,12 +288,12 @@ extension UtilityString on String {
   ///'-----hello--world--'.snakeCase(); // hello_world
   ///```
   String snakeCase({String separator = '_'}) {
-    return _reuseCase(separator ?? '_');
+    return _reuseCase(separator);
   }
 
   ///A helper function for reusing the same functionality of `snakeCase`, `lowerCase` and `kebabCase`.
   String _reuseCase(String separator) {
-    return words().map((word) => word.toLowerCase()).toList().join(separator);
+    return words().map((word) => word!.toLowerCase()).toList().join(separator);
   }
 
   ///Converts the string to `nameCase`.
@@ -303,10 +303,7 @@ extension UtilityString on String {
   ///'-----kawaljeet--singh--'.nameCase(); // Kawaljeet Singh
   ///```
   String nameCase({String separator = ' '}) {
-    return words()
-        .map((word) => word.capitalize)
-        .toList()
-        .join(separator ?? ' ');
+    return words().map((word) => word!.capitalize).toList().join(separator);
   }
 
   // --------------------- Cases End ---------------------
@@ -318,7 +315,7 @@ extension UtilityString on String {
   ///'1'.repeat(5); // 11111
   ///```
   String repeat([int n = 1]) {
-    if (this == null || n < 1) {
+    if (n < 1) {
       return '';
     }
     var result = '', string = this;
@@ -357,7 +354,7 @@ extension UtilityString on String {
 
   // private function for internal usage
   String _createPadding(int length, String chars) {
-    if ((chars ?? '') == '') {
+    if (chars == '') {
       chars = ' ';
     }
     var charsLength = chars.length;
