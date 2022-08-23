@@ -272,20 +272,17 @@ extension UtilityList<T> on List<T?> {
   ///var newList = list.flattenDepth(1); // newList = [2, 1, 3, 4, [1, [2] ] ];
   ///```
   List<T?> flattenDepth([int depth = 1]) {
-    if (this is List) {
-      var copyList = <Object?>[];
-      for (var val in this) {
-        if (depth > 0 && val != null && val is List) {
-          val.flattenDepth(depth - 1).forEach((dynamic element) {
-            copyList.add(element);
-          });
-        } else {
-          copyList.add(val);
-        }
+    var copyList = <Object?>[];
+    for (var val in this) {
+      if (depth > 0 && val != null && val is List) {
+        val.flattenDepth(depth - 1).forEach((dynamic element) {
+          copyList.add(element);
+        });
+      } else {
+        copyList.add(val);
       }
-      return copyList as List<T?>;
     }
-    return this;
+    return copyList as List<T?>;
   }
 
   ///`Recursively flattens array.`

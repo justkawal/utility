@@ -24,31 +24,30 @@ final rsAstralRange = '\\ud800-\\udfff',
     rsBreakRange =
         rsMathOpRange + rsNonCharRange + rsPunctuationRange + rsSpaceRange;
 
-final rsMiscLower = '(?:' + rsLower + '|' + rsMisc + ')',
-    rsMiscUpper = '(?:' + rsUpper + '|' + rsMisc + ')',
-    rsOptContrLower = '(?:' + rsApos + '(?:d|ll|m|re|s|t|ve))?',
-    rsOptContrUpper = '(?:' + rsApos + '(?:D|LL|M|RE|S|T|VE))?',
-    reOptMod = rsModifier + '?',
-    rsOptVar = '[' + rsVarRange + ']?',
-    rsOptJoin = '(?:' +
-        rsZWJ +
-        '(?:' +
-        [rsNonAstral, rsRegional, rsSurrPair].join('|') +
-        ')' +
-        rsOptVar +
-        reOptMod +
-        ')*',
+final rsMiscLower = '(?:$rsLower|$rsMisc)',
+    rsMiscUpper = '(?:$rsUpper|$rsMisc)',
+    rsOptContrLower = '(?:$rsApos(?:d|ll|m|re|s|t|ve))?',
+    rsOptContrUpper = '(?:$rsApos(?:D|LL|M|RE|S|T|VE))?',
+    reOptMod = '$rsModifier?',
+    rsOptVar = '[$rsVarRange]?',
+    rsOptJoin = '(?:$rsZWJ(?:${[
+      rsNonAstral,
+      rsRegional,
+      rsSurrPair
+    ].join('|')})$rsOptVar$reOptMod)*',
     rsOrdLower = '\\d*(?:1st|2nd|3rd|(?![123])\\dth)(?=\\b|[A-Z_])',
     rsOrdUpper = '\\d*(?:1ST|2ND|3RD|(?![123])\\dTH)(?=\\b|[a-z_])',
     rsSeq = rsOptVar + reOptMod + rsOptJoin,
-    rsEmoji =
-        '(?:' + [rsDingbat, rsRegional, rsSurrPair].join('|') + ')' + rsSeq,
-    rsSymbol = '(?:' +
-        [rsNonAstral + rsCombo + '?', rsCombo, rsRegional, rsSurrPair, rsAstral]
-            .join('|') +
-        ')';
+    rsEmoji = '(?:${[rsDingbat, rsRegional, rsSurrPair].join('|')})$rsSeq',
+    rsSymbol = '(?:${[
+      '$rsNonAstral$rsCombo?',
+      rsCombo,
+      rsRegional,
+      rsSurrPair,
+      rsAstral
+    ].join('|')})';
 
-final reUnicode = RegExp(rsFitz + '(?=' + rsFitz + ')|' + rsSymbol + rsSeq,
+final reUnicode = RegExp('$rsFitz(?=$rsFitz)|$rsSymbol$rsSeq',
     multiLine: true, unicode: true);
 
 final reHasUnicodeWord = RegExp(
@@ -61,22 +60,18 @@ final reAsciiWord =
 
 final reUnicodeWord = RegExp(
     [
-      rsUpper +
-          '?' +
-          rsLower +
-          '+' +
-          rsOptContrLower +
-          '(?=' +
-          [rsBreak, rsUpper, r'$'].join('|') +
-          ')',
-      rsMiscUpper +
-          '+' +
-          rsOptContrUpper +
-          '(?=' +
-          [rsBreak, rsUpper + rsMiscLower, r'$'].join('|') +
-          ')',
-      rsUpper + '?' + rsMiscLower + '+' + rsOptContrLower,
-      rsUpper + '+' + rsOptContrUpper,
+      '$rsUpper?$rsLower+$rsOptContrLower(?=${[
+        rsBreak,
+        rsUpper,
+        r'$'
+      ].join('|')})',
+      '$rsMiscUpper+$rsOptContrUpper(?=${[
+        rsBreak,
+        rsUpper + rsMiscLower,
+        r'$'
+      ].join('|')})',
+      '$rsUpper?$rsMiscLower+$rsOptContrLower',
+      '$rsUpper+$rsOptContrUpper',
       rsOrdUpper,
       rsOrdLower,
       rsDigits,
@@ -86,26 +81,20 @@ final reUnicodeWord = RegExp(
     unicode: true);
 
 final rsApos = "['\u2019]",
-    rsAstral = '[' + rsAstralRange + ']',
-    rsBreak = '[' + rsBreakRange + ']',
-    rsCombo = '[' + rsComboRange + ']',
+    rsAstral = '[$rsAstralRange]',
+    rsBreak = '[$rsBreakRange]',
+    rsCombo = '[$rsComboRange]',
     rsDigits = '\\d+',
-    rsDingbat = '[' + rsDingbatRange + ']',
-    rsLower = '[' + rsLowerRange + ']',
-    rsMisc = '[^' +
-        rsAstralRange +
-        rsBreakRange +
-        rsDigits +
-        rsDingbatRange +
-        rsLowerRange +
-        rsUpperRange +
-        ']',
+    rsDingbat = '[$rsDingbatRange]',
+    rsLower = '[$rsLowerRange]',
+    rsMisc =
+        '[^$rsAstralRange$rsBreakRange$rsDigits$rsDingbatRange$rsLowerRange$rsUpperRange]',
     rsFitz = '\\ud83c[\\udffb-\\udfff]',
-    rsModifier = '(?:' + rsCombo + '|' + rsFitz + ')',
-    rsNonAstral = '[^' + rsAstralRange + ']',
+    rsModifier = '(?:$rsCombo|$rsFitz)',
+    rsNonAstral = '[^$rsAstralRange]',
     rsRegional = '(?:\\ud83c[\\udde6-\\uddff]){2}',
     rsSurrPair = '[\\ud800-\\udbff][\\udc00-\\udfff]',
-    rsUpper = '[' + rsUpperRange + ']',
+    rsUpper = '[$rsUpperRange]',
     rsZWJ = '\\u200d';
 
 final reComboMark = RegExp(rsCombo, multiLine: true);
