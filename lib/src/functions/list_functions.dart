@@ -66,11 +66,11 @@ List<T> drop<T>(List<T> list, [int n = 1]) {
 ///```
 List<T> compact<T>(List<T> list) {
   var result = <T>[];
-  list.forEach((value) {
+  for (var value in list) {
     if (!isFalsey(value)) {
       result.add(value);
     }
-  });
+  }
   return result;
 }
 

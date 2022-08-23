@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.2] - 2022-08-23
+### Launched
+- upgrade environment and dependencies
+
 ## [1.0.1-nullsafety.1] - 2021-01-18
 ### Launched
 - bump to nullsafety

@@ -2,6 +2,7 @@ import 'package:test/test.dart';
 import 'package:utility/utility.dart';
 
 ///enum for testing: string operation
+// ignore: camel_case_types
 enum justkawal {
   just,
   kawal,

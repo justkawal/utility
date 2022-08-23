@@ -136,9 +136,9 @@ extension UtilityString on String {
   ///```
   String get deburr {
     return replaceAllMapped(reLatin, (match) {
-      var value = '', word = '${match[0] ?? ""}';
+      var value = '', word = match[0] ?? '';
       for (var index = 0; index < word.length; index++) {
-        value += '${deburredLetters[word[index]] ?? word[index]}';
+        value += deburredLetters[word[index]] ?? word[index];
       }
       return value;
     }).replaceAll(reComboMark, '');
@@ -187,7 +187,7 @@ extension UtilityString on String {
   ///'JUSTKAWAL'.capitalize; // Justkawal
   ///```
   String? get capitalize {
-    var result;
+    String? result;
     if (isNotEmpty) {
       result = this[0].toUpperCase();
       if (length > 1) {
@@ -203,7 +203,7 @@ extension UtilityString on String {
   ///'JUSTKAWAL'.lowerFirst; // jUSTKAWAL
   ///```
   String? get lowerFirst {
-    var result;
+    String? result;
     if (isNotEmpty) {
       result = this[0].toLowerCase();
       if (length > 1) {
