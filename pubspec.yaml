@@ -1,10 +1,10 @@
 name: utility
 description: Utility helps developers to use dart more easily and effeciently.
-version: 1.0.2
+version: 1.0.3
 homepage: https://github.com/justkawal/utility.git
 
 environment:
-  sdk: ">=2.17.1 <3.0.0"
+  sdk: ">=2.18.0 <3.0.0"
 
 dev_dependencies:
   test: ^1.21.4

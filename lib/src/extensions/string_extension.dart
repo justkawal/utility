@@ -253,8 +253,14 @@ extension UtilityString on String {
   ///'-----just--Kawal--'.camelCase; // justKawal
   ///```
   String get camelCase {
+    if (isEmpty) {
+      return '';
+    }
     var wordList = words();
     var leftSide = wordList.first!.toLowerCase();
+    if (wordList.length == 1) {
+      return leftSide;
+    }
     var rightSide = wordList
         .skip(1)
         .reduce((value, element) => value! + element!.capitalize!)!;

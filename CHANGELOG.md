@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.3] - 2022-09-18
+### Bug Fix
+- Bug Fix Camel Case
+
 ## [1.0.2] - 2022-08-23
 ### Launched
 - upgrade environment and dependencies
