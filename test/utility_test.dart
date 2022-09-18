@@ -505,7 +505,12 @@ void main() {
 
     test('camelCase', () {
       expect('---count===Number'.camelCase, equals('countNumber'));
-      expect('RAMAN-----Hello'.camelCase, equals('ramanHello'));
+      expect('kawal'.camelCase, equals('kawal'));
+      expect('Kawal'.camelCase, equals('kawal'));
+      expect('KaWal'.camelCase, equals('kaWal'));
+      expect('ThisShouldBeConvertedToCamelCase'.camelCase,
+          equals('thisShouldBeConvertedToCamelCase'));
+      expect('BAMAN-----Hello'.camelCase, equals('bamanHello'));
       expect('shyam    Cool'.camelCase, equals('shyamCool'));
       expect('occ-------urance'.camelCase, equals('occurance'));
       expect('-----add=====Null'.camelCase, equals('addNull'));
