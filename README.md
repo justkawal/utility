@@ -55,7 +55,7 @@ Add this to your package's `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  utility: any
+  utility: 1.0.3
 ```
 
 ### 2. Install it
